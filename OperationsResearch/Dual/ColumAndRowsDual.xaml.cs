@@ -31,7 +31,7 @@ namespace OperationsResearch.Dual
             int value;
 
             // Проверяем, является ли введённый текст числом
-            if (int.TryParse(textFromTextBox1, out value))
+            if (int.TryParse(textFromTextBox1, out value) && string.IsNullOrEmpty(textFromTextBox1))
             {
 
                 if (value > 0)
@@ -52,7 +52,6 @@ namespace OperationsResearch.Dual
                 errorMessage.Content = "Введіть коректне число!!!";
             }
         }
-
         private void Button_Up1(object sender, RoutedEventArgs e)
         {
             int value;
