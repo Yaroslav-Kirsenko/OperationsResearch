@@ -74,7 +74,6 @@
     <Compile Include="Dual\ColumAndRowsDual.xaml.cs">
       <DependentUpon>ColumAndRowsDual.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dual\ShowExamlCS.cs" />
     <Compile Include="Dual\ShowExample.xaml.cs">
       <DependentUpon>ShowExample.xaml</DependentUpon>
     </Compile>
