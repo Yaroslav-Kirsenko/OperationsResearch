@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace OperationsResearch.DualServices
 {
@@ -25,11 +26,14 @@ namespace OperationsResearch.DualServices
             Console.WriteLine(columns);
         }
 
-    }
+        public void CreateTextBox(TextBox textBox) {
 
-    public class ShowXLine
-    {
-
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    TextBox text = new TextBox();                
+                }
+            }
+        }
 
     }
 }

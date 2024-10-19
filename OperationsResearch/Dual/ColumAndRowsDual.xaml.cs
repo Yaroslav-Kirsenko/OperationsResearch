@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using OperationsResearch.DualServices;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace OperationsResearch.Dual
@@ -24,6 +25,7 @@ namespace OperationsResearch.Dual
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string textFromTextBox1 = textBox1.Text;
+            string textFromTextBox2 = textBox2.Text;
             int value;
 
             // Проверка на строка
@@ -41,6 +43,10 @@ namespace OperationsResearch.Dual
                 // Проверка на 0
                 if (value > 0)
                 {
+                    ShowExampleService showExampleService = new ShowExampleService();
+                    showExampleService.GetRows(textFromTextBox1);
+                    showExampleService.GetColumns(textFromTextBox2);
+
                     ShowExample showExample = new ShowExample();
                     showExample.UpdateLabelContent(textFromTextBox1);
                     showExample.Show();

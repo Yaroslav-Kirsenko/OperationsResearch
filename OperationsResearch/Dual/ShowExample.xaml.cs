@@ -30,5 +30,7 @@ namespace OperationsResearch.Dual
             // Предположим, что Label с именем "displayLabel"
             displayLabel.Content = content;
         }
+
+        
     }
 }
