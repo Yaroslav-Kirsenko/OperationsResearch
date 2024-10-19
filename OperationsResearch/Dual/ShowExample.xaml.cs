@@ -77,56 +77,65 @@ namespace OperationsResearch.Dual
             textBoxContainer.RowDefinitions.Clear();
             textBoxContainer.ColumnDefinitions.Clear();
 
-            // Увеличиваем количество строк на 1, чтобы было место для Label и TextBox
-            for (int i = 0; i < rows * 2; i++)  // * 2 для чередования строк Label и TextBox
-            {
-                textBoxContainer.RowDefinitions.Add(new RowDefinition());
-            }
+            // Создадим строку для заголовков столбцов (X1, X2, X3 и т.д.)
+            textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-            // Добавляем столбцы
+            // Добавляем пустую ячейку для номера строк в первой колонке
+            textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition());
+
+            // Добавляем заголовки столбцов
             for (int j = 0; j < columns; j++)
             {
                 textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition());
+
+                // Создаем Label для заголовка столбца
+                Label headerLabel = new Label();
+                headerLabel.Content = $"X{j + 1}";
+                headerLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+                headerLabel.Width = 100;
+                headerLabel.Height = 30;
+                headerLabel.Margin = new Thickness(5);
+
+                // Добавляем заголовок в первую строку
+                Grid.SetRow(headerLabel, 0);
+                Grid.SetColumn(headerLabel, j + 1);
+                textBoxContainer.Children.Add(headerLabel);
             }
 
-            // Создаем Label и размещаем их в четных строках
+            // Добавляем строки с нумерацией и полями ввода
             for (int i = 0; i < rows; i++)
             {
+                // Добавляем строку для текущей строки полей ввода
+                textBoxContainer.RowDefinitions.Add(new RowDefinition());
+
+                // Создаем Label для номера строки
+                Label rowLabel = new Label();
+                rowLabel.Content = $"{i + 1}";
+                rowLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+                rowLabel.Width = 100;
+                rowLabel.Height = 30;
+                rowLabel.Margin = new Thickness(5);
+
+                // Добавляем номер строки в первую колонку
+                Grid.SetRow(rowLabel, i + 1);
+                Grid.SetColumn(rowLabel, 0);
+                textBoxContainer.Children.Add(rowLabel);
+
+                // Создаем TextBox для каждого столбца в текущей строке
                 for (int j = 0; j < columns; j++)
                 {
-                    Label label = new Label();
-                    label.Content = $"Label {i + 1},{j + 1}";
-                    label.Width = 100;
-                    label.Height = 30;
-                    label.Margin = new Thickness(5); // Отступы для красоты
-
-                    // Задаем позицию Label в Grid (чередуем строки)
-                    Grid.SetRow(label, i * 2);  // Четные строки для Label
-                    Grid.SetColumn(label, j);
-
-                    textBoxContainer.Children.Add(label);
-                }
-            }
-
-            // Создаем TextBox и размещаем их в нечетных строках
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < columns; j++)
-                {
-                    // Создаем TextBox
                     TextBox textBox = new TextBox();
                     textBox.Width = 100;
                     textBox.Height = 30;
-                    textBox.Margin = new Thickness(5); // Отступы для красоты
+                    textBox.Margin = new Thickness(5);
 
-                    // Задаем позицию TextBox в Grid (чередуем строки)
-                    Grid.SetRow(textBox, i * 2 + 1);  // Нечетные строки для TextBox
-                    Grid.SetColumn(textBox, j);
-
-                    // Добавляем TextBox в Grid
+                    // Добавляем TextBox в текущую строку и столбец
+                    Grid.SetRow(textBox, i + 1);
+                    Grid.SetColumn(textBox, j + 1);
                     textBoxContainer.Children.Add(textBox);
                 }
             }
         }
+
     }
 }
