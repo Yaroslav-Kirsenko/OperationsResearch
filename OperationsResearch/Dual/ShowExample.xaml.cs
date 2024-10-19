@@ -72,55 +72,55 @@ namespace OperationsResearch.Dual
 
         public void CreateTextBox()
         {
-            // Очистим контейнер перед добавлением новых TextBox
+            // Очистим контейнер перед добавлением новых элементов
             textBoxContainer.Children.Clear();
             textBoxContainer.RowDefinitions.Clear();
             textBoxContainer.ColumnDefinitions.Clear();
 
-            // Добавляем строки в Grid
-            for (int i = 0; i < rows; i++)
+            // Увеличиваем количество строк на 1, чтобы было место для Label и TextBox
+            for (int i = 0; i < rows * 2; i++)  // * 2 для чередования строк Label и TextBox
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
-
             }
 
-            // Добавляем столбцы в Grid
+            // Добавляем столбцы
             for (int j = 0; j < columns; j++)
             {
                 textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
+            // Создаем Label и размещаем их в четных строках
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
                     Label label = new Label();
-                    label.Content = i+1;
+                    label.Content = $"Label {i + 1},{j + 1}";
                     label.Width = 100;
                     label.Height = 30;
-                    label.Margin = new Thickness(5); // Добавим отступы
-                    Grid.SetRow(label, i);
-                    Grid.SetColumn(label, j);
-                    textBoxContainer.Children.Add(label);
+                    label.Margin = new Thickness(5); // Отступы для красоты
 
+                    // Задаем позицию Label в Grid (чередуем строки)
+                    Grid.SetRow(label, i * 2);  // Четные строки для Label
+                    Grid.SetColumn(label, j);
+
+                    textBoxContainer.Children.Add(label);
                 }
             }
 
-
-            // Создаем TextBox и размещаем их в нужных строках и столбцах
+            // Создаем TextBox и размещаем их в нечетных строках
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
-
                     // Создаем TextBox
                     TextBox textBox = new TextBox();
                     textBox.Width = 100;
                     textBox.Height = 30;
-                    textBox.Margin = new Thickness(5); // Добавим отступы
+                    textBox.Margin = new Thickness(5); // Отступы для красоты
 
-                    // Задаем позицию TextBox в Grid
-                    Grid.SetRow(textBox, i);
+                    // Задаем позицию TextBox в Grid (чередуем строки)
+                    Grid.SetRow(textBox, i * 2 + 1);  // Нечетные строки для TextBox
                     Grid.SetColumn(textBox, j);
 
                     // Добавляем TextBox в Grid
@@ -128,7 +128,5 @@ namespace OperationsResearch.Dual
                 }
             }
         }
-
-
     }
 }
