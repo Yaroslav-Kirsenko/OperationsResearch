@@ -43,12 +43,15 @@ namespace OperationsResearch.Dual
                 // Проверка на 0
                 if (value > 0)
                 {
-                    ShowExampleService showExampleService = new ShowExampleService();
-                    showExampleService.GetRows(textFromTextBox1);
-                    showExampleService.GetColumns(textFromTextBox2);
+                   
 
                     ShowExample showExample = new ShowExample();
-                    showExample.UpdateLabelContent(textFromTextBox1);
+
+                    showExample.GetRows(textFromTextBox1);
+                    showExample.GetColumns(textFromTextBox2);
+
+                    showExample.CreateTextBox();
+                    //showExample.UpdateLabelContent(textFromTextBox1);
                     showExample.Show();
 
                     this.Close();
