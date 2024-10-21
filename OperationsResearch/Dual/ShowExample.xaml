@@ -5,16 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OperationsResearch.Dual"
         mc:Ignorable="d"
-        Title="ShowExample" Height="450" Width="800">
+        Title="ShowExample" 
+        Height="450" Width="800" 
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
 
+    <!-- Основная сетка -->
     <Grid Margin="0,0,0,0">
 
+        <!-- Сетка для размещения элементов внутри окна -->
+        <Grid>
+            <!-- Определение строк. Первая строка для основной таблицы, вторая строка для Z-функции -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <!-- Растягивается в зависимости от размера окна -->
+                <RowDefinition Height="Auto" />
+                <!-- Z-функция внизу -->
+            </Grid.RowDefinitions>
 
-        <Grid x:Name="textBoxContainer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="271" Width="800"/>
+            <!-- Контейнер для основной таблицы -->
+            <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                <!-- Уменьшил Margin -->
+                <Grid x:Name="textBoxContainer" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Top"
+                      ShowGridLines="True"
+                      
+                      Width="Auto"
+                      Height="Auto"/>
+            </Grid>
 
+            <!-- Контейнер для Z-функции -->
+            <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5">
+                <!-- Уменьшил Margin -->
+                <Grid x:Name="textBoxContainerZ" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Top"
+                      ShowGridLines="True"
+                      
+                      Width="Auto"
+                      Height="Auto"/>
+            </Grid>
 
-        <Grid x:Name="textBoxContainerZ" HorizontalAlignment="Center" VerticalAlignment="Top" Height="158" Width="800" Margin="0,276,0,0"/>
-
+        </Grid>
 
     </Grid>
 </Window>
