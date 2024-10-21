@@ -6,31 +6,15 @@
         xmlns:local="clr-namespace:OperationsResearch.Dual"
         mc:Ignorable="d"
         Title="ShowExample" Height="450" Width="800">
-    <Grid Margin="0,0,10,209" RenderTransformOrigin="0.492,0.621" ShowGridLines="True">
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FFF9F9F9" Offset="0"/>
-            </LinearGradientBrush>
-        </Grid.Background>
 
-        <!-- Определяем строки в Grid -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="145"/>
-            <!-- Верхняя строка фиксированной высоты 200 -->
-            <RowDefinition/>
-            <!-- Нижняя строка займёт оставшееся пространство -->
-        </Grid.RowDefinitions>
+    <Grid Margin="0,0,0,0">
 
-        <!-- Первый контейнер в первой строке -->
-        <Grid x:Name="textBoxContainer" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="16" Width="69">
-           
-        </Grid>
 
-        <!-- Второй контейнер во второй строке -->
-        <Grid x:Name="textBoxContainerZ" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="16" Width="69">
-            
-        </Grid>
+        <Grid x:Name="textBoxContainer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="271" Width="800"/>
+
+
+        <Grid x:Name="textBoxContainerZ" HorizontalAlignment="Center" VerticalAlignment="Top" Height="158" Width="800" Margin="0,276,0,0"/>
+
+
     </Grid>
 </Window>

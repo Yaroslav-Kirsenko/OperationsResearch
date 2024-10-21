@@ -1,4 +1,4 @@
-﻿using OperationsResearch.DualServices;
+﻿
 using System.Windows;
 using System.Windows.Controls;
 
@@ -51,6 +51,7 @@ namespace OperationsResearch.Dual
                     showExample.GetColumns(textFromTextBox2);
 
                     showExample.CreateTextBox();
+                    showExample.Zfunc();
                     //showExample.UpdateLabelContent(textFromTextBox1);
                     showExample.Show();
 
