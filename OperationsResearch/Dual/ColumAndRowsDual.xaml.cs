@@ -112,5 +112,14 @@ namespace OperationsResearch.Dual
                 errorMessage.Content = "Введіть коректне число!!!";
             }
         }
+
+        private void Button_Click_Exet(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+
+            mainWindow.Show();
+
+            this.Close();
+        }
     }
 }
