@@ -122,7 +122,6 @@ namespace OperationsResearch.Dual
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
                         Padding = new Thickness(5),
-                        Background = System.Windows.Media.Brushes.LightGray,
                         Text = "0" // Значение по умолчанию
                     };
 
@@ -153,7 +152,6 @@ namespace OperationsResearch.Dual
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
                     Padding = new Thickness(5),
-                    Background = System.Windows.Media.Brushes.LightGray,
                     Text = "0" // Значение по умолчанию
                 };
 
@@ -237,7 +235,6 @@ namespace OperationsResearch.Dual
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
                     Padding = new Thickness(5),
-                    Background = System.Windows.Media.Brushes.LightGray,
                     Text = "0" // Пример значения по умолчанию
                 };
 
