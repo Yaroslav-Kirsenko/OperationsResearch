@@ -5,6 +5,8 @@ using System.Windows.Controls;
 
 namespace OperationsResearch.Dual
 {
+
+
     public partial class ShowExample : Window
     {
         public ShowExample()
@@ -258,6 +260,15 @@ namespace OperationsResearch.Dual
             Grid.SetRow(extremumComboBox, 1); // Под функцией Z
             Grid.SetColumn(extremumComboBox, columns + 1); // В последнем столбце для экстремума
             textBoxContainerZ.Children.Add(extremumComboBox);
+     
+        }
+        private void Button_Click_Exit(object sender, RoutedEventArgs e)
+        {
+            ColumAndRowsDual ColumAndRowsDual = new ColumAndRowsDual();
+
+            ColumAndRowsDual.Show();
+
+            this.Close();
         }
     }
 }

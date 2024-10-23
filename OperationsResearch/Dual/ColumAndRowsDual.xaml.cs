@@ -52,7 +52,6 @@ namespace OperationsResearch.Dual
 
                     showExample.CreateTextBox();
                     showExample.Zfunc();
-                    //showExample.UpdateLabelContent(textFromTextBox1);
                     showExample.Show();
 
                     this.Close();
