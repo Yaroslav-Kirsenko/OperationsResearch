@@ -9,6 +9,6 @@
     <Grid Background="#FFD9FFFE">
         <Button Content="Двоїста" HorizontalAlignment="Center" Margin="0,110,0,0" VerticalAlignment="Top" Click="Button_Click_Dual" Background="#FFE87070" Height="56" Width="588"/>
         <Button Content="Симплекс метод" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click" Background="#FFE87070" Height="56" Width="588" Margin="0,249,0,0"/>
-        <Label Content="Привіт, я твій помчник!!!" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Margin="0,17,0,0"/>
+        <Label Content="Привіт, я твій помічник!!!" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Margin="0,17,0,0"/>
     </Grid>
 </Window>
