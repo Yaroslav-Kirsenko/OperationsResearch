@@ -12,17 +12,18 @@
 
     <!-- Основная сетка -->
     <Grid Margin="0,0,0,0">
-        <Button Content="Повернутись назад
-         " HorizontalAlignment="Left" Margin="2,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exit" Background="#FFE87070" Grid.ColumnSpan="2"/>
+        <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="2,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exit" Background="#FFE87070" Grid.ColumnSpan="2"/>
 
         <!-- Сетка для размещения элементов внутри окна -->
         <Grid>
-            <!-- Определение строк. Первая строка для основной таблицы, вторая строка для Z-функции -->
+            <!-- Определение строк. Первая строка для основной таблицы, вторая строка для Z-функции, третья для кнопки "Далі" -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <!-- Растягивается в зависимости от размера окна -->
                 <RowDefinition Height="Auto" />
-                <!-- Z-функция внизу -->
+                <!-- Z-функция -->
+                <RowDefinition Height="Auto" />
+                <!-- Кнопка "Далі" внизу -->
             </Grid.RowDefinitions>
 
             <!-- Контейнер для основной таблицы -->
@@ -32,7 +33,6 @@
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Top"
                       ShowGridLines="True"
-                      
                       Width="Auto"
                       Height="Auto"/>
             </Grid>
@@ -44,12 +44,12 @@
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Top"
                       ShowGridLines="True"
-                      
                       Width="Auto"
                       Height="Auto"/>
             </Grid>
 
+            <!-- Кнопка "Далі" внизу -->
+            <Button Grid.Row="2" Content="Далі" HorizontalAlignment="Center" VerticalAlignment="Top" Width="770" Height="24" Click="Button_Click_Next" Background="#FFE87070"/>
         </Grid>
-
     </Grid>
 </Window>

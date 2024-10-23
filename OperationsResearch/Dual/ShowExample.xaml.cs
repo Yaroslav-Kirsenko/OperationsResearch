@@ -270,5 +270,10 @@ namespace OperationsResearch.Dual
 
             this.Close();
         }
+
+        private void Button_Click_Next(object sender, RoutedEventArgs e)
+        {
+       
+        }
     }
 }

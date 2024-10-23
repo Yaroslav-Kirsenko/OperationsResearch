@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#FFD9FFFE">
-        <Button Content="Двоїста" HorizontalAlignment="Center" Margin="0,110,0,0" VerticalAlignment="Top" Click="Button_Click_Dual" Background="#FFE87070" Height="56" Width="588"/>
-        <Button Content="Симплекс метод" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click" Background="#FFE87070" Height="56" Width="588" Margin="0,249,0,0"/>
-        <Label Content="Привіт, я твій помічник!!!" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Margin="0,17,0,0"/>
+        <Button Content="Двоїстий симплекс метод" HorizontalAlignment="Center" Margin="0,204,0,0" VerticalAlignment="Top" Click="Button_Click_Dual" Background="#FFE87070" Height="56" Width="588"/>
+        <Label Content="Привіт, я твій помічник!!!" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Margin="0,103,0,0"/>
     </Grid>
 </Window>
