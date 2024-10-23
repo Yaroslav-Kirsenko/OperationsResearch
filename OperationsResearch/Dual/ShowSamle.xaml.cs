@@ -24,18 +24,16 @@ namespace OperationsResearch.Dual
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_exit(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click_Dual(object sender, RoutedEventArgs e)
-        {
-            ShowSamle ShowSamle = new ShowSamle();
-
-            ShowSamle.Show();
-
+            ShowExample showExample = new ShowExample();
+            showExample.Show();
             this.Close();
+            
+        }
+        private void Button_Click_next(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

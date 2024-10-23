@@ -273,7 +273,9 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
-       
+            ShowSamle showSamle = new ShowSamle();
+            showSamle.Show();
+            this.Close();
         }
     }
 }
