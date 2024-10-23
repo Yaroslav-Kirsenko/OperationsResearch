@@ -47,7 +47,7 @@
                       Width="Auto"
                       Height="Auto"/>
                 <Button Content="Далі" HorizontalAlignment="Center" Background="#FFE87070" Margin="0,143,0,0" VerticalAlignment="Top" Width="770" Height="31"/>
-                <Button Content="Далі" HorizontalAlignment="Center" Background="#FFE87070" Margin="0,143,0,0" VerticalAlignment="Top" Width="770" Height="31"/>
+                
             </Grid>
 
 
