@@ -56,6 +56,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
+                    Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
 
@@ -75,6 +76,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
+                Background = System.Windows.Media.Brushes.LightPink,
                 Padding = new Thickness(5)
             };
 
@@ -89,6 +91,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
+                Background = System.Windows.Media.Brushes.LightPink,
                 Padding = new Thickness(5)
             };
 
@@ -109,6 +112,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
+                    Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
 
@@ -124,7 +128,6 @@ namespace OperationsResearch.Dual
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
                         Padding = new Thickness(5),
-                        Text = "0" // Значение по умолчанию
                     };
 
                     Grid.SetRow(textBox, i + 1);
@@ -154,7 +157,6 @@ namespace OperationsResearch.Dual
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
                     Padding = new Thickness(5),
-                    Text = "0" // Значение по умолчанию
                 };
 
                 Grid.SetRow(valueTextBox, i + 1);
@@ -188,6 +190,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
+                    Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
 
@@ -206,6 +209,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
+                Background = System.Windows.Media.Brushes.LightPink,
                 Padding = new Thickness(5)
             };
 
@@ -218,16 +222,18 @@ namespace OperationsResearch.Dual
 
             Label zRowLabel = new Label
             {
-                Content = "Z =",
+                Content = "Z = ",
                 HorizontalContentAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
+                Background = System.Windows.Media.Brushes.LightPink,
                 Padding = new Thickness(5)
             };
 
             Grid.SetRow(zRowLabel, 1);
             Grid.SetColumn(zRowLabel, 0);
+
             textBoxContainerZ.Children.Add(zRowLabel);
 
             for (int j = 0; j < columns; j++)
@@ -237,7 +243,6 @@ namespace OperationsResearch.Dual
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
                     Padding = new Thickness(5),
-                    Text = "0" // Пример значения по умолчанию
                 };
 
                 Grid.SetRow(textBox, 1);
@@ -259,6 +264,7 @@ namespace OperationsResearch.Dual
 
             Grid.SetRow(extremumComboBox, 1); // Под функцией Z
             Grid.SetColumn(extremumComboBox, columns + 1); // В последнем столбце для экстремума
+
             textBoxContainerZ.Children.Add(extremumComboBox);
      
         }
@@ -274,7 +280,9 @@ namespace OperationsResearch.Dual
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
             ShowSamle showSamle = new ShowSamle();
+
             showSamle.Show();
+
             this.Close();
         }
     }

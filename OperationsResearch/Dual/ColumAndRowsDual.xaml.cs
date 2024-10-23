@@ -26,22 +26,27 @@ namespace OperationsResearch.Dual
         {
             string textFromTextBox1 = textBox1.Text;
             string textFromTextBox2 = textBox2.Text;
-            int value;
+            int value1;
+            int value2;
 
             // Проверка на строка
-            if (string.IsNullOrEmpty(textFromTextBox1))
+            if (string.IsNullOrEmpty(textFromTextBox1) && string.IsNullOrEmpty(textFromTextBox2))
             {
-                errorMessage.Content = "Поле ввода не может быть пустым!";
+                errorMessage.Content = "Поле не може бути пустим!!!";
             }
             // Проверка на число
-            else if (!int.TryParse(textFromTextBox1, out value))
+            else if (!int.TryParse(textFromTextBox1, out value1))
+            {
+                errorMessage.Content = "Введіть коректне число!!!";
+            }
+            else if (!int.TryParse(textFromTextBox2, out value2))
             {
                 errorMessage.Content = "Введіть коректне число!!!";
             }
             else
             {
                 // Проверка на 0
-                if (value > 0)
+                if (value1 > 1 && value2 > 1)
                 {
                    
 
@@ -58,7 +63,7 @@ namespace OperationsResearch.Dual
                 }
                 else
                 {
-                    errorMessage.Content = "нуль, або меньше нуля не може бути!!!";
+                    errorMessage.Content = "нуль, або меньше одиниці не може бути!!!";
                 }
             }
         }
