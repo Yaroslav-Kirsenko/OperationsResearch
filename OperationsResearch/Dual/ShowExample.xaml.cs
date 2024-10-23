@@ -14,6 +14,8 @@ namespace OperationsResearch.Dual
             InitializeComponent();
         }
 
+        public ShowSamle showSamle = new ShowSamle();
+
         public int rows = 0;
         public int columns = 0;
 
@@ -21,19 +23,25 @@ namespace OperationsResearch.Dual
         public void GetRows(string rowsStr)
         {
             rows = Convert.ToInt32(rowsStr);
-            Console.WriteLine(rows);
+            //Console.WriteLine(rows);
         }
 
         // Установка количества столбцов
         public void GetColumns(string columnsStr)
         {
             columns = Convert.ToInt32(columnsStr);
-            Console.WriteLine(columns);
+            //Console.WriteLine(columns);
         }
+
+       
+
+        
 
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
         public void CreateTextBox()
         {
+            ShowSamle showSamle = new ShowSamle();
+
             textBoxContainer.Children.Clear();
             textBoxContainer.RowDefinitions.Clear();
             textBoxContainer.ColumnDefinitions.Clear();
@@ -58,7 +66,11 @@ namespace OperationsResearch.Dual
                     BorderBrush = System.Windows.Media.Brushes.Black,
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
+
+                    
                 };
+
+                showSamle.GetValueLabelX(headerLabel); ///////////////////////////////////////////////////////
 
                 Grid.SetRow(headerLabel, 0);
                 Grid.SetColumn(headerLabel, j + 1);
@@ -193,6 +205,7 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
+                showSamle.GetValueZX(zColumn);///////////////////////////////////////////////////////////////////
 
                 Grid.SetRow(zColumn, 0);
                 Grid.SetColumn(zColumn, j + 1);

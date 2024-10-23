@@ -5,23 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OperationsResearch.Dual"
         mc:Ignorable="d"
-        Title="ColumAndRowsDual" Height="450" Width="850">
+        Title="ColumAndRowsDual"
+        Height="450" Width="850"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
+    
     <Grid Background="#FFD9FFFE">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="24*"/>
         </Grid.ColumnDefinitions>
+        
         <Label Content="Кількість обмежень (рядків): " HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" FontSize="18" Grid.ColumnSpan="2"/>
         <Label Content="Кількість змінних (стовпчиків): " HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" FontSize="18" Grid.ColumnSpan="2"/>
-        <Button Content="Готово" HorizontalAlignment="Left" Margin="1,284,0,0" VerticalAlignment="Top" Width="780" Height="31" Click="Button_Click" Background="#FFABFFEE" Grid.Column="1"/>
+        
+        
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="246,34,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="492" Height="34" FontSize="20" Grid.Column="1" TextChanged="textBox1_TextChanged"/>
         <TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="246,73,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="492" Height="33" FontSize="20" Grid.Column="1" TextChanged="textBox2_TextChanged"/>
+        
         <Button Grid.Column="1" Content="^" HorizontalAlignment="Left" Margin="738,34,0,0" VerticalAlignment="Top" Height="17" Width="17" Click="Button_Up1" FontSize="10"/>
         <Button Grid.Column="1" Content="ˇ" HorizontalAlignment="Left" Margin="738,51,0,0" VerticalAlignment="Top" Height="17" Width="17" Click="Button_Down1" RenderTransformOrigin="0.559,1.444" FontSize="18"/>
         <Button Grid.Column="1" Content="^" HorizontalAlignment="Left" Margin="738,73,0,0" VerticalAlignment="Top" Height="17" Width="17" Click="Button_Up2" FontSize="10"/>
         <Button Grid.Column="1" Content="ˇ" HorizontalAlignment="Left" Margin="738,90,0,0" VerticalAlignment="Top" Height="16" Width="17" Click="Button_Down2" RenderTransformOrigin="0.559,1.444" FontSize="18"/>
+        
         <Label x:Name="errorMessage" Grid.Column="1" Content="" HorizontalAlignment="Center" Margin="0,162,0,0" VerticalAlignment="Top" Width="746" FontSize="34" Background="{x:Null}" Foreground="Red"/>
-        <Button Content="Повернутись назад
-" HorizontalAlignment="Left" Margin="17,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exet" Background="#FFABFFEE" Grid.ColumnSpan="2"/>
+        
+        <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="17,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exet" Background="#FFABFFEE" Grid.ColumnSpan="2"/>
+        <Button Content="Готово" HorizontalAlignment="Left" Margin="1,284,0,0" VerticalAlignment="Top" Width="780" Height="31" Click="Button_Click" Background="#FFABFFEE" Grid.Column="1"/>
     </Grid>
 </Window>

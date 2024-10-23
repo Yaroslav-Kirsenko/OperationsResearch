@@ -1,5 +1,4 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace OperationsResearch.Dual
@@ -51,9 +50,13 @@ namespace OperationsResearch.Dual
                    
 
                     ShowExample showExample = new ShowExample();
+                    ShowSamle showSamle = new ShowSamle();
 
                     showExample.GetRows(textFromTextBox1);
                     showExample.GetColumns(textFromTextBox2);
+
+                    showSamle.GetRowsSamle(textFromTextBox1);
+                    showSamle.GetColumnsSamle(textFromTextBox2);
 
                     showExample.CreateTextBox();
                     showExample.Zfunc();
