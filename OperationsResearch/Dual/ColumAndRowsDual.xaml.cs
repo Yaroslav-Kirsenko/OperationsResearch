@@ -13,14 +13,18 @@ namespace OperationsResearch.Dual
             InitializeComponent();
         }
 
+        public ShowExample showExample = new ShowExample();
+        public ShowSamle showSamle = new ShowSamle();
+
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+   
         }
         private void textBox2_TextChanged(object sender, TextChangedEventArgs e)
         {
             
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string textFromTextBox1 = textBox1.Text;
@@ -49,8 +53,7 @@ namespace OperationsResearch.Dual
                 {
                    
 
-                    ShowExample showExample = new ShowExample();
-                    ShowSamle showSamle = new ShowSamle();
+                  
 
                     showExample.GetRows(textFromTextBox1);
                     showExample.GetColumns(textFromTextBox2);
@@ -62,7 +65,7 @@ namespace OperationsResearch.Dual
                     showExample.Zfunc();
                     showExample.Show();
 
-                    this.Close();
+                    this.Hide();
                 }
                 else
                 {
@@ -126,7 +129,7 @@ namespace OperationsResearch.Dual
 
             mainWindow.Show();
 
-            this.Close();
+            this.Hide();
         }
     }
 }

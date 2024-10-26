@@ -18,14 +18,9 @@ namespace OperationsResearch.Dual
             InitializeComponent();
         }
 
-        public Label label = new Label();
-
         public int rows = 0;
         public int columns = 0;
 
-        public List<Label> listTableX = new List<Label>();
-
-        public List<Label> listZX = new List<Label>();
 
         public void GetRowsSamle(string rowsStr)
         {
@@ -43,14 +38,20 @@ namespace OperationsResearch.Dual
         // БЕРУ ИНФУ С ТАБЛИЧКИ LABEL X!!!!!!!
         public void GetValueLabelX(Label label)
         {
-
+            // Получаем текст метки
             string labelContent = label.Content.ToString();
 
-            Console.WriteLine("Табличка");
-            Console.WriteLine(labelContent);
+          
+            Label rowLabel = new Label
+            {
+                Content = labelContent,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(5)
+            };
 
-            listTableX.Add(new Label { Content = labelContent });
-
+            // Добавляем Label в StackPanel для отображения
+            LabelsContainer.Children.Add(rowLabel);
         }
 
         // БЕРУ ИНФУ С  Z - ФУНКЦИИ LABEL X!!!!!!!
@@ -63,7 +64,18 @@ namespace OperationsResearch.Dual
             Console.WriteLine(labelContent);
 
 
-            listZX.Add(new Label { Content = labelContent });
+            //listZX.Add(new Label { Content = labelContent });
+
+            Label rowLabelZ = new Label
+            {
+                Content = labelContent,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(5)
+            };
+
+            // Добавляем Label в StackPanel для отображения
+            LabelsContainer.Children.Add(rowLabelZ);
 
         }
 
@@ -79,7 +91,7 @@ namespace OperationsResearch.Dual
 
             showExample.Show();
 
-            this.Close();
+             this.Hide();
         }
     }
 }

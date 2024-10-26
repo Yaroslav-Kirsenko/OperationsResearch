@@ -9,6 +9,7 @@ namespace OperationsResearch.Dual
 
     public partial class ShowExample : Window
     {
+
         public ShowExample()
         {
             InitializeComponent();
@@ -40,11 +41,11 @@ namespace OperationsResearch.Dual
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
         public void CreateTextBox()
         {
-            ShowSamle showSamle = new ShowSamle();
+           
 
-            textBoxContainer.Children.Clear();
-            textBoxContainer.RowDefinitions.Clear();
-            textBoxContainer.ColumnDefinitions.Clear();
+            //textBoxContainer.Children.Clear();
+            //textBoxContainer.RowDefinitions.Clear();
+            //textBoxContainer.ColumnDefinitions.Clear();
 
             // Включаем отображение линий сетки
             textBoxContainer.ShowGridLines = true;
@@ -180,9 +181,9 @@ namespace OperationsResearch.Dual
         // Метод для создания таблицы для функции Z
         public void Zfunc()
         {
-            textBoxContainerZ.Children.Clear();
-            textBoxContainerZ.RowDefinitions.Clear();
-            textBoxContainerZ.ColumnDefinitions.Clear();
+            //textBoxContainerZ.Children.Clear();
+            //textBoxContainerZ.RowDefinitions.Clear();
+            //textBoxContainerZ.ColumnDefinitions.Clear();
 
             // Включаем отображение линий сетки
             textBoxContainerZ.ShowGridLines = true;
@@ -287,16 +288,15 @@ namespace OperationsResearch.Dual
 
             ColumAndRowsDual.Show();
 
-            this.Close();
+            this.Hide();
         }
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
-            ShowSamle showSamle = new ShowSamle();
 
             showSamle.Show();
 
-            this.Close();
+            this.Hide();
         }
     }
 }

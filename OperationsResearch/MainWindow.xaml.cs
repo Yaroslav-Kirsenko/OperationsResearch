@@ -37,7 +37,7 @@ namespace OperationsResearch
 
             columAndRowsDual.Show();
 
-            this.Close();
+            this.Hide();
         }
     }
 }
