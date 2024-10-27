@@ -8,22 +8,23 @@ namespace OperationsResearch.Dual
     /// </summary>
     public partial class ColumAndRowsDual : Window
     {
+
+        public static string savedTextBox1Value = "0";
+        public static string savedTextBox2Value = "0";
+
         public ColumAndRowsDual()
         {
             InitializeComponent();
+
+            textBox1.Text = savedTextBox1Value;
+            textBox2.Text = savedTextBox2Value;
         }
 
         public ShowExample showExample = new ShowExample();
         public ShowSamle showSamle = new ShowSamle();
 
-        private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-   
-        }
-        private void textBox2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
+        private void textBox1_TextChanged(object sender, TextChangedEventArgs e) { }
+        private void textBox2_TextChanged(object sender, TextChangedEventArgs e) { }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -32,47 +33,48 @@ namespace OperationsResearch.Dual
             int value1;
             int value2;
 
-            // Проверка на строка
+            // Проверка на пустое значение
             if (string.IsNullOrEmpty(textFromTextBox1) && string.IsNullOrEmpty(textFromTextBox2))
             {
-                errorMessage.Content = "Поле не може бути пустим!!!";
+                errorMessage.Content = "Поле не может быть пустым!";
             }
-            // Проверка на число
+            // Проверка на корректность числа
             else if (!int.TryParse(textFromTextBox1, out value1))
             {
-                errorMessage.Content = "Введіть коректне число!!!";
+                errorMessage.Content = "Введите корректное число!";
             }
             else if (!int.TryParse(textFromTextBox2, out value2))
             {
-                errorMessage.Content = "Введіть коректне число!!!";
+                errorMessage.Content = "Введите корректное число!";
             }
             else
             {
                 // Проверка на 0
                 if (value1 > 1 && value2 > 1)
                 {
-                   
+                    //showExample.GetRows(textFromTextBox1);
+                    //showExample.GetColumns(textFromTextBox2);
 
-                  
+                    //showSamle.GetRowsSamle(textFromTextBox1);
+                    //showSamle.GetColumnsSamle(textFromTextBox2);
 
-                    showExample.GetRows(textFromTextBox1);
-                    showExample.GetColumns(textFromTextBox2);
-
-                    showSamle.GetRowsSamle(textFromTextBox1);
-                    showSamle.GetColumnsSamle(textFromTextBox2);
-
-                    showExample.CreateTextBox();
-                    showExample.Zfunc();
+                    //showExample.CreateTextBox();
+                    //showExample.Zfunc();
                     showExample.Show();
+
+
+                    savedTextBox1Value = textBox1.Text;
+                    savedTextBox2Value = textBox2.Text;
 
                     this.Hide();
                 }
                 else
                 {
-                    errorMessage.Content = "нуль, або меньше одиниці не може бути!!!";
+                    errorMessage.Content = "Нуль или меньше единицы не может быть!";
                 }
             }
         }
+
         private void Button_Up1(object sender, RoutedEventArgs e)
         {
             int value;
@@ -82,9 +84,10 @@ namespace OperationsResearch.Dual
             }
             else
             {
-                errorMessage.Content = "Введіть коректне число!!!";
+                errorMessage.Content = "Введите корректное число!";
             }
         }
+
         private void Button_Down1(object sender, RoutedEventArgs e)
         {
             int value;
@@ -94,9 +97,10 @@ namespace OperationsResearch.Dual
             }
             else
             {
-                errorMessage.Content = "Введіть коректне число!!!";
+                errorMessage.Content = "Введите корректное число!";
             }
         }
+
         private void Button_Up2(object sender, RoutedEventArgs e)
         {
             int value;
@@ -106,7 +110,7 @@ namespace OperationsResearch.Dual
             }
             else
             {
-                errorMessage.Content = "Введіть коректне число!!!";
+                errorMessage.Content = "Введите корректное число!";
             }
         }
 
@@ -119,16 +123,18 @@ namespace OperationsResearch.Dual
             }
             else
             {
-                errorMessage.Content = "Введіть коректне число!!!";
+                errorMessage.Content = "Введите корректное число!";
             }
         }
 
         private void Button_Click_Exet(object sender, RoutedEventArgs e)
         {
+
+            savedTextBox1Value = textBox1.Text;
+            savedTextBox2Value = textBox2.Text;
+
             MainWindow mainWindow = new MainWindow();
-
             mainWindow.Show();
-
             this.Hide();
         }
     }

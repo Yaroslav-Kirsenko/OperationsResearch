@@ -9,13 +9,22 @@ namespace OperationsResearch.Dual
 
     public partial class ShowExample : Window
     {
+        public static int savedRow = 0;
+        public static int savedColum = 0;
+
+
 
         public ShowExample()
         {
             InitializeComponent();
+            rows = savedRow;
+            columns = savedColum;
+
         }
 
         public ShowSamle showSamle = new ShowSamle();
+        public ColumAndRowsDual columAndRowsDual = new ColumAndRowsDual();
+
 
         public int rows = 0;
         public int columns = 0;
@@ -34,14 +43,14 @@ namespace OperationsResearch.Dual
             //Console.WriteLine(columns);
         }
 
-       
 
-        
+
+
 
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
         public void CreateTextBox()
         {
-           
+
 
             //textBoxContainer.Children.Clear();
             //textBoxContainer.RowDefinitions.Clear();
@@ -68,7 +77,7 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
 
-                    
+
                 };
 
                 showSamle.GetValueLabelX(headerLabel); ///////////////////////////////////////////////////////
@@ -206,7 +215,7 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
-                showSamle.GetValueZX(zColumn);///////////////////////////////////////////////////////////////////
+                /*showSamle.GetValueZX(zColumn);*////////////////////////////////////////////////////////////////////
 
                 Grid.SetRow(zColumn, 0);
                 Grid.SetColumn(zColumn, j + 1);
@@ -280,19 +289,23 @@ namespace OperationsResearch.Dual
             Grid.SetColumn(extremumComboBox, columns + 1); // В последнем столбце для экстремума
 
             textBoxContainerZ.Children.Add(extremumComboBox);
-     
+
         }
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
-            ColumAndRowsDual ColumAndRowsDual = new ColumAndRowsDual();
 
-            ColumAndRowsDual.Show();
+            savedRow = rows;
+            savedColum = columns;
+
+            columAndRowsDual.Show();
 
             this.Hide();
         }
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
+            savedRow = rows;
+            savedColum = columns;
 
             showSamle.Show();
 
