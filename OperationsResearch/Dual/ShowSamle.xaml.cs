@@ -13,27 +13,28 @@ namespace OperationsResearch.Dual
     public partial class ShowSamle : Window
     {
 
+
         public ShowSamle()
         {
             InitializeComponent();
         }
 
-        //public int rows = 0;
-        //public int columns = 0;
+        public int rows = 0;
+        public int columns = 0;
 
 
-        //public void GetRowsSamle(string rowsStr)
-        //{
-        //    rows = Convert.ToInt32(rowsStr);
-        //    //Console.WriteLine(rows);
-        //}
+        public void GetRowsSamle(string rowsStr)
+        {
+            rows = Convert.ToInt32(rowsStr);
+            //Console.WriteLine(rows);
+        }
 
 
-        //public void GetColumnsSamle(string columnsStr)
-        //{
-        //    columns = Convert.ToInt32(columnsStr);
-        //    //Console.WriteLine(columns);
-        //}
+        public void GetColumnsSamle(string columnsStr)
+        {
+            columns = Convert.ToInt32(columnsStr);
+            //Console.WriteLine(columns);
+        }
 
         // БЕРУ ИНФУ С ТАБЛИЧКИ LABEL X!!!!!!!
         public void GetValueLabelX(Label label)
