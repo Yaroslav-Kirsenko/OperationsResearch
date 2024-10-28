@@ -5,7 +5,7 @@ namespace OperationsResearch.Dual
     public class SavedElements
     {
         public static int[][] array;
-
+        public static int[] arrayResult;
         public static int[] arrayZ;
 
         public static int rows = 0;
@@ -25,6 +25,19 @@ namespace OperationsResearch.Dual
                 }
             }
         }
+
+        public void InitializeArrayResult(int rows2)
+        {
+
+            rows = rows2;
+
+            if (rows > 0)
+            {
+                arrayResult = new int[rows];  // Инициализация одномерного массива res
+            }
+        }
+
+
 
         public void InitializeArrayZ(int columns1)
         {
@@ -50,6 +63,16 @@ namespace OperationsResearch.Dual
                 Console.WriteLine();
             }
         }
+        public static void ShowValuesrRezult()
+        {
+            Console.WriteLine("ARRAY result");
+
+            for (int i = 0; i < rows; i++)
+            {
+                Console.Write(arrayResult[i] + " ");
+            }
+            Console.WriteLine();
+        }
 
         // Метод для вывода значений массива Z в консоль
         public static void ShowValuesZ()
@@ -62,5 +85,7 @@ namespace OperationsResearch.Dual
             }
             Console.WriteLine();
         }
+
     }
+
 }

@@ -24,7 +24,9 @@ namespace OperationsResearch.Dual
         {
             rows = Convert.ToInt32(rowsStr);
             InitializeArray(); // Инициализация массива после установки количества строк
+            InitializeArrayResult();
             InitializeArrayZ(); // Инициализация массива Z
+
         }
 
         // Установка количества столбцов
@@ -32,13 +34,21 @@ namespace OperationsResearch.Dual
         {
             columns = Convert.ToInt32(columnsStr);
             InitializeArray(); // Инициализация массива после установки количества столбцов
+            InitializeArrayResult();
             InitializeArrayZ(); // Инициализация массива Z
+
         }
 
         // Метод для инициализации массива в savedElements
         private void InitializeArray()
         {
             savedElements.InitializeArray(rows, columns);
+
+        }
+
+        private void InitializeArrayResult()
+        {
+            savedElements.InitializeArrayResult(rows); // Указываем только количество столбцов
         }
 
         private void InitializeArrayZ()
@@ -188,6 +198,19 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5),
                 };
 
+                int rows = i;
+
+                valueTextBox.TextChanged += (sender, e) =>
+                {
+                    if (int.TryParse(valueTextBox.Text, out int result))
+                    {
+                        SavedElements.arrayResult[rows] = result;
+                    }
+                    else
+                    {
+                        SavedElements.arrayResult[rows] = 0;
+                    }
+                };
                 Grid.SetRow(valueTextBox, i + 1);
                 Grid.SetColumn(valueTextBox, columns + 2);
                 textBoxContainer.Children.Add(valueTextBox);
@@ -321,6 +344,7 @@ namespace OperationsResearch.Dual
             showSamle.GetColumnsSamle(columns);
 
             SavedElements.ShowValues();
+            SavedElements.ShowValuesrRezult();
             SavedElements.ShowValuesZ(); // Вывод массива Z
 
             showSamle.Show();
