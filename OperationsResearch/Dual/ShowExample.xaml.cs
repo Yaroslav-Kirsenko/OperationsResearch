@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-
 namespace OperationsResearch.Dual
 {
-
-
     public partial class ShowExample : Window
     {
+        public SavedElements savedElements = new SavedElements();
 
         public ShowExample()
         {
@@ -17,7 +15,6 @@ namespace OperationsResearch.Dual
         }
 
         public ShowSamle showSamle = new ShowSamle();
-     
 
         public static int rows = 0;
         public static int columns = 0;
@@ -26,25 +23,32 @@ namespace OperationsResearch.Dual
         public void GetRows(string rowsStr)
         {
             rows = Convert.ToInt32(rowsStr);
-            //Console.WriteLine(rows);
+            InitializeArray(); // Инициализация массива после установки количества строк
+            InitializeArrayZ(); // Инициализация массива Z
         }
 
         // Установка количества столбцов
         public void GetColumns(string columnsStr)
         {
             columns = Convert.ToInt32(columnsStr);
-            //Console.WriteLine(columns);
+            InitializeArray(); // Инициализация массива после установки количества столбцов
+            InitializeArrayZ(); // Инициализация массива Z
         }
 
+        // Метод для инициализации массива в savedElements
+        private void InitializeArray()
+        {
+            savedElements.InitializeArray(rows, columns);
+        }
 
-
-
+        private void InitializeArrayZ()
+        {
+            savedElements.InitializeArrayZ(columns); // Указываем только количество столбцов
+        }
 
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
         public void CreateTextBox()
         {
-
-
             textBoxContainer.Children.Clear();
             textBoxContainer.RowDefinitions.Clear();
             textBoxContainer.ColumnDefinitions.Clear();
@@ -69,11 +73,9 @@ namespace OperationsResearch.Dual
                     BorderBrush = System.Windows.Media.Brushes.Black,
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
-
-                    
                 };
 
-                showSamle.GetValueLabelX(headerLabel); ///////////////////////////////////////////////////////
+                showSamle.GetValueLabelX(headerLabel);
 
                 Grid.SetRow(headerLabel, 0);
                 Grid.SetColumn(headerLabel, j + 1);
@@ -96,7 +98,7 @@ namespace OperationsResearch.Dual
             };
 
             Grid.SetRow(signHeader, 0);
-            Grid.SetColumn(signHeader, columns + 1); // Добавляем в колонку для знаков
+            Grid.SetColumn(signHeader, columns + 1);
             textBoxContainer.Children.Add(signHeader);
 
             Label valueHeader = new Label
@@ -111,7 +113,7 @@ namespace OperationsResearch.Dual
             };
 
             Grid.SetRow(valueHeader, 0);
-            Grid.SetColumn(valueHeader, columns + 2); // Добавляем в колонку для значений
+            Grid.SetColumn(valueHeader, columns + 2);
             textBoxContainer.Children.Add(valueHeader);
 
             // Добавляем строки с номерами и полями ввода
@@ -119,7 +121,6 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                // Номер строки
                 Label rowLabel = new Label
                 {
                     Content = $"{i + 1}",
@@ -145,17 +146,31 @@ namespace OperationsResearch.Dual
                         Padding = new Thickness(5),
                     };
 
+                    int row = i;
+                    int column = j;
+
+                    textBox.TextChanged += (sender, e) =>
+                    {
+                        if (int.TryParse(textBox.Text, out int result))
+                        {
+                            SavedElements.array[row][column] = result;
+                        }
+                        else
+                        {
+                            SavedElements.array[row][column] = 0;
+                        }
+                    };
+
                     Grid.SetRow(textBox, i + 1);
                     Grid.SetColumn(textBox, j + 1);
                     textBoxContainer.Children.Add(textBox);
                 }
 
-                // Добавляем выпадающий список для знаков
                 ComboBox signComboBox = new ComboBox
                 {
                     Width = 100,
-                    ItemsSource = new List<string> { "=", "<=", ">=" }, // Пример опций
-                    SelectedIndex = 0, // Значение по умолчанию
+                    ItemsSource = new List<string> { "=", "<=", ">=" },
+                    SelectedIndex = 0,
                     Margin = new Thickness(5),
                     Padding = new Thickness(5),
                     BorderThickness = new Thickness(1),
@@ -163,10 +178,9 @@ namespace OperationsResearch.Dual
                 };
 
                 Grid.SetRow(signComboBox, i + 1);
-                Grid.SetColumn(signComboBox, columns + 1); // Добавляем ComboBox после последнего столбца
+                Grid.SetColumn(signComboBox, columns + 1);
                 textBoxContainer.Children.Add(signComboBox);
 
-                // Добавляем текстовое поле для значений
                 TextBox valueTextBox = new TextBox
                 {
                     BorderThickness = new Thickness(1),
@@ -175,7 +189,7 @@ namespace OperationsResearch.Dual
                 };
 
                 Grid.SetRow(valueTextBox, i + 1);
-                Grid.SetColumn(valueTextBox, columns + 2); // Добавляем TextBox для значений
+                Grid.SetColumn(valueTextBox, columns + 2);
                 textBoxContainer.Children.Add(valueTextBox);
             }
         }
@@ -187,12 +201,9 @@ namespace OperationsResearch.Dual
             textBoxContainerZ.RowDefinitions.Clear();
             textBoxContainerZ.ColumnDefinitions.Clear();
 
-            // Включаем отображение линий сетки
             textBoxContainerZ.ShowGridLines = true;
-
-            // Создаем строку для заголовков столбцов (X1, X2 и т.д.)
             textBoxContainerZ.RowDefinitions.Add(new RowDefinition());
-            textBoxContainerZ.ColumnDefinitions.Add(new ColumnDefinition()); // Пустая колонка для Z=
+            textBoxContainerZ.ColumnDefinitions.Add(new ColumnDefinition());
 
             for (int j = 0; j < columns; j++)
             {
@@ -209,14 +220,13 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                showSamle.GetValueZX(zColumn);///////////////////////////////////////////////////////////////////
+                showSamle.GetValueZX(zColumn);
 
                 Grid.SetRow(zColumn, 0);
                 Grid.SetColumn(zColumn, j + 1);
                 textBoxContainerZ.Children.Add(zColumn);
             }
 
-            // Добавляем колонку для экстремума
             textBoxContainerZ.ColumnDefinitions.Add(new ColumnDefinition());
 
             Label extremumHeader = new Label
@@ -231,10 +241,9 @@ namespace OperationsResearch.Dual
             };
 
             Grid.SetRow(extremumHeader, 0);
-            Grid.SetColumn(extremumHeader, columns + 1); // Добавляем в последнюю колонку
+            Grid.SetColumn(extremumHeader, columns + 1);
             textBoxContainerZ.Children.Add(extremumHeader);
 
-            // Добавляем строку для функции Z
             textBoxContainerZ.RowDefinitions.Add(new RowDefinition());
 
             Label zRowLabel = new Label
@@ -262,35 +271,47 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5),
                 };
 
+                int column = j;
+
+                textBox.TextChanged += (sender, e) =>
+                {
+                    if (int.TryParse(textBox.Text, out int result))
+                    {
+                        SavedElements.arrayZ[column] = result;
+                    }
+                    else
+                    {
+                        SavedElements.arrayZ[column] = 0;
+                    }
+                };
+
                 Grid.SetRow(textBox, 1);
                 Grid.SetColumn(textBox, j + 1);
                 textBoxContainerZ.Children.Add(textBox);
             }
 
-            // Добавляем выпадающий список для выбора экстремума (max/min)
             ComboBox extremumComboBox = new ComboBox
             {
                 Width = 100,
-                ItemsSource = new List<string> { "max", "min" }, // Пример опций
-                SelectedIndex = 0, // Значение по умолчанию
+                ItemsSource = new List<string> { "max", "min" },
+                SelectedIndex = 0,
                 Margin = new Thickness(5),
                 Padding = new Thickness(5),
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black
             };
 
-            Grid.SetRow(extremumComboBox, 1); // Под функцией Z
-            Grid.SetColumn(extremumComboBox, columns + 1); // В последнем столбце для экстремума
+            Grid.SetRow(extremumComboBox, 1);
+            Grid.SetColumn(extremumComboBox, columns + 1);
 
             textBoxContainerZ.Children.Add(extremumComboBox);
-     
         }
+
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
-            ColumAndRowsDual ColumAndRowsDual = new ColumAndRowsDual();
+            ColumAndRowsDual columAndRowsDual = new ColumAndRowsDual();
 
-            ColumAndRowsDual.Show();
-
+            columAndRowsDual.Show();
             this.Hide();
         }
 
@@ -299,8 +320,10 @@ namespace OperationsResearch.Dual
             showSamle.GetRowsSamle(rows);
             showSamle.GetColumnsSamle(columns);
 
-            showSamle.Show();
+            SavedElements.ShowValues();
+            SavedElements.ShowValuesZ(); // Вывод массива Z
 
+            showSamle.Show();
             this.Hide();
         }
     }
