@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
+
 namespace OperationsResearch.Dual
 {
 
@@ -16,9 +17,10 @@ namespace OperationsResearch.Dual
         }
 
         public ShowSamle showSamle = new ShowSamle();
+     
 
-        public int rows = 0;
-        public int columns = 0;
+        public static int rows = 0;
+        public static int columns = 0;
 
         // Установка количества строк
         public void GetRows(string rowsStr)
@@ -43,9 +45,9 @@ namespace OperationsResearch.Dual
         {
 
 
-            //textBoxContainer.Children.Clear();
-            //textBoxContainer.RowDefinitions.Clear();
-            //textBoxContainer.ColumnDefinitions.Clear();
+            textBoxContainer.Children.Clear();
+            textBoxContainer.RowDefinitions.Clear();
+            textBoxContainer.ColumnDefinitions.Clear();
 
             // Включаем отображение линий сетки
             textBoxContainer.ShowGridLines = true;
@@ -68,7 +70,7 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
 
-
+                    
                 };
 
                 showSamle.GetValueLabelX(headerLabel); ///////////////////////////////////////////////////////
@@ -181,9 +183,9 @@ namespace OperationsResearch.Dual
         // Метод для создания таблицы для функции Z
         public void Zfunc()
         {
-            //textBoxContainerZ.Children.Clear();
-            //textBoxContainerZ.RowDefinitions.Clear();
-            //textBoxContainerZ.ColumnDefinitions.Clear();
+            textBoxContainerZ.Children.Clear();
+            textBoxContainerZ.RowDefinitions.Clear();
+            textBoxContainerZ.ColumnDefinitions.Clear();
 
             // Включаем отображение линий сетки
             textBoxContainerZ.ShowGridLines = true;
@@ -206,6 +208,7 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
+
                 showSamle.GetValueZX(zColumn);///////////////////////////////////////////////////////////////////
 
                 Grid.SetRow(zColumn, 0);
@@ -280,7 +283,7 @@ namespace OperationsResearch.Dual
             Grid.SetColumn(extremumComboBox, columns + 1); // В последнем столбце для экстремума
 
             textBoxContainerZ.Children.Add(extremumComboBox);
-
+     
         }
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
@@ -293,6 +296,8 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
+            showSamle.GetRowsSamle(rows);
+            showSamle.GetColumnsSamle(columns);
 
             showSamle.Show();
 

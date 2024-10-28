@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿
+using System.Windows;
 using System.Windows.Controls;
+
 
 namespace OperationsResearch.Dual
 {
@@ -52,15 +54,11 @@ namespace OperationsResearch.Dual
                 // Проверка на 0
                 if (value1 > 1 && value2 > 1)
                 {
-
-
-
-
                     showExample.GetRows(textFromTextBox1);
                     showExample.GetColumns(textFromTextBox2);
 
-                    showSamle.GetRowsSamle(textFromTextBox1);
-                    showSamle.GetColumnsSamle(textFromTextBox2);
+                    //showSamle.GetRowsSamle(textFromTextBox1);
+                    //showSamle.GetColumnsSamle(textFromTextBox2);
 
                     showExample.CreateTextBox();
                     showExample.Zfunc();

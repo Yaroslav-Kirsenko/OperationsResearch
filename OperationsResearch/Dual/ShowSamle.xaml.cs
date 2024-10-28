@@ -19,21 +19,26 @@ namespace OperationsResearch.Dual
             InitializeComponent();
         }
 
-        public int rows = 0;
-        public int columns = 0;
+        public static string rows = "";
+        public static string columns ="";
 
 
-        public void GetRowsSamle(string rowsStr)
+        public void GetRowsSamle(int rowsStr)
         {
-            rows = Convert.ToInt32(rowsStr);
-            //Console.WriteLine(rows);
+            rows = Convert.ToString(rowsStr);
+            //rows = rowsStr;
+            Console.WriteLine("ShowSamle");
+
+            Console.WriteLine(rows);
         }
 
 
-        public void GetColumnsSamle(string columnsStr)
+        public void GetColumnsSamle(int columnsStr)
         {
-            columns = Convert.ToInt32(columnsStr);
-            //Console.WriteLine(columns);
+            columns = Convert.ToString(columnsStr);
+            //columns = columnsStr;
+            Console.WriteLine("ShowSamle");
+            Console.WriteLine(columns);
         }
 
         // БЕРУ ИНФУ С ТАБЛИЧКИ LABEL X!!!!!!!
@@ -81,15 +86,17 @@ namespace OperationsResearch.Dual
         }
 
 
-        //public void GetTextBoxInfo(string content)
-        //{
-        //    displayLabel.Content = content;
-        //}
-
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
+
+
             ShowExample showExample = new ShowExample();
 
+            showExample.GetRows(rows);
+            showExample.GetColumns(columns);
+
+            showExample.CreateTextBox();
+            showExample.Zfunc();
             showExample.Show();
 
             this.Hide();
