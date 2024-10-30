@@ -13,9 +13,10 @@
         <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="2,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exit" Background="#FFABFFEE"/>
 
         <!-- StackPanel для отображения значений меток -->
-        <StackPanel x:Name="LabelsContainer" Margin="10,48,10,0" VerticalAlignment="Top" Height="334">
+        <StackPanel x:Name="LabelsContainer" Margin="10,48,10,0" VerticalAlignment="Top" Height="293">
             <!-- Здесь будут отображаться добавленные Label -->
         </StackPanel>
+        <Button Content="Далі" HorizontalAlignment="Center" Margin="0,367,0,0" VerticalAlignment="Top" Width="830" Height="40" Click="Button_Click_Next" Background="#FFABFFEE"/>
 
     </Grid>
 </Window>

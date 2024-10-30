@@ -101,5 +101,21 @@ namespace OperationsResearch.Dual
 
             this.Hide();
         }
+
+        private void Button_Click_Next(object sender, RoutedEventArgs e)
+        {
+            CreateNewElements createNewElements = new CreateNewElements();
+
+            createNewElements.GetRows(rows);
+            createNewElements.GetColumns(columns);
+
+            createNewElements.CreateTextBox();
+            createNewElements.Zfunc();
+
+            createNewElements.Show();
+
+            this.Hide();
+
+        }
     }
 }

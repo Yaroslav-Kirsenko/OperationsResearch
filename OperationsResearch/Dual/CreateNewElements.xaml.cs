@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace OperationsResearch.Dual
 {
-    public partial class ShowExample : Window
+    /// <summary>
+    /// Логика взаимодействия для CreateNewElements.xaml
+    /// </summary>
+    public partial class CreateNewElements : Window
     {
-        public SavedElements savedElements = new SavedElements();
-
-        public ShowExample()
+        public CreateNewElements()
         {
             InitializeComponent();
         }
-
-        public ShowSamle showSamle = new ShowSamle();
 
         public static int rows = 0;
         public static int columns = 0;
@@ -23,44 +31,12 @@ namespace OperationsResearch.Dual
         public void GetRows(string rowsStr)
         {
             rows = Convert.ToInt32(rowsStr);
-            InitializeArray(); // Инициализация массива после установки количества строк
-            InitializeArrayResult();
-            InitializeArrayZ(); // Инициализация массива Z
-            InitializeArraySign(); 
-
         }
 
         // Установка количества столбцов
         public void GetColumns(string columnsStr)
         {
             columns = Convert.ToInt32(columnsStr);
-            InitializeArray(); // Инициализация массива после установки количества столбцов
-            InitializeArrayResult();
-            InitializeArrayZ(); // Инициализация массива Z
-            InitializeArraySign();
-
-        }
-
-        // Метод для инициализации массива в savedElements
-        private void InitializeArray()
-        {
-            savedElements.InitializeArray(rows, columns);
-
-        }
-
-        private void InitializeArrayResult()
-        {
-            savedElements.InitializeArrayResult(rows); // Указываем только количество столбцов
-        }
-
-        private void InitializeArrayZ()
-        {
-            savedElements.InitializeArrayZ(columns); // Указываем только количество столбцов
-        }
-
-        private void InitializeArraySign()
-        {
-            savedElements.InitializeArraySign(rows); 
         }
 
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
@@ -92,7 +68,6 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                showSamle.GetValueLabelX(headerLabel);
 
                 Grid.SetRow(headerLabel, 0);
                 Grid.SetColumn(headerLabel, j + 1);
@@ -223,7 +198,7 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5),
                 };
 
-                
+
 
                 valueTextBox.TextChanged += (sender, e) =>
                 {
@@ -268,7 +243,7 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                showSamle.GetValueZX(zColumn);
+               
 
                 Grid.SetRow(zColumn, 0);
                 Grid.SetColumn(zColumn, j + 1);
@@ -357,24 +332,16 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
-            ColumAndRowsDual columAndRowsDual = new ColumAndRowsDual();
+            ShowSamle showSamle = new ShowSamle();
 
-            columAndRowsDual.Show();
+            showSamle.Show();
+
             this.Hide();
         }
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
-            showSamle.GetRowsSamle(rows);
-            showSamle.GetColumnsSamle(columns);
 
-            SavedElements.ShowValues();
-            SavedElements.ShowValuesRezult();
-            SavedElements.ShowValuesZ(); 
-            SavedElements.ShowValuesSign();
-
-            showSamle.Show();
-            this.Hide();
         }
     }
 }

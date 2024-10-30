@@ -8,6 +8,9 @@ namespace OperationsResearch.Dual
         public static int[] arrayResult;
         public static int[] arrayZ;
 
+        public static string[] arraySign;
+
+
         public static int rows = 0;
         public static int columns = 0;
 
@@ -49,6 +52,18 @@ namespace OperationsResearch.Dual
             }
         }
 
+
+        public void InitializeArraySign(int rows2)
+        {
+
+            rows = rows2;
+
+            if (rows > 0)
+            {
+                arraySign = new string[rows];  // Инициализация одномерного массива Sign
+            }
+        }
+
         public static void ShowValues()
         {
 
@@ -63,7 +78,7 @@ namespace OperationsResearch.Dual
                 Console.WriteLine();
             }
         }
-        public static void ShowValuesrRezult()
+        public static void ShowValuesRezult()
         {
             Console.WriteLine("ARRAY result");
 
@@ -82,6 +97,17 @@ namespace OperationsResearch.Dual
             for (int j = 0; j < columns; j++)
             {
                 Console.Write(arrayZ[j] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static void ShowValuesSign()
+        {
+            Console.WriteLine("ARRAY Sign");
+
+            for (int i = 0; i < rows; i++)
+            {
+                Console.Write(arraySign[i] + " ");
             }
             Console.WriteLine();
         }

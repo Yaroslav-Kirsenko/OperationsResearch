@@ -1,0 +1,55 @@
+﻿<Window x:Class="OperationsResearch.Dual.CreateNewElements"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OperationsResearch.Dual"
+        mc:Ignorable="d"
+        Title="CreateNewElements"
+        Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
+
+    <!-- Основная сетка -->
+    <Grid Margin="0,0,0,0"  Background="#FFD9FFFE">
+        <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="2,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exit" Background="#FFABFFEE" Grid.ColumnSpan="2"/>
+
+        <!-- Сетка для размещения элементов внутри окна -->
+        <Grid>
+            <!-- Определение строк. Первая строка для основной таблицы, вторая строка для Z-функции, третья для кнопки "Далі" -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <!-- Растягивается в зависимости от размера окна -->
+                <RowDefinition Height="Auto" />
+                <!-- Z-функция -->
+                <RowDefinition Height="Auto" />
+                <!-- Кнопка "Далі" внизу -->
+            </Grid.RowDefinitions>
+
+            <!-- Контейнер для основной таблицы -->
+            <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                <!-- Уменьшил Margin -->
+                <Grid x:Name="textBoxContainer" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Top"
+                      ShowGridLines="True"
+                      Width="Auto"
+                      Height="Auto"/>
+            </Grid>
+
+            <!-- Контейнер для Z-функции -->
+            <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5">
+                <!-- Уменьшил Margin -->
+                <Grid x:Name="textBoxContainerZ" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Top"
+                      ShowGridLines="True"
+                      Width="Auto"
+                      Height="Auto"/>
+            </Grid>
+
+            <!-- Кнопка "Далі" внизу -->
+            <Button Grid.Row="2" Content="Далі" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="34" Click="Button_Click_Next" Background="#FFABFFEE"/>
+        </Grid>
+    </Grid>
+</Window>
