@@ -26,7 +26,8 @@ namespace OperationsResearch.Dual
             InitializeArray(); // Инициализация массива после установки количества строк
             InitializeArrayResult();
             InitializeArrayZ(); // Инициализация массива Z
-            InitializeArraySign(); 
+            InitializeArraySign();
+            
 
         }
 
@@ -38,8 +39,9 @@ namespace OperationsResearch.Dual
             InitializeArrayResult();
             InitializeArrayZ(); // Инициализация массива Z
             InitializeArraySign();
-
+            
         }
+
 
         // Метод для инициализации массива в savedElements
         private void InitializeArray()
@@ -60,7 +62,7 @@ namespace OperationsResearch.Dual
 
         private void InitializeArraySign()
         {
-            savedElements.InitializeArraySign(rows); 
+            savedElements.InitializeArraySign(rows);
         }
 
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
@@ -223,7 +225,7 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5),
                 };
 
-                
+
 
                 valueTextBox.TextChanged += (sender, e) =>
                 {
@@ -340,6 +342,7 @@ namespace OperationsResearch.Dual
 
             ComboBox extremumComboBox = new ComboBox
             {
+
                 Width = 100,
                 ItemsSource = new List<string> { "max", "min" },
                 SelectedIndex = 0,
@@ -348,6 +351,18 @@ namespace OperationsResearch.Dual
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black
             };
+            string value = extremumComboBox.SelectedItem.ToString();
+            savedElements.InitializeExtremum(value);
+
+            // Добавляем обработчик для дальнейших изменений
+            extremumComboBox.SelectionChanged += (sender, e) =>
+                {
+                    if (extremumComboBox.SelectedItem != null)
+                    {
+                        SavedElements.Extremum = extremumComboBox.SelectedItem.ToString();
+                    }
+                };
+
 
             Grid.SetRow(extremumComboBox, 1);
             Grid.SetColumn(extremumComboBox, columns + 1);
@@ -370,8 +385,9 @@ namespace OperationsResearch.Dual
 
             SavedElements.ShowValues();
             SavedElements.ShowValuesRezult();
-            SavedElements.ShowValuesZ(); 
+            SavedElements.ShowValuesZ();
             SavedElements.ShowValuesSign();
+            SavedElements.ShowExtremum();   
 
             showSamle.Show();
             this.Hide();

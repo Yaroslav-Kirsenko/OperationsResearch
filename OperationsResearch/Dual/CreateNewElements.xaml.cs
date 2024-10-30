@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OperationsResearch.Dual
 {
@@ -66,6 +57,7 @@ namespace OperationsResearch.Dual
                     BorderBrush = System.Windows.Media.Brushes.Black,
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
+
                 };
 
 
@@ -133,6 +125,7 @@ namespace OperationsResearch.Dual
                 {
                     TextBox textBox = new TextBox
                     {
+                        IsReadOnly = true,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
                         Padding = new Thickness(5),
@@ -193,6 +186,8 @@ namespace OperationsResearch.Dual
 
                 TextBox valueTextBox = new TextBox
                 {
+                    IsReadOnly = true,
+
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
                     Padding = new Thickness(5),
@@ -243,7 +238,7 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-               
+
 
                 Grid.SetRow(zColumn, 0);
                 Grid.SetColumn(zColumn, j + 1);
@@ -289,6 +284,7 @@ namespace OperationsResearch.Dual
             {
                 TextBox textBox = new TextBox
                 {
+                    IsReadOnly = true,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
                     Padding = new Thickness(5),

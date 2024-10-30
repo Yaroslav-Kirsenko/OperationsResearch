@@ -9,6 +9,8 @@ namespace OperationsResearch.Dual
         public static int[] arrayZ;
 
         public static string[] arraySign;
+        public static string Extremum;
+
 
 
         public static int rows = 0;
@@ -31,7 +33,7 @@ namespace OperationsResearch.Dual
 
         public void InitializeArrayResult(int rows2)
         {
-
+            
             rows = rows2;
 
             if (rows > 0)
@@ -42,6 +44,7 @@ namespace OperationsResearch.Dual
 
 
 
+
         public void InitializeArrayZ(int columns1)
         {
             columns = columns1;
@@ -49,6 +52,15 @@ namespace OperationsResearch.Dual
             if (columns > 0)
             {
                 arrayZ = new int[columns];  // Инициализация одномерного массива Z
+            }
+        }
+
+
+        public void InitializeExtremum(string value)
+        {
+            if (value != null)
+            {
+                Extremum = value;
             }
         }
 
@@ -64,19 +76,12 @@ namespace OperationsResearch.Dual
             }
         }
 
-        public static void ShowValues()
+        public static void ShowExtremum()
         {
+            Console.WriteLine("Extremum");
+            Console.Write(Extremum);
+            
 
-            Console.WriteLine("ARRAY");
-
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < columns; j++)
-                {
-                    Console.Write(array[i][j] + " ");
-                }
-                Console.WriteLine();
-            }
         }
         public static void ShowValuesRezult()
         {
@@ -91,6 +96,17 @@ namespace OperationsResearch.Dual
 
         // Метод для вывода значений массива Z в консоль
         public static void ShowValuesZ()
+        {
+            Console.WriteLine("ARRAY Z");
+
+            for (int j = 0; j < columns; j++)
+            {
+                Console.Write(arrayZ[j] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static void ShowValues()
         {
             Console.WriteLine("ARRAY Z");
 
