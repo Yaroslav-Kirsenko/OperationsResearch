@@ -33,7 +33,7 @@ namespace OperationsResearch.Dual
 
         public void InitializeArrayResult(int rows2)
         {
-            
+
             rows = rows2;
 
             if (rows > 0)
@@ -76,23 +76,22 @@ namespace OperationsResearch.Dual
             }
         }
 
-        public static void ShowExtremum()
-        {
-            Console.WriteLine("Extremum");
-            Console.Write(Extremum);
-            
 
-        }
-        public static void ShowValuesRezult()
+        public static void ShowValues()
         {
-            Console.WriteLine("ARRAY result");
+            Console.WriteLine("ARRAY");
 
             for (int i = 0; i < rows; i++)
             {
-                Console.Write(arrayResult[i] + " ");
-            }
-            Console.WriteLine();
+                for (int j = 0; j < columns; j++)
+                {
+                    Console.Write(array[i][j] + " ");
+                }
+                Console.WriteLine();
+            }     
         }
+
+
 
         // Метод для вывода значений массива Z в консоль
         public static void ShowValuesZ()
@@ -106,16 +105,18 @@ namespace OperationsResearch.Dual
             Console.WriteLine();
         }
 
-        public static void ShowValues()
-        {
-            Console.WriteLine("ARRAY Z");
 
-            for (int j = 0; j < columns; j++)
+        public static void ShowValuesRezult()
+        {
+            Console.WriteLine("ARRAY result");
+
+            for (int i = 0; i < rows; i++)
             {
-                Console.Write(arrayZ[j] + " ");
+                Console.Write(arrayResult[i] + " ");
             }
             Console.WriteLine();
         }
+
 
         public static void ShowValuesSign()
         {
@@ -126,6 +127,12 @@ namespace OperationsResearch.Dual
                 Console.Write(arraySign[i] + " ");
             }
             Console.WriteLine();
+        }
+
+        public static void ShowExtremum()
+        {
+            Console.WriteLine("Extremum");
+            Console.Write(Extremum);
         }
 
     }
