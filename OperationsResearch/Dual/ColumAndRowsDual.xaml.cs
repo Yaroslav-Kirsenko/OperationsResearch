@@ -1,16 +1,11 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Media;
 
 namespace OperationsResearch.Dual
 {
-    /// <summary>
-    /// Логика взаимодействия для ColumAndRowsDual.xaml
-    /// </summary>
     public partial class ColumAndRowsDual : Window
     {
-
         public static string savedTextBox1Value = "0";
         public static string savedTextBox2Value = "0";
 
@@ -25,103 +20,126 @@ namespace OperationsResearch.Dual
         public ShowExample showExample = new ShowExample();
         public ShowSamle showSamle = new ShowSamle();
 
-        private void textBox1_TextChanged(object sender, TextChangedEventArgs e) { }
-        private void textBox2_TextChanged(object sender, TextChangedEventArgs e) { }
+        // Метод для обработки изменения текста в textBox1
+        private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateTextBox(textBox1);
+        }
+
+        // Метод для обработки изменения текста в textBox2
+        private void textBox2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateTextBox(textBox2);
+        }
+
+        private bool ValidateTextBox(TextBox textBox)
+        {
+            // Проверка на пустое поле
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Background = Brushes.LightPink;
+                return false;
+            }
+
+            // Проверка на корректное числовое значение и на значение больше 1
+            if (int.TryParse(textBox.Text, out int value) && value > 1)
+            {
+                textBox.Background = Brushes.White;
+                return true;
+            }
+            else
+            {
+                textBox.Background = Brushes.LightPink;
+                return false;
+            }
+        }
+
+        private bool HasValidationErrors()
+        {
+            bool hasError = false;
+
+            // Проверка textBox1
+            if (!ValidateTextBox(textBox1))
+            {
+                hasError = true;
+            }
+
+            // Проверка textBox2
+            if (!ValidateTextBox(textBox2))
+            {
+                hasError = true;
+            }
+
+            // Если есть ошибки, показать предупреждающее сообщение
+            if (hasError)
+            {
+                MessageBox.Show("Будь ласка, виправте всі помилки вводу перед переходом.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            return hasError;
+        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string textFromTextBox1 = textBox1.Text;
-            string textFromTextBox2 = textBox2.Text;
-            int value1;
-            int value2;
+            //HasValidationErrors();
+            //{ return; }
 
-            // Проверка на строка
-            if (string.IsNullOrEmpty(textFromTextBox1) && string.IsNullOrEmpty(textFromTextBox2))
-            {
-                errorMessage.Content = "Поле не може бути пустим!!!";
-            }
-            // Проверка на число
-            else if (!int.TryParse(textFromTextBox1, out value1))
-            {
-                errorMessage.Content = "Введіть коректне число!!!";
-            }
-            else if (!int.TryParse(textFromTextBox2, out value2))
-            {
-                errorMessage.Content = "Введіть коректне число!!!";
-            }
-            else
-            {
-                // Проверка на 0
-                if (value1 > 1 && value2 > 1)
-                {
-                    showExample.GetRows(textFromTextBox1);
-                    showExample.GetColumns(textFromTextBox2);
+            bool isTextBox1Valid = ValidateTextBox(textBox1);
+            bool isTextBox2Valid = ValidateTextBox(textBox2);
 
-                    //showSamle.GetRowsSamle(textFromTextBox1);
-                    //showSamle.GetColumnsSamle(textFromTextBox2);
+            //if (!isTextBox1Valid || !isTextBox2Valid)
+            //{
+            //    return;
+            //}
 
-                    showExample.CreateTextBox();
-                    showExample.Zfunc();
-                    showExample.Show();
+            int value1 = int.Parse(textBox1.Text);
+            int value2 = int.Parse(textBox2.Text);
 
-                    savedTextBox1Value = textBox1.Text;
-                    savedTextBox2Value = textBox2.Text;
+            showExample.GetRows(textBox1.Text);
+            showExample.GetColumns(textBox2.Text);
 
-                    this.Hide();
-                }
-                else
-                {
-                    errorMessage.Content = "нуль, або меньше одиниці не може бути!!!";
-                }
-            }
+            showExample.CreateTextBox();
+            showExample.Zfunc();
+            showExample.Show();
+
+            savedTextBox1Value = textBox1.Text;
+            savedTextBox2Value = textBox2.Text;
+
+            this.Hide();
         }
+
         private void Button_Up1(object sender, RoutedEventArgs e)
         {
-            int value;
-            if (int.TryParse(textBox1.Text, out value))
+            if (ValidateTextBox(textBox1))
             {
-                textBox1.Text = (value + 1).ToString();
-            }
-            else
-            {
-                errorMessage.Content = "Введіть коректне число!!!";
+                textBox1.Text = (int.Parse(textBox1.Text) + 1).ToString();
             }
         }
+
         private void Button_Down1(object sender, RoutedEventArgs e)
         {
-            int value;
-            if (int.TryParse(textBox1.Text, out value))
+            if (ValidateTextBox(textBox1))
             {
-                textBox1.Text = (value - 1).ToString();
-            }
-            else
-            {
-                errorMessage.Content = "Введіть коректне число!!!";
+                int currentValue = int.Parse(textBox1.Text);
+                if (currentValue > 1) textBox1.Text = (currentValue - 1).ToString();
             }
         }
+
         private void Button_Up2(object sender, RoutedEventArgs e)
         {
-            int value;
-            if (int.TryParse(textBox2.Text, out value))
+            if (ValidateTextBox(textBox2))
             {
-                textBox2.Text = (value + 1).ToString();
-            }
-            else
-            {
-                errorMessage.Content = "Введіть коректне число!!!";
+                textBox2.Text = (int.Parse(textBox2.Text) + 1).ToString();
             }
         }
 
         private void Button_Down2(object sender, RoutedEventArgs e)
         {
-            int value;
-            if (int.TryParse(textBox2.Text, out value))
+            if (ValidateTextBox(textBox2))
             {
-                textBox2.Text = (value - 1).ToString();
-            }
-            else
-            {
-                errorMessage.Content = "Введіть коректне число!!!";
+                int currentValue = int.Parse(textBox2.Text);
+                if (currentValue > 1) textBox2.Text = (currentValue - 1).ToString();
             }
         }
 
@@ -131,9 +149,7 @@ namespace OperationsResearch.Dual
             savedTextBox2Value = textBox2.Text;
 
             MainWindow mainWindow = new MainWindow();
-
             mainWindow.Show();
-
             this.Hide();
         }
     }
