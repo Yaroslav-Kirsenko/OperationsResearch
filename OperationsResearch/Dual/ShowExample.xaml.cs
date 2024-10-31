@@ -163,8 +163,6 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                showSamle.GetValueLabelX(headerLabel);
-
                 Grid.SetRow(headerLabel, 0);
                 Grid.SetColumn(headerLabel, j + 1);
                 textBoxContainer.Children.Add(headerLabel);
@@ -354,8 +352,6 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
-
-                showSamle.GetValueZX(zColumn);
 
                 Grid.SetRow(zColumn, 0);
                 Grid.SetColumn(zColumn, j + 1);
