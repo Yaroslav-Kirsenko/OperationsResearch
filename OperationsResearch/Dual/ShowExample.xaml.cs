@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,6 +20,7 @@ namespace OperationsResearch.Dual
         public static int rows = 0;
         public static int columns = 0;
 
+
         // Установка количества строк
         public void GetRows(string rowsStr)
         {
@@ -27,7 +29,7 @@ namespace OperationsResearch.Dual
             InitializeArrayResult();
             InitializeArrayZ(); // Инициализация массива Z
             InitializeArraySign();
-            
+
 
         }
 
@@ -39,7 +41,7 @@ namespace OperationsResearch.Dual
             InitializeArrayResult();
             InitializeArrayZ(); // Инициализация массива Z
             InitializeArraySign();
-            
+
         }
 
 
@@ -63,6 +65,73 @@ namespace OperationsResearch.Dual
         private void InitializeArraySign()
         {
             savedElements.InitializeArraySign(rows);
+        }
+
+
+
+
+        private bool ValidateTextBoxInput(TextBox textBox)
+        {
+
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+               textBox.Background = System.Windows.Media.Brushes.LightPink;
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Background = System.Windows.Media.Brushes.White; 
+                return true;
+            }
+
+           
+            if (int.TryParse(textBox.Text, out _))
+            {
+                textBox.Background = System.Windows.Media.Brushes.White; 
+                return true;
+            }
+            else
+            {
+                textBox.Background = System.Windows.Media.Brushes.LightPink; 
+                return false;
+            }
+        }
+
+        private bool HasValidationErrors()
+        {
+            bool hasErrors = false;
+
+            foreach (var child in textBoxContainer.Children)
+            {
+                if (child is TextBox textBox)
+                {
+                    
+                    if (!ValidateTextBoxInput(textBox))
+                    {
+                        hasErrors = true;
+                    }
+                }
+            }
+
+            foreach (var child in textBoxContainerZ.Children)
+            {
+                if (child is TextBox textBox)
+                {
+                    if (!ValidateTextBoxInput(textBox))
+                    {
+                        hasErrors = true;
+                    }
+                }
+            }
+
+            if (hasErrors)
+            {
+                
+                MessageBox.Show("Будь ласка, виправте всі помилки вводу перед переходом.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            return hasErrors;
         }
 
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
@@ -170,7 +239,7 @@ namespace OperationsResearch.Dual
 
                     textBox.TextChanged += (sender, e) =>
                     {
-                        if (int.TryParse(textBox.Text, out int result))
+                        if (ValidateTextBoxInput(textBox) && int.TryParse(textBox.Text, out int result))
                         {
                             SavedElements.array[row][column] = result;
                         }
@@ -229,7 +298,7 @@ namespace OperationsResearch.Dual
 
                 valueTextBox.TextChanged += (sender, e) =>
                 {
-                    if (int.TryParse(valueTextBox.Text, out int result))
+                    if (ValidateTextBoxInput(valueTextBox) && int.TryParse(valueTextBox.Text, out int result))
                     {
                         SavedElements.arrayResult[rows] = result;
                     }
@@ -238,6 +307,22 @@ namespace OperationsResearch.Dual
                         SavedElements.arrayResult[rows] = 0;
                     }
                 };
+
+                // Сбрасываем цвет только при корректном значении и потере фокуса
+                valueTextBox.LostFocus += (sender, e) =>
+                {
+                    if (ValidateTextBoxInput(valueTextBox))
+                    {
+                        valueTextBox.Background = System.Windows.Media.Brushes.White;
+                    }
+                };
+
+
+                valueTextBox.PreviewLostKeyboardFocus += (sender, e) =>
+                {
+                    valueTextBox.Background = System.Windows.Media.Brushes.White; // Сбрасываем цвет фона при потере фокуса
+                };
+
                 Grid.SetRow(valueTextBox, i + 1);
                 Grid.SetColumn(valueTextBox, columns + 2);
                 textBoxContainer.Children.Add(valueTextBox);
@@ -325,7 +410,7 @@ namespace OperationsResearch.Dual
 
                 textBox.TextChanged += (sender, e) =>
                 {
-                    if (int.TryParse(textBox.Text, out int result))
+                    if (ValidateTextBoxInput(textBox) && int.TryParse(textBox.Text, out int result))
                     {
                         SavedElements.arrayZ[column] = result;
                     }
@@ -334,6 +419,16 @@ namespace OperationsResearch.Dual
                         SavedElements.arrayZ[column] = 0;
                     }
                 };
+
+
+                textBox.LostFocus += (sender, e) =>
+                {
+                    if (ValidateTextBoxInput(textBox))
+                    {
+                        textBox.Background = System.Windows.Media.Brushes.White;
+                    }
+                };
+
 
                 Grid.SetRow(textBox, 1);
                 Grid.SetColumn(textBox, j + 1);
@@ -356,12 +451,12 @@ namespace OperationsResearch.Dual
 
             // Добавляем обработчик для дальнейших изменений
             extremumComboBox.SelectionChanged += (sender, e) =>
+            {
+                if (extremumComboBox.SelectedItem != null)
                 {
-                    if (extremumComboBox.SelectedItem != null)
-                    {
-                        SavedElements.Extremum = extremumComboBox.SelectedItem.ToString();
-                    }
-                };
+                    SavedElements.Extremum = extremumComboBox.SelectedItem.ToString();
+                }
+            };
 
 
             Grid.SetRow(extremumComboBox, 1);
@@ -380,6 +475,8 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
+            if (HasValidationErrors()) { return; }
+            
             showSamle.GetRowsSamle(rows);
             showSamle.GetColumnsSamle(columns);
 
@@ -387,7 +484,7 @@ namespace OperationsResearch.Dual
             SavedElements.ShowValuesRezult();
             SavedElements.ShowValuesZ();
             SavedElements.ShowValuesSign();
-            SavedElements.ShowExtremum();   
+            SavedElements.ShowExtremum();
 
             showSamle.Show();
             this.Hide();
