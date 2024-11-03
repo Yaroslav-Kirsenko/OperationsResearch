@@ -17,28 +17,58 @@ namespace OperationsResearch.Dual
         public ShowSamle()
         {
             InitializeComponent();
+            FillStackPanels();
         }
 
-        public static string rows = "";
-        public static string columns ="";
+        public static int rows = 0;
+        public static int columns = 0;
 
+        public static int[][] arrayDisplay = Array.Empty<int[]>();
+        public static int[] arrayResult = Array.Empty<int>();
+        public static int[] arrayZ = Array.Empty<int>();
+
+        public static string[] arraySign = Array.Empty<string>();
+        public static string Extremum;
 
         public void GetRowsSamle(int rowsStr)
         {
-            rows = Convert.ToString(rowsStr);
+            rows = rowsStr;
             //rows = rowsStr;
             Console.WriteLine("ShowSamle");
 
             Console.WriteLine(rows);
         }
 
-
         public void GetColumnsSamle(int columnsStr)
         {
-            columns = Convert.ToString(columnsStr);
+            columns = columnsStr;
             //columns = columnsStr;
             Console.WriteLine("ShowSamle");
             Console.WriteLine(columns);
+        }
+
+        public void GetResultSamle(int[] resultArray) {
+            arrayResult = resultArray;
+        }
+
+        public void GetZSamle(int[] zArray)
+        {
+            arrayZ = zArray;
+        }
+
+        public void GetDisplaySamle(int[][] displayArray)
+        {
+            arrayDisplay = displayArray;
+        }
+
+        public void GetExtremumSamle(string extremumValue)
+        {
+            Extremum = extremumValue;
+        }
+
+        public void GetSignSamle(string[] signArray)
+        {
+            arraySign = signArray;
         }
 
         // БЕРУ ИНФУ С ТАБЛИЧКИ LABEL X!!!!!!!
@@ -57,7 +87,7 @@ namespace OperationsResearch.Dual
             };
 
             // Добавляем Label в StackPanel для отображения
-            LabelsContainer.Children.Add(rowLabel);
+            ResultContainer.Children.Add(rowLabel);
         }
 
         // БЕРУ ИНФУ С  Z - ФУНКЦИИ LABEL X!!!!!!!
@@ -81,8 +111,7 @@ namespace OperationsResearch.Dual
             };
 
             // Добавляем Label в StackPanel для отображения
-            LabelsContainer.Children.Add(rowLabelZ);
-
+            ResultContainer.Children.Add(rowLabelZ);
         }
 
 
@@ -92,8 +121,8 @@ namespace OperationsResearch.Dual
 
             ShowExample showExample = new ShowExample();
 
-            showExample.GetRows(rows);
-            showExample.GetColumns(columns);
+            showExample.GetRows(Convert.ToString(rows));
+            showExample.GetColumns(Convert.ToString(columns));
 
             showExample.CreateTextBox();
             showExample.Zfunc();
@@ -104,18 +133,57 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
-            CreateNewElements createNewElements = new CreateNewElements();
+            // Add the functionality for the "Next" button click here
+            MessageBox.Show("Button 'Next' clicked!");
+        }
 
-            createNewElements.GetRows(rows);
-            createNewElements.GetColumns(columns);
 
-            createNewElements.CreateTextBox();
-            createNewElements.Zfunc();
+        // Display user input data
+        private void FillStackPanels()
+        {
+            // Очищення контейнерів перед додаванням нових даних
+            ResultContainer.Children.Clear();
 
-            createNewElements.Show();
+            // Заповнення першого контейнера даними з arrayZ
+            StackPanel zPanel = new StackPanel { Orientation = Orientation.Horizontal };
 
-            this.Hide();
+            for (int i = 0; i < arrayZ.Length; i++)
+            {
+                zPanel.Children.Add(new TextBlock { Text = arrayZ[i].ToString() });
+                zPanel.Children.Add(new TextBlock { Text = $"x{i + 1}" });
 
+                if (i != arrayZ.Length - 1)
+                {
+                    zPanel.Children.Add(new TextBlock { Text = " + " });
+                }
+            }
+
+            zPanel.Children.Add(new TextBlock { Text = " => " });
+            zPanel.Children.Add(new TextBlock { Text = Extremum?.ToString() ?? "N/A" });
+
+            ResultContainer.Children.Add(zPanel);
+
+            // Заповнення другого контейнера даними з arrayDisplay
+            for (int i = 0; i < rows; i++)
+            {
+                StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
+
+                for (int j = 0; j < columns; j++)
+                {
+                    panel.Children.Add(new TextBlock { Text = arrayDisplay[i][j].ToString() });
+                    panel.Children.Add(new TextBlock { Text = $"x{j + 1}" });
+
+                    if (j != columns - 1)
+                    {
+                        panel.Children.Add(new TextBlock { Text = " + " });
+                    }
+                }
+
+                panel.Children.Add(new TextBlock { Text = $" {arraySign[i]} " });
+                panel.Children.Add(new TextBlock { Text = arrayResult[i].ToString() });
+
+                ResultContainer.Children.Add(panel);
+            }
         }
     }
 }
