@@ -6,8 +6,8 @@ namespace OperationsResearch.Dual
 {
     public partial class ColumAndRowsDual : Window
     {
-        public static string savedTextBox1Value = "0";
-        public static string savedTextBox2Value = "0";
+        public static string savedTextBox1Value = "2";
+        public static string savedTextBox2Value = "2";
 
         public ColumAndRowsDual()
         {
@@ -42,7 +42,7 @@ namespace OperationsResearch.Dual
             }
 
             // Проверка на корректное числовое значение и на значение больше 1
-            if (int.TryParse(textBox.Text, out int value) && value > 1)
+            if (int.TryParse(textBox.Text, out int value))
             {
                 textBox.Background = Brushes.White;
                 return true;
@@ -59,54 +59,52 @@ namespace OperationsResearch.Dual
             bool hasError = false;
 
             // Проверка textBox1
-            if (!ValidateTextBox(textBox1))
+            if (!ValidateTextBox(textBox1) && !ValidateTextBox(textBox2))
             {
-                hasError = true;
-            }
 
-            // Проверка textBox2
-            if (!ValidateTextBox(textBox2))
-            {
-                hasError = true;
-            }
-
-            // Если есть ошибки, показать предупреждающее сообщение
-            if (hasError)
-            {
                 MessageBox.Show("Будь ласка, виправте всі помилки вводу перед переходом.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Warning);
+                hasError = true;
             }
-
             return hasError;
         }
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //HasValidationErrors();
-            //{ return; }
+            if (HasValidationErrors()) { return; }
+
 
             bool isTextBox1Valid = ValidateTextBox(textBox1);
             bool isTextBox2Valid = ValidateTextBox(textBox2);
 
-            //if (!isTextBox1Valid || !isTextBox2Valid)
-            //{
-            //    return;
-            //}
+            if (!isTextBox1Valid || !isTextBox2Valid)
+            {
+                return;
+            }
 
             int value1 = int.Parse(textBox1.Text);
             int value2 = int.Parse(textBox2.Text);
+            if (value1 > 1 && value2 > 1)
+            {
+                showExample.GetRows(textBox1.Text);
+                showExample.GetColumns(textBox2.Text);
 
-            showExample.GetRows(textBox1.Text);
-            showExample.GetColumns(textBox2.Text);
+                showExample.CreateTextBox();
+                showExample.Zfunc();
+                showExample.Show();
 
-            showExample.CreateTextBox();
-            showExample.Zfunc();
-            showExample.Show();
+                savedTextBox1Value = textBox1.Text;
+                savedTextBox2Value = textBox2.Text;
+                this.Hide();
+            }
+            else
+            {
+                textBox1.Background = Brushes.LightPink;
+                textBox2.Background = Brushes.LightPink;
+                MessageBox.Show("Будь ласка, виправте всі помилки вводу перед переходом.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
-            savedTextBox1Value = textBox1.Text;
-            savedTextBox2Value = textBox2.Text;
 
-            this.Hide();
         }
 
         private void Button_Up1(object sender, RoutedEventArgs e)
