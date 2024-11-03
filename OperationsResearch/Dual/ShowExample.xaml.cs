@@ -472,15 +472,22 @@ namespace OperationsResearch.Dual
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
             if (HasValidationErrors()) { return; }
-            
+
+
+
+           ShowSamle showSamle = new ShowSamle();
+
             showSamle.GetRowsSamle(rows);
             showSamle.GetColumnsSamle(columns);
+
+            //ShowSamle.ShowDisplaySamle();
 
             SavedElements.ShowValues();
             SavedElements.ShowValuesRezult();
             SavedElements.ShowValuesZ();
             SavedElements.ShowValuesSign();
             SavedElements.ShowExtremum();
+
 
             showSamle.Show();
             this.Hide();

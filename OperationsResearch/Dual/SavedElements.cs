@@ -4,6 +4,10 @@ namespace OperationsResearch.Dual
 {
     public class SavedElements
     {
+
+
+
+
         public static int[][] array;
         public static int[] arrayResult;
         public static int[] arrayZ;
@@ -79,6 +83,7 @@ namespace OperationsResearch.Dual
 
         public static void ShowValues()
         {
+
             Console.WriteLine("ARRAY");
 
             for (int i = 0; i < rows; i++)
@@ -88,7 +93,7 @@ namespace OperationsResearch.Dual
                     Console.Write(array[i][j] + " ");
                 }
                 Console.WriteLine();
-            }     
+            }
         }
 
 
@@ -135,10 +140,20 @@ namespace OperationsResearch.Dual
             Console.Write(Extremum);
         }
 
+
+
+
+
+
+        //    public ShowSamle showSamle = new ShowSamle();
+
+        //    //showSamle.GetDisplaySamle(array);
+
+        //    public SavedElements()
+        //    {
+        //        showSamle = new ShowSamle();
+        //        showSamle.GetDisplaySamle(array);
+        //    }
+        //}
     }
-
-
-
-
-
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.ComponentModel;
 
 namespace OperationsResearch.Dual
 {
@@ -13,132 +14,53 @@ namespace OperationsResearch.Dual
     public partial class ShowSamle : Window
     {
 
-
         public ShowSamle()
         {
             InitializeComponent();
+            LoadData();
+            DataContext = this; // Встановлюємо DataContext для прив'язки
+        }
+
+        public static string rows = "";
+        public static string columns = "";
+
+        public int[][] arrayDisplay { get; set; }
+        public int[] arrayResult { get; set; }
+        public int[] arrayZ { get; set; }
+        public string[] arraySign { get; set; }
+        public string Extremum { get; set; }
+
+        public int samleRows { get; set; }
+        public int samleColumns { get; set; }
+
+        private void LoadData()
+        {
+            // Перетворення `int[][]` на колекцію рядків для відображення
+            arrayDisplay = SavedElements.array;
+
+            // Ініціалізація даних з `SavedElements`
+            arrayResult = SavedElements.arrayResult;
+            arrayZ = SavedElements.arrayZ ?? new int[0];
+            arraySign = SavedElements.arraySign;
+            Extremum = SavedElements.Extremum;
+
+            samleRows = SavedElements.rows;
+            samleColumns = SavedElements.columns;
+
+            // Сповіщення про зміни властивостей
+            OnPropertyChanged(nameof(arrayDisplay));
+            OnPropertyChanged(nameof(arrayResult));
+            OnPropertyChanged(nameof(arrayZ));
+            OnPropertyChanged(nameof(arraySign));
+            OnPropertyChanged(nameof(Extremum));
+            OnPropertyChanged(nameof(samleRows));
+            OnPropertyChanged(nameof(samleColumns));
+
+            // Відображення даних
             FillStackPanels();
+
         }
 
-        public static int rows = 0;
-        public static int columns = 0;
-
-        public static int[][] arrayDisplay = Array.Empty<int[]>();
-        public static int[] arrayResult = Array.Empty<int>();
-        public static int[] arrayZ = Array.Empty<int>();
-
-        public static string[] arraySign = Array.Empty<string>();
-        public static string Extremum;
-
-        public void GetRowsSamle(int rowsStr)
-        {
-            rows = rowsStr;
-            //rows = rowsStr;
-            Console.WriteLine("ShowSamle");
-
-            Console.WriteLine(rows);
-        }
-
-        public void GetColumnsSamle(int columnsStr)
-        {
-            columns = columnsStr;
-            //columns = columnsStr;
-            Console.WriteLine("ShowSamle");
-            Console.WriteLine(columns);
-        }
-
-        public void GetResultSamle(int[] resultArray) {
-            arrayResult = resultArray;
-        }
-
-        public void GetZSamle(int[] zArray)
-        {
-            arrayZ = zArray;
-        }
-
-        public void GetDisplaySamle(int[][] displayArray)
-        {
-            arrayDisplay = displayArray;
-        }
-
-        public void GetExtremumSamle(string extremumValue)
-        {
-            Extremum = extremumValue;
-        }
-
-        public void GetSignSamle(string[] signArray)
-        {
-            arraySign = signArray;
-        }
-
-        // БЕРУ ИНФУ С ТАБЛИЧКИ LABEL X!!!!!!!
-        public void GetValueLabelX(Label label)
-        {
-            // Получаем текст метки
-            string labelContent = label.Content.ToString();
-
-
-            Label rowLabel = new Label
-            {
-                Content = labelContent,
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(5)
-            };
-
-            // Добавляем Label в StackPanel для отображения
-            ResultContainer.Children.Add(rowLabel);
-        }
-
-        // БЕРУ ИНФУ С  Z - ФУНКЦИИ LABEL X!!!!!!!
-        public void GetValueZX(Label label)
-        {
-
-            string labelContent = label.Content.ToString();
-
-            Console.WriteLine("Z - функция");
-            Console.WriteLine(labelContent);
-
-
-            //listZX.Add(new Label { Content = labelContent });
-
-            Label rowLabelZ = new Label
-            {
-                Content = labelContent,
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(5)
-            };
-
-            // Добавляем Label в StackPanel для отображения
-            ResultContainer.Children.Add(rowLabelZ);
-        }
-
-
-        private void Button_Click_Exit(object sender, RoutedEventArgs e)
-        {
-
-
-            ShowExample showExample = new ShowExample();
-
-            showExample.GetRows(Convert.ToString(rows));
-            showExample.GetColumns(Convert.ToString(columns));
-
-            showExample.CreateTextBox();
-            showExample.Zfunc();
-            showExample.Show();
-
-            this.Hide();
-        }
-
-        private void Button_Click_Next(object sender, RoutedEventArgs e)
-        {
-            // Add the functionality for the "Next" button click here
-            MessageBox.Show("Button 'Next' clicked!");
-        }
-
-
-        // Display user input data
         private void FillStackPanels()
         {
             // Очищення контейнерів перед додаванням нових даних
@@ -164,16 +86,16 @@ namespace OperationsResearch.Dual
             ResultContainer.Children.Add(zPanel);
 
             // Заповнення другого контейнера даними з arrayDisplay
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < samleRows; i++)
             {
                 StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
 
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < samleColumns; j++)
                 {
                     panel.Children.Add(new TextBlock { Text = arrayDisplay[i][j].ToString() });
                     panel.Children.Add(new TextBlock { Text = $"x{j + 1}" });
 
-                    if (j != columns - 1)
+                    if (j != samleColumns - 1)
                     {
                         panel.Children.Add(new TextBlock { Text = " + " });
                     }
@@ -184,6 +106,114 @@ namespace OperationsResearch.Dual
 
                 ResultContainer.Children.Add(panel);
             }
+        }
+
+
+
+
+        // Реалізація INotifyPropertyChanged для оновлення UI при зміні даних
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+
+
+        public void GetRowsSamle(int rowsStr)
+        {
+            rows = Convert.ToString(rowsStr);
+            //rows = rowsStr;
+            Console.WriteLine("ShowSamle");
+
+            Console.WriteLine(rows);
+        }
+
+
+
+
+        public void GetColumnsSamle(int columnsStr)
+        {
+            columns = Convert.ToString(columnsStr);
+            //columns = columnsStr;
+            Console.WriteLine("ShowSamle");
+            Console.WriteLine(columns);
+        }
+
+
+        private void Button_Click_Exit(object sender, RoutedEventArgs e)
+        {
+
+
+            ShowExample showExample = new ShowExample();
+
+            showExample.GetRows(rows);
+            showExample.GetColumns(columns);
+
+            showExample.CreateTextBox();
+            showExample.Zfunc();
+            showExample.Show();
+
+            this.Hide();
+        }
+
+        private void Button_Click_Next(object sender, RoutedEventArgs e)
+        {
+            CreateNewElements createNewElements = new CreateNewElements();
+
+            createNewElements.GetRows(rows);
+            createNewElements.GetColumns(columns);
+
+            createNewElements.CreateTextBox();
+            createNewElements.Zfunc();
+
+            createNewElements.Show();
+
+            this.Hide();
+
+        }
+
+
+
+        // Нові методи для відображення інформації з SavedElements
+        private void Button_Click_ShowSavedData(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Button_Click_ShowSavedData called");
+            ShowSavedArray();
+            ShowSavedArrayZ();
+            ShowSavedArrayResult();
+            ShowSavedArraySign();
+            ShowSavedExtremum();
+        }
+
+        public void ShowSavedArray()
+        {
+            Console.WriteLine("ShowSavedArray called");
+            SavedElements.ShowValues();
+        }
+
+        public void ShowSavedArrayZ()
+        {
+            Console.WriteLine("ShowSavedArrayZ called");
+            SavedElements.ShowValuesZ();
+        }
+
+        public void ShowSavedArrayResult()
+        {
+            Console.WriteLine("ShowSavedArrayResult called");
+            SavedElements.ShowValuesRezult();
+        }
+
+        public void ShowSavedArraySign()
+        {
+            Console.WriteLine("ShowSavedArraySign called");
+            SavedElements.ShowValuesSign();
+        }
+
+        public void ShowSavedExtremum()
+        {
+            Console.WriteLine("ShowSavedExtremum called");
+            SavedElements.ShowExtremum();
         }
     }
 }
