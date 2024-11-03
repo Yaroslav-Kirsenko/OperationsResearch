@@ -76,7 +76,7 @@ namespace OperationsResearch.Dual
 
                 if (i != arrayZ.Length - 1)
                 {
-                    zPanel.Children.Add(new TextBlock { Text = " + " });
+                    zPanel.Children.Add(new TextBlock { Text = " + " }); ////// ТУТ ИСПРАВИТЬ
                 }
             }
 
@@ -97,7 +97,7 @@ namespace OperationsResearch.Dual
 
                     if (j != samleColumns - 1)
                     {
-                        panel.Children.Add(new TextBlock { Text = " + " });
+                        panel.Children.Add(new TextBlock { Text = " + " }); ////// ТУТ ИСПРАВИТЬ
                     }
                 }
 

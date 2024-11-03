@@ -142,7 +142,7 @@ namespace OperationsResearch.Dual
 
 
 
-
+       
 
 
         //    public ShowSamle showSamle = new ShowSamle();
