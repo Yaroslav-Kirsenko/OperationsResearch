@@ -480,8 +480,7 @@ namespace OperationsResearch.Dual
             showSamle.GetRowsSamle(rows);
             showSamle.GetColumnsSamle(columns);
 
-            //ShowSamle.ShowDisplaySamle();
-
+            
             SavedElements.ShowValues();
             SavedElements.ShowValuesRezult();
             SavedElements.ShowValuesZ();
