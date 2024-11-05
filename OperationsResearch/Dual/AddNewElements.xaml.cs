@@ -25,18 +25,33 @@ namespace OperationsResearch.Dual
         }
         public static int rows = 0;
         public static int columns = 0;
+
+        public static string strRows = "";
+        public static string strColumns = "";
+
         public static int index = 0;
 
         // Установка количества строк
-        public void GetRows(string rowsStr)
+        public void GetRows(int rowsStr)
         {
             rows = Convert.ToInt32(rowsStr);
         }
 
         // Установка количества столбцов
-        public void GetColumns(string columnsStr)
+        public void GetColumns(int columnsStr)
         {
             columns = Convert.ToInt32(columnsStr);
+        }
+
+        public void SetRows(int rowsStr)
+        {
+            strRows = Convert.ToString(rowsStr);
+        }
+
+        // Установка количества столбцов
+        public void SetColumns(int columnsStr)
+        {
+            strColumns = Convert.ToString(columnsStr);
         }
 
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
@@ -593,9 +608,16 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
-            ShowSamle showSamle = new ShowSamle();
+          
 
-            showSamle.Show();
+            CreateNewElements createNewElements = new CreateNewElements();
+
+            createNewElements.GetRows(strRows);
+            createNewElements.GetColumns(strColumns);
+
+            createNewElements.CreateTextBox();
+            createNewElements.Zfunc();
+            createNewElements.Show();
 
             this.Hide();
         }

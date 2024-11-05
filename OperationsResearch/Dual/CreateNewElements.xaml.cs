@@ -31,6 +31,7 @@ namespace OperationsResearch.Dual
             columns = Convert.ToInt32(columnsStr);
         }
 
+
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
         public void CreateTextBox()
         {
@@ -355,9 +356,6 @@ namespace OperationsResearch.Dual
 
 
 
-
-
-
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
             ShowSamle showSamle = new ShowSamle();
@@ -375,7 +373,16 @@ namespace OperationsResearch.Dual
             SavedElements.ShowValuesSign();
             SavedElements.ShowExtremum();
 
+
+    
+
             AddNewElements addNewElements = new AddNewElements();
+
+            addNewElements.GetRows(rows);
+            addNewElements.GetColumns(columns);
+
+            addNewElements.CreateTextBox();
+            addNewElements.Zfunc();
 
             addNewElements.Show();
 
