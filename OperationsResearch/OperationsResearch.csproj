@@ -70,6 +70,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dual\AddNewElements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dual\ColumAndRowsDual.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +97,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Dual\AddNewElements.xaml.cs">
+      <DependentUpon>AddNewElements.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dual\ColumAndRowsDual.xaml.cs">
       <DependentUpon>ColumAndRowsDual.xaml</DependentUpon>
