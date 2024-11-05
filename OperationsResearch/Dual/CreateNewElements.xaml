@@ -11,24 +11,23 @@
         ResizeMode="CanResizeWithGrip">
 
     <!-- Основная сетка -->
-    <Grid Margin="0,0,0,0"  Background="#FFD9FFFE">
+    <Grid Margin="0,0,0,0" Background="#FFD9FFFE">
         <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="2,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exit" Background="#FFABFFEE" Grid.ColumnSpan="2"/>
 
         <!-- Сетка для размещения элементов внутри окна -->
         <Grid>
             <!-- Определение строк. Первая строка для основной таблицы, вторая строка для Z-функции, третья для кнопки "Далі" -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition />
                 <!-- Растягивается в зависимости от размера окна -->
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" MinHeight="82" />
                 <!-- Z-функция -->
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" MinHeight="24.04" />
                 <!-- Кнопка "Далі" внизу -->
             </Grid.RowDefinitions>
 
             <!-- Контейнер для основной таблицы -->
-            <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
-                <!-- Уменьшил Margin -->
+            <Grid Grid.Row="0" Margin="5,5,5,5">
                 <Grid x:Name="textBoxContainer" 
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Top"
@@ -38,8 +37,7 @@
             </Grid>
 
             <!-- Контейнер для Z-функции -->
-            <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5">
-                <!-- Уменьшил Margin -->
+            <Grid Grid.Row="1" VerticalAlignment="Top" Margin="5,0,5,0">
                 <Grid x:Name="textBoxContainerZ" 
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Top"
@@ -49,7 +47,8 @@
             </Grid>
 
             <!-- Кнопка "Далі" внизу -->
-            <Button Grid.Row="2" Content="Далі" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="34" Click="Button_Click_Next" Background="#FFABFFEE"/>
+            <Button Grid.Row="2" Content="Далі" HorizontalAlignment="Center" VerticalAlignment="Top" Width="800" Height="26" Click="Button_Click_Next" Background="#FFABFFEE" Margin="0,56,0,0"/>
+            <Button Grid.Row="2" Content="Додати змінну" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="31" Click="Button_Click_Add" Background="#FFABFFEE"/>
         </Grid>
     </Grid>
 </Window>

@@ -31,7 +31,7 @@
         
         <Label x:Name="errorMessage" Grid.Column="1" Content="" HorizontalAlignment="Center" Margin="0,162,0,0" VerticalAlignment="Top" Width="746" FontSize="34" Background="{x:Null}" Foreground="Red"/>
         
-        <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="17,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exet" Background="#FFABFFEE" Grid.ColumnSpan="2"/>
+        <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exet" Background="#FFABFFEE" Grid.ColumnSpan="2"/>
         <Button Content="Готово" HorizontalAlignment="Left" Margin="1,284,0,0" VerticalAlignment="Top" Width="780" Height="31" Click="Button_Click" Background="#FFABFFEE" Grid.Column="1"/>
     </Grid>
 </Window>

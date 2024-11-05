@@ -6,17 +6,16 @@
         xmlns:local="clr-namespace:OperationsResearch.Dual"
         mc:Ignorable="d"
         Title="ShowSamle"
-        Height="450" Width="850"
+        Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip">
+    
     <Grid Margin="0,0,0,0"  Background="#FFD9FFFE">
-        <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="2,7,0,0" Width="113" Height="22" Click="Button_Click_Exit" Background="#FFABFFEE"/>
+        <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="10,10,0,402"  Width="113" Height="22" Click="Button_Click_Exit" Background="#FFABFFEE"/>
 
-        <Button Content="Далі" HorizontalAlignment="Center" Margin="0,367,0,0" VerticalAlignment="Top" Width="830" Height="40" Click="Button_Click_Next" Background="#FFABFFEE"/>
+        <Button Content="Далі" HorizontalAlignment="Center" Margin="0,394,0,0" VerticalAlignment="Top" Width="800" Height="40" Click="Button_Click_Next" Background="#FFABFFEE"/>
 
-        <StackPanel x:Name="ResultContainer" Orientation="Vertical">
-
-        </StackPanel>
+        <StackPanel x:Name="ResultContainer" Orientation="Vertical" Margin="0,132,0,93"/>
 
     </Grid>
 </Window>
