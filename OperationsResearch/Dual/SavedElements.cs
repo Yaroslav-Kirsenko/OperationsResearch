@@ -7,7 +7,7 @@ namespace OperationsResearch.Dual
 
 
 
-
+        public static int[,] additionalVariables;
         public static int[][] array;
         public static int[] arrayResult;
         public static int[] arrayZ;
@@ -47,7 +47,12 @@ namespace OperationsResearch.Dual
         }
 
 
-
+        public void InitializeAdditionalVariables(int rows1, int columns1)
+        {
+            rows = rows1;
+            columns = columns1;
+            additionalVariables = new int[rows, columns];
+        }
 
         public void InitializeArrayZ(int columns1)
         {
@@ -98,6 +103,22 @@ namespace OperationsResearch.Dual
 
 
 
+        //// Метод для вывода значений additionalVariables в консоль
+        //public static void ShowadditionalVariables()
+        //{
+        //    Console.WriteLine("Значения массива дополнительных переменных U:");
+        //    for (int i = 0; i < rows; i++)
+        //    {
+        //        for (int j = 0; j < columns; j++)
+        //        {
+        //            Console.Write($"{additionalVariables[i, j]} ");
+        //        }
+        //        Console.WriteLine();
+        //    }
+        //}
+
+
+
         // Метод для вывода значений массива Z в консоль
         public static void ShowValuesZ()
         {
@@ -142,7 +163,7 @@ namespace OperationsResearch.Dual
 
 
 
-       
+
 
 
         //    public ShowSamle showSamle = new ShowSamle();
