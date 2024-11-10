@@ -128,7 +128,7 @@ namespace OperationsResearch.Dual
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
                         Padding = new Thickness(5),
-                        Text = SavedElements.array[i][j].ToString()
+                        Text = SavedElements.array[i, j].ToString()
                     };
 
                     Grid.SetRow(textBox, i + 1);
@@ -156,7 +156,7 @@ namespace OperationsResearch.Dual
                         // Инвертируем все значения в строке
                         for (int j = 0; j < columns; j++)
                         {
-                            SavedElements.array[row][j] = -SavedElements.array[row][j];
+                            SavedElements.array[row, j] = -SavedElements.array[row,j];
                         }
 
                         // Инвертируем значение только в строке row для массива arrayResult
@@ -201,7 +201,7 @@ namespace OperationsResearch.Dual
                         Grid.GetRow(textBox) == row + 1 && // Учитываем сдвиг для первой строки заголовков
                         Grid.GetColumn(textBox) == j + 1)
                     {
-                        textBox.Text = SavedElements.array[row][j].ToString();
+                        textBox.Text = SavedElements.array[row, j].ToString();
                         break;
                     }
                 }

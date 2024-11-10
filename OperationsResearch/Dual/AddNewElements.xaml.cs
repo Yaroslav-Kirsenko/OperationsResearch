@@ -8,12 +8,14 @@ namespace OperationsResearch.Dual
 {
     public partial class AddNewElements : Window
     {
-       
+
 
         public AddNewElements()
         {
             InitializeComponent();
         }
+
+        public SavedElements savedElements = new SavedElements();
 
         public static int rows = 0;
         public static int columns = 0;
@@ -25,17 +27,39 @@ namespace OperationsResearch.Dual
         // Двумерный массив для хранения значений дополнительных переменных U
         public static int[,] additionalVariables;
 
+        public static int[,] fullArray;
+
+
         // Установка количества строк
         public void GetRows(int rowsStr)
         {
             rows = Convert.ToInt32(rowsStr);
+            InitializeAdditionalVariables();
+            InitializeFullArray();
+
+
         }
+
 
         // Установка количества столбцов
         public void GetColumns(int columnsStr)
         {
             columns = Convert.ToInt32(columnsStr);
+            InitializeAdditionalVariables();
+            InitializeFullArray();
             additionalVariables = new int[rows, 0]; // Изначально нет дополнительных переменных
+
+        }
+
+
+        private void InitializeFullArray()
+        {
+            savedElements.InitializeFullArray(rows, columns); // Указываем только количество столбцов
+        }
+
+        private void InitializeAdditionalVariables()
+        {
+            savedElements.InitializeAdditionalVariables(rows, columns); // Указываем только количество столбцов
         }
 
         public static void SetRows(int rowsStr)
@@ -305,8 +329,9 @@ namespace OperationsResearch.Dual
                         BorderThickness = new Thickness(1),
                         BorderBrush = Brushes.Black,
                         Padding = new Thickness(5),
-                        Text = SavedElements.array[i][j].ToString()
+                        Text = SavedElements.array[i, j].ToString()
                     };
+
                     Grid.SetRow(textBox, i + 1);
                     Grid.SetColumn(textBox, j + 1);
                     textBoxContainer.Children.Add(textBox);
@@ -330,7 +355,7 @@ namespace OperationsResearch.Dual
                     {
                         if (int.TryParse(textBox.Text, out int value))
                         {
-                            additionalVariables[row, col] = value;
+                            SavedElements.additionalVariables[row, col] = value;
                         }
                     };
 
@@ -368,7 +393,35 @@ namespace OperationsResearch.Dual
                 textBoxContainer.Children.Add(valueTextBox);
             }
         }
-         private bool ValidateAllUTextBoxes()
+
+        private bool ValidateTextBoxInput(TextBox textBox)
+        {
+
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Background = System.Windows.Media.Brushes.LightPink;
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Background = System.Windows.Media.Brushes.White;
+                return true;
+            }
+
+
+            if (int.TryParse(textBox.Text, out _))
+            {
+                textBox.Background = System.Windows.Media.Brushes.White;
+                return true;
+            }
+            else
+            {
+                textBox.Background = System.Windows.Media.Brushes.LightPink;
+                return false;
+            }
+        }
+        private bool ValidateAllUTextBoxes()
         {
             bool hasErrors = false;
 
@@ -396,13 +449,14 @@ namespace OperationsResearch.Dual
             return hasErrors;
         }
 
-        
+
         private void AddNewVariableU()
         {
             index++;
 
             // Создаем новый массив с увеличенным числом столбцов
             int newColumns = additionalVariables.GetLength(1) + 1;
+
             int[,] newAdditionalVariables = new int[rows, newColumns];
 
             for (int i = 0; i < rows; i++)
@@ -418,10 +472,75 @@ namespace OperationsResearch.Dual
             CreateTextBox();
         }
 
+        public static int[,] Concat2DArrays(int[,] array1, int[,] array2)
+        {
+            int rows1 = array1.GetLength(0);
+            int cols1 = array1.GetLength(1);
+
+            int rows2 = array2.GetLength(0);
+            int cols2 = array2.GetLength(1);
+
+            if (cols1 != cols2)
+            {
+                throw new ArgumentException("Both arrays must have the same number of columns to concatenate.");
+            }
+
+            // Создаём результирующий массив с корректными размерами
+            int[,] result = new int[rows1, cols1+cols2];
+
+            // Копируем первый массив
+            for (int i = 0; i < rows1; i++)
+            {
+                for (int j = 0; j < cols1; j++)
+                {
+                    result[i, j] = array1[i, j];
+                }
+            }
+
+            Console.WriteLine("1");
+
+            for (int i = 0; i < result.GetLength(0); i++)
+            {
+                for (int j = 0; j < result.GetLength(1); j++)
+                {
+                    Console.Write(result[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            // Копируем второй массив
+            for (int i = 0; i < rows2; i++)
+            {
+                for (int j = 0; j < cols2; j++)
+                {
+                    result[ i, cols1+ j] = array2[i, j];
+                }
+            }
+
+            Console.WriteLine("2");
+
+            for (int i = 0; i < result.GetLength(0); i++)
+            {
+                for (int j = 0; j < result.GetLength(1); j++)
+                {
+                    Console.Write(result[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            return result;
+        }
+
+
+
+
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
+
             AddNewVariableU();
         }
+
+
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
@@ -444,13 +563,20 @@ namespace OperationsResearch.Dual
             {
                 return; // Если есть ошибки, прерываем выполнение
             }
-            SavedElements.ShowValues();
-            SavedElements.ShowValuesRezult();
-            SavedElements.ShowValuesZ();
-            SavedElements.ShowValuesSign();
-            SavedElements.ShowExtremum();
-            //SavedElements.ShowadditionalVariables();
+
+            SavedElements.fullArray = Concat2DArrays(SavedElements.array, SavedElements.additionalVariables);
+
+            DeltaSearch deltaSearch = new DeltaSearch();
+
+
+            deltaSearch.CreateTextBox();
+
+            deltaSearch.Show();
+
+            this.Hide();
+
+
         }
     }
-   
+
 }

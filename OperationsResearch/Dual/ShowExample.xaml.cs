@@ -239,11 +239,11 @@ namespace OperationsResearch.Dual
                     {
                         if (ValidateTextBoxInput(textBox) && int.TryParse(textBox.Text, out int result))
                         {
-                            SavedElements.array[row][column] = result;
+                            SavedElements.array[row,column] = result;
                         }
                         else
                         {
-                            SavedElements.array[row][column] = 0;
+                            SavedElements.array[row,column] = 0;
                         }
                     };
 

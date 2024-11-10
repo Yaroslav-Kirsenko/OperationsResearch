@@ -82,6 +82,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dual\DeltaSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dual\ShowExample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +110,9 @@
     </Compile>
     <Compile Include="Dual\CreateNewElements.xaml.cs">
       <DependentUpon>CreateNewElements.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dual\DeltaSearch.xaml.cs">
+      <DependentUpon>DeltaSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dual\SavedElements.cs" />
     <Compile Include="Dual\ShowExample.xaml.cs">

@@ -6,9 +6,11 @@ namespace OperationsResearch.Dual
     {
 
 
+        public static int[,] fullArray;
+
 
         public static int[,] additionalVariables;
-        public static int[][] array;
+        public static int[,] array;
         public static int[] arrayResult;
         public static int[] arrayZ;
 
@@ -20,6 +22,60 @@ namespace OperationsResearch.Dual
         public static int rows = 0;
         public static int columns = 0;
 
+
+        public static int SetRowsFullArray()
+        {
+            int rows1 = fullArray.GetLength(0);
+
+            return rows;
+        }
+
+        public static int SetColumnsFullArray()
+        {
+
+            int cols = fullArray.GetLength(1);
+            return cols;
+        }
+
+        public static int SetRowsX()
+        {
+            int rows1 = array.GetLength(0);
+
+            return rows;
+        }
+
+        public static int SetColumnsX()
+        {
+
+            int cols = array.GetLength(1);
+            return cols;
+        }
+
+        public static int SetRowsU()
+        {
+            int rows1 = additionalVariables.GetLength(0);
+
+            return rows;
+        }
+
+        public static int SetColumnsU()
+        {
+           
+            int cols = additionalVariables.GetLength(1);
+            return cols;
+        }
+
+        public void InitializeFullArray(int rows1, int columns1)
+        {
+            rows = rows1;
+            columns = columns1;
+
+            if (rows > 0 && columns > 0)
+            {
+                fullArray = new int[rows, columns];
+            }
+        }
+
         public void InitializeArray(int rows1, int columns1)
         {
             rows = rows1;
@@ -27,13 +83,11 @@ namespace OperationsResearch.Dual
 
             if (rows > 0 && columns > 0)
             {
-                array = new int[rows][];
-                for (int i = 0; i < rows; i++)
-                {
-                    array[i] = new int[columns];
-                }
+                array = new int[rows, columns];
             }
         }
+
+
 
         public void InitializeArrayResult(int rows2)
         {
@@ -51,7 +105,10 @@ namespace OperationsResearch.Dual
         {
             rows = rows1;
             columns = columns1;
-            additionalVariables = new int[rows, columns];
+            if (rows > 0 && columns > 0)
+            {
+                additionalVariables = new int[rows, columns];
+            }
         }
 
         public void InitializeArrayZ(int columns1)
@@ -86,6 +143,25 @@ namespace OperationsResearch.Dual
         }
 
 
+        public static void ShowFullArray()
+        {
+
+            Console.WriteLine("ShowFullArray");
+
+
+            int rows1 = fullArray.GetLength(0);
+            int cols1 = fullArray.GetLength(1);
+
+            for (int i = 0; i < rows1; i++)
+            {
+                for (int j = 0; j < cols1; j++)
+                {
+                    Console.Write(fullArray[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
         public static void ShowValues()
         {
 
@@ -95,7 +171,7 @@ namespace OperationsResearch.Dual
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    Console.Write(array[i][j] + " ");
+                    Console.Write(array[i,j] + " ");
                 }
                 Console.WriteLine();
             }
@@ -103,19 +179,24 @@ namespace OperationsResearch.Dual
 
 
 
-        //// Метод для вывода значений additionalVariables в консоль
-        //public static void ShowadditionalVariables()
-        //{
-        //    Console.WriteLine("Значения массива дополнительных переменных U:");
-        //    for (int i = 0; i < rows; i++)
-        //    {
-        //        for (int j = 0; j < columns; j++)
-        //        {
-        //            Console.Write($"{additionalVariables[i, j]} ");
-        //        }
-        //        Console.WriteLine();
-        //    }
-        //}
+        public static void ShowadditionalVariables()
+        {
+
+            Console.WriteLine("ShowadditionalVariables");
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    Console.Write(additionalVariables[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+
+
+
 
 
 

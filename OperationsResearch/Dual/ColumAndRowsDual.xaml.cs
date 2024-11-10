@@ -69,6 +69,8 @@ namespace OperationsResearch.Dual
         }
 
 
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (HasValidationErrors()) { return; }

@@ -24,7 +24,7 @@ namespace OperationsResearch.Dual
         public static string rows = "";
         public static string columns = "";
 
-        public int[][] arrayDisplay { get; set; }
+        public int[,] arrayDisplay { get; set; }
         public int[] arrayResult { get; set; }
         public int[] arrayZ { get; set; }
         public string[] arraySign { get; set; }
@@ -92,7 +92,7 @@ namespace OperationsResearch.Dual
 
                 for (int j = 0; j < samleColumns; j++)
                 {
-                    panel.Children.Add(new TextBlock { Text = arrayDisplay[i][j].ToString() });
+                    panel.Children.Add(new TextBlock { Text = arrayDisplay[i,j].ToString() });
                     panel.Children.Add(new TextBlock { Text = $"x{j + 1}" });
 
                     if (j != samleColumns - 1)
