@@ -8,7 +8,7 @@
         Title="DeltaSearch" Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip">
-    
+
     <Grid Margin="0,0,0,0"  Background="#FFD9FFFE">
         <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="2,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exit" Background="#FFABFFEE" Grid.ColumnSpan="2"/>
 
@@ -19,9 +19,7 @@
                 <RowDefinition Height="*" />
                 <!-- Растягивается в зависимости от размера окна -->
                 <RowDefinition Height="Auto" />
-                <!-- Z-функция -->
-                <RowDefinition Height="Auto" />
-                <!-- Кнопка "Далі" внизу -->
+
             </Grid.RowDefinitions>
 
             <!-- Контейнер для основной таблицы -->
@@ -35,19 +33,9 @@
                   Height="Auto"/>
             </Grid>
 
-            <!-- Контейнер для Z-функции -->
-            <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5">
-                <!-- Уменьшил Margin -->
-                <Grid x:Name="textBoxContainerZ" 
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Top"
-                  ShowGridLines="True"
-                  Width="Auto"
-                  Height="Auto"/>
-            </Grid>
-
             <!-- Кнопка "Далі" внизу -->
-            <Button Grid.Row="2" Content="Далі" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="34" Click="Button_Click_Next" Background="#FFABFFEE"/>
+            <Button Grid.Row="1" Content="Вирішити" HorizontalAlignment="Center" VerticalAlignment="Top" Width="800" Height="32" Click="Button_Click_Result" Background="#FFABFFEE" Margin="0,66,0,0"/>
+            <Button Grid.Row="1" Content="Далі" HorizontalAlignment="Center" VerticalAlignment="Top" Width="800" Height="34" Click="Button_Click_Next" Background="#FFABFFEE" Margin="0,98,0,0"/>
         </Grid>
     </Grid>
 </Window>

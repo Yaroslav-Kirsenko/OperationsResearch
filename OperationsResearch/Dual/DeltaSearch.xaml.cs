@@ -213,7 +213,7 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition());
 
-                Label headerLabelX = new Label
+                Button headerLabelX = new Button
                 {
                     Content = $"X{j + 1}",
                     HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -223,6 +223,9 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
+
+                headerLabelX.Click += Button_Click_Header;
+
 
                 Grid.SetRow(headerLabelX, 0);
                 Grid.SetColumn(headerLabelX, j + 1);
@@ -234,7 +237,7 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition());
 
-                Label headerLabelU = new Label
+                Button headerLabelU = new Button
                 {
                     Content = $"U{j + 1}",
                     HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -244,6 +247,8 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
+
+                headerLabelU.Click += Button_Click_Header;
 
                 Grid.SetRow(headerLabelU, 0);
                 Grid.SetColumn(headerLabelU, columnsX + j + 1);
@@ -273,7 +278,7 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                Label rowLabel = new Label
+                Button rowLabel = new Button
                 {
                     Content = $"U{i + 1}",
                     HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -283,6 +288,8 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.LightPink,
                     Padding = new Thickness(5)
                 };
+
+                rowLabel.Click += Button_Click_Header;
 
                 Grid.SetRow(rowLabel, i + 1);
                 Grid.SetColumn(rowLabel, 0);
@@ -371,6 +378,8 @@ namespace OperationsResearch.Dual
         }
 
 
+
+
         // Обработчик нажатия кнопки
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -384,6 +393,43 @@ namespace OperationsResearch.Dual
                 button.Background = Brushes.White; // если уже голубой, возвращаем белый
             }
         }
+
+
+        private void Button_Click_Header(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            if (button.Background == Brushes.LightPink)
+            {
+                button.Background = Brushes.LightBlue; // при нажатии меняем на голубой цвет
+            }
+            else
+            {
+                button.Background = Brushes.LightPink; // если уже голубой, возвращаем белый
+            }
+        }
+
+        private void Button_Click_Result(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement element in textBoxContainer.Children)
+            {
+                if (element is Button button)
+                {
+                    if (button.Background == Brushes.LightBlue)
+                    {
+                        if (button.Content.ToString().StartsWith("X") || button.Content.ToString().StartsWith("U"))
+                        {
+                            button.Background = Brushes.LightPink;
+                        }
+                        else
+                        {
+                            button.Background = Brushes.White;
+                        }
+                    }
+                }
+            }
+        }
+
 
 
 
