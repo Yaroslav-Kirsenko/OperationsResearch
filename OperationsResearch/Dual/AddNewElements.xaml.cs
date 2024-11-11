@@ -356,6 +356,7 @@ namespace OperationsResearch.Dual
                         if (int.TryParse(textBox.Text, out int value))
                         {
                             SavedElements.additionalVariables[row, col] = value;
+
                         }
                     };
 

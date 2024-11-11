@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OperationsResearch.Dual
 {
@@ -23,6 +14,10 @@ namespace OperationsResearch.Dual
         {
             InitializeComponent();
         }
+
+        public TextBox deltaTextBox;
+
+        public TextBox deltaValueTextBox;
 
         SavedElements savedElements = new SavedElements();
 
@@ -37,164 +32,6 @@ namespace OperationsResearch.Dual
         public int rowsU = SavedElements.SetRowsU();
 
         public int columnsU = SavedElements.SetColumnsU();
-
-        //// Метод для создания основной таблицы с текстовыми полями, знаками и значениями
-        //public void CreateTextBox()
-        //{
-        //    textBoxContainer.Children.Clear();
-        //    textBoxContainer.RowDefinitions.Clear();
-        //    textBoxContainer.ColumnDefinitions.Clear();
-
-        //    // Включаем отображение линий сетки
-        //    textBoxContainer.ShowGridLines = true;
-
-        //    // Создаем строку для заголовков столбцов (X1, X2 и т.д.)
-        //    textBoxContainer.RowDefinitions.Add(new RowDefinition());
-        //    textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition()); // Пустая ячейка для номера строки
-
-        //    for (int j = 0; j < columns; j++)
-        //    {
-        //        textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition());
-
-        //        Label headerLabel = new Label
-        //        {
-        //            Content = $"X{j + 1}",
-        //            HorizontalContentAlignment = HorizontalAlignment.Center,
-        //            VerticalAlignment = VerticalAlignment.Center,
-        //            BorderThickness = new Thickness(1),
-        //            BorderBrush = System.Windows.Media.Brushes.Black,
-        //            Background = System.Windows.Media.Brushes.LightPink,
-        //            Padding = new Thickness(5)
-        //        };
-
-        //        Grid.SetRow(headerLabel, 0);
-        //        Grid.SetColumn(headerLabel, j + 1);
-        //        textBoxContainer.Children.Add(headerLabel);
-        //    }
-
-        //    // Добавляем заголовки для столбцов "Знак" и "Значення"
-        //    textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition()); // Столбец для значений
-
-
-        //    Label valueHeader = new Label
-        //    {
-        //        Content = "Значення",
-        //        HorizontalContentAlignment = HorizontalAlignment.Center,
-        //        VerticalAlignment = VerticalAlignment.Center,
-        //        BorderThickness = new Thickness(1),
-        //        BorderBrush = System.Windows.Media.Brushes.Black,
-        //        Background = System.Windows.Media.Brushes.LightPink,
-        //        Padding = new Thickness(5)
-        //    };
-
-        //    Grid.SetRow(valueHeader, 0);
-        //    Grid.SetColumn(valueHeader, columns + 2);
-        //    textBoxContainer.Children.Add(valueHeader);
-
-        //    // Добавляем строки с номерами и полями ввода
-        //    for (int i = 0; i < rows; i++)
-        //    {
-        //        textBoxContainer.RowDefinitions.Add(new RowDefinition());
-
-        //        Label rowLabel = new Label
-        //        {
-        //            Content = $"U{ i+1}",
-        //            HorizontalContentAlignment = HorizontalAlignment.Center,
-        //            VerticalAlignment = VerticalAlignment.Center,
-        //            BorderThickness = new Thickness(1),
-        //            BorderBrush = System.Windows.Media.Brushes.Black,
-        //            Background = System.Windows.Media.Brushes.LightPink,
-        //            Padding = new Thickness(5)
-        //        };
-
-        //        Grid.SetRow(rowLabel, i + 1);
-        //        Grid.SetColumn(rowLabel, 0);
-        //        textBoxContainer.Children.Add(rowLabel);
-
-        //        for (int j = 0; j < columns; j++)
-        //        {
-        //            TextBox textBox = new TextBox
-        //            {
-        //                IsReadOnly = true,
-        //                BorderThickness = new Thickness(1),
-        //                BorderBrush = System.Windows.Media.Brushes.Black,
-        //                Padding = new Thickness(5),
-        //                Text = SavedElements.fullArray[i, j].ToString()
-        //            };
-
-        //            Grid.SetRow(textBox, i + 1);
-        //            Grid.SetColumn(textBox, j + 1);
-        //            textBoxContainer.Children.Add(textBox);
-        //        }
-
-        //        TextBox valueTextBox = new TextBox
-        //        {
-        //            IsReadOnly = true,
-        //            BorderThickness = new Thickness(1),
-        //            BorderBrush = System.Windows.Media.Brushes.Black,
-        //            Padding = new Thickness(5),
-        //            Text = SavedElements.arrayResult[i].ToString()
-        //        };
-
-
-
-        //        Grid.SetRow(valueTextBox, i + 1);
-        //        Grid.SetColumn(valueTextBox, columns + 2);
-        //        textBoxContainer.Children.Add(valueTextBox);
-        //    }
-
-
-        //    textBoxContainer.RowDefinitions.Add(new RowDefinition());
-
-        //    Label deltaLabel = new Label
-        //    {
-        //        Content = "Delta",
-        //        HorizontalContentAlignment = HorizontalAlignment.Center,
-        //        VerticalAlignment = VerticalAlignment.Center,
-        //        BorderThickness = new Thickness(1),
-        //        BorderBrush = System.Windows.Media.Brushes.Black,
-        //        Background = System.Windows.Media.Brushes.LightPink,
-        //        Padding = new Thickness(5)
-        //    };
-
-        //    Grid.SetRow(deltaLabel, rows + 1);
-        //    Grid.SetColumn(deltaLabel, 0);
-        //    textBoxContainer.Children.Add(deltaLabel);
-
-        //    for (int j = 0; j < columns; j++)
-        //    {
-        //        TextBox deltaTextBox = new TextBox
-        //        {
-        //            IsReadOnly = false,  // Make these fields editable if desired
-        //            BorderThickness = new Thickness(1),
-        //            BorderBrush = System.Windows.Media.Brushes.Black,
-        //            Padding = new Thickness(5)
-        //        };
-
-        //        Grid.SetRow(deltaTextBox, rows + 1);
-        //        Grid.SetColumn(deltaTextBox, j + 1);
-        //        textBoxContainer.Children.Add(deltaTextBox);
-        //    }
-
-
-
-        //    // Add empty TextBox for "Value" column
-        //    TextBox deltaValueTextBox = new TextBox
-        //    {
-        //        BorderThickness = new Thickness(1),
-        //        BorderBrush = System.Windows.Media.Brushes.Black,
-        //        Padding = new Thickness(5)
-        //    };
-
-        //    Grid.SetRow(deltaValueTextBox, rows + 1);
-        //    Grid.SetColumn(deltaValueTextBox, columns + 2);
-        //    textBoxContainer.Children.Add(deltaValueTextBox);
-
-
-
-
-        //}
-
 
         public void CreateTextBox()
         {
@@ -216,7 +53,7 @@ namespace OperationsResearch.Dual
                 Button headerLabelX = new Button
                 {
                     Content = $"X{j + 1}",
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    Tag = SavedElements.arrayZ[j].ToString(), // Сохраняем значение из массива в свойство Tag                                                       
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -240,6 +77,7 @@ namespace OperationsResearch.Dual
                 Button headerLabelU = new Button
                 {
                     Content = $"U{j + 1}",
+                    Tag = 0,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
@@ -281,6 +119,7 @@ namespace OperationsResearch.Dual
                 Button rowLabel = new Button
                 {
                     Content = $"U{i + 1}",
+                    Tag = 0,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
@@ -301,6 +140,7 @@ namespace OperationsResearch.Dual
                     Button button = new Button
                     {
                         Content = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
+                        Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
@@ -318,6 +158,7 @@ namespace OperationsResearch.Dual
                 Button valueButton = new Button
                 {
                     Content = SavedElements.arrayResult[i].ToString(),
+                    Tag = SavedElements.arrayResult[i].ToString(),
                     Background = Brushes.White,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -351,7 +192,7 @@ namespace OperationsResearch.Dual
 
             for (int j = 0; j < columnsX + columnsU; j++)
             {
-                TextBox deltaTextBox = new TextBox
+                deltaTextBox = new TextBox
                 {
                     IsReadOnly = true,
                     BorderThickness = new Thickness(1),
@@ -364,7 +205,7 @@ namespace OperationsResearch.Dual
                 textBoxContainer.Children.Add(deltaTextBox);
             }
 
-            TextBox deltaValueTextBox = new TextBox
+            deltaValueTextBox = new TextBox
             {
                 IsReadOnly = true,
                 BorderThickness = new Thickness(1),
@@ -378,15 +219,29 @@ namespace OperationsResearch.Dual
         }
 
 
+      
+
 
 
         // Обработчик нажатия кнопки
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             Button button = sender as Button;
+
+            if (button.Tag != null)
+            {
+                Console.WriteLine(button.Tag); // Вывод в консоль значения Tag
+            }
+            else
+            {
+                Console.WriteLine("Tag не задан для этой кнопки.");
+            }
+
             if (button.Background == Brushes.White)
             {
                 button.Background = Brushes.LightBlue; // при нажатии меняем на голубой цвет
+
             }
             else
             {
@@ -399,6 +254,15 @@ namespace OperationsResearch.Dual
         {
             Button button = sender as Button;
 
+            if (button.Tag != null)
+            {
+                Console.WriteLine(button.Tag); // Вывод в консоль значения Tag
+            }
+            else
+            {
+                Console.WriteLine("Tag не задан для этой кнопки.");
+            }
+
             if (button.Background == Brushes.LightPink)
             {
                 button.Background = Brushes.LightBlue; // при нажатии меняем на голубой цвет
@@ -409,6 +273,20 @@ namespace OperationsResearch.Dual
             }
         }
 
+        public static double CalculateFormula(double row1, double textBox1, double row2, double textBox2, double column)
+        {
+            double result = (row1 * textBox1 + row2 * textBox2) - column;
+            Console.WriteLine($"Результат формулы: {result}");
+            return result;
+        }
+
+        public static double CalculateFormulaLast(double row1, double textBox1, double row2, double textBox2)
+        {
+            double result = (row1 * textBox1 + row2 * textBox2);
+            Console.WriteLine($"Результат формулы: {result}");
+            return result;
+        }
+
         private void Button_Click_Result(object sender, RoutedEventArgs e)
         {
             foreach (UIElement element in textBoxContainer.Children)
@@ -417,9 +295,25 @@ namespace OperationsResearch.Dual
                 {
                     if (button.Background == Brushes.LightBlue)
                     {
-                        if (button.Content.ToString().StartsWith("X") || button.Content.ToString().StartsWith("U"))
+                        if (button.Content.ToString().StartsWith("U"))
                         {
+                            Console.WriteLine("Button_Click_Result");
+                            double row1 = double.Parse(button.Tag?.ToString() ?? "0");
+                            Console.WriteLine(row1);
+                            double textBox1 = double.Parse(button.Tag?.ToString() ?? "0");
+                            Console.WriteLine(textBox1);
+                            double row2 = double.Parse(button.Tag?.ToString() ?? "0");
+                            Console.WriteLine(row2);
+                            double textBox2 = double.Parse(button.Tag?.ToString() ?? "0");
+                            Console.WriteLine(textBox2);
+
+                            double result2 = CalculateFormulaLast(row1, textBox1, row2, textBox2);
+
+                            // Use deltaValueTextBox to display the result
+                            deltaValueTextBox.Text = result2.ToString();
+
                             button.Background = Brushes.LightPink;
+
                         }
                         else
                         {
@@ -435,7 +329,7 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
-  
+
 
         }
 
