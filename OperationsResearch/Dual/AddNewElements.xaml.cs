@@ -132,7 +132,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = Brushes.Black,
-                    Background = Brushes.LightPink,
+                    Background = Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
 
@@ -153,7 +153,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = Brushes.Black,
-                    Background = Brushes.LightPink,
+                    Background = Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
 
@@ -171,7 +171,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = Brushes.Black,
-                Background = Brushes.LightPink,
+                Background = Brushes.SkyBlue,
                 Padding = new Thickness(5)
             };
 
@@ -188,7 +188,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = Brushes.Black,
-                Background = Brushes.LightPink,
+                Background = Brushes.SkyBlue,
                 Padding = new Thickness(5)
             };
 
@@ -295,7 +295,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = Brushes.Black,
-                Background = Brushes.LightPink,
+                Background = Brushes.SkyBlue,
                 Padding = new Thickness(5)
             };
 
@@ -317,7 +317,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = Brushes.Black,
-                    Background = Brushes.LightPink,
+                    Background = Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
                 Grid.SetRow(rowLabel, i + 1);

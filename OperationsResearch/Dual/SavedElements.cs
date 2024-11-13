@@ -111,6 +111,11 @@ namespace OperationsResearch.Dual
                     int value = rows - columns;
                     additionalVariables = new int[rows, columns + value];
                 }
+                else
+                {
+                    additionalVariables = new int[rows, columns];
+
+                }
             }
         }
 
