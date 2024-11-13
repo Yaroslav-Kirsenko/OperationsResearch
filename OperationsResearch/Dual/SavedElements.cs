@@ -107,7 +107,10 @@ namespace OperationsResearch.Dual
             columns = columns1;
             if (rows > 0 && columns > 0)
             {
-                additionalVariables = new int[rows, columns];
+                if (rows > columns) {
+                    int value = rows - columns;
+                    additionalVariables = new int[rows, columns + value];
+                }
             }
         }
 

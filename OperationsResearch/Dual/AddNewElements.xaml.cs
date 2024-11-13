@@ -487,10 +487,10 @@ namespace OperationsResearch.Dual
             int rows2 = array2.GetLength(0);
             int cols2 = array2.GetLength(1);
 
-            if (cols1 != cols2)
-            {
-                throw new ArgumentException("Both arrays must have the same number of columns to concatenate.");
-            }
+            //if (cols1 != cols2)
+            //{
+            //    throw new ArgumentException("Both arrays must have the same number of columns to concatenate.");
+            //}
 
             // Создаём результирующий массив с корректными размерами
             int[,] result = new int[rows1, cols1+cols2];
