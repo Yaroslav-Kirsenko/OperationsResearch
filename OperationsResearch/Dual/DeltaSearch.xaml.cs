@@ -295,22 +295,8 @@ namespace OperationsResearch.Dual
                 {
                     if (button.Background == Brushes.LightBlue)
                     {
-                        if (button.Content.ToString().StartsWith("U"))
-                        {
-                            Console.WriteLine("Button_Click_Result");
-                            double row1 = double.Parse(button.Tag?.ToString() ?? "0");
-                            Console.WriteLine(row1);
-                            double textBox1 = double.Parse(button.Tag?.ToString() ?? "0");
-                            Console.WriteLine(textBox1);
-                            double row2 = double.Parse(button.Tag?.ToString() ?? "0");
-                            Console.WriteLine(row2);
-                            double textBox2 = double.Parse(button.Tag?.ToString() ?? "0");
-                            Console.WriteLine(textBox2);
-
-                            double result2 = CalculateFormulaLast(row1, textBox1, row2, textBox2);
-
-                            // Use deltaValueTextBox to display the result
-                            deltaValueTextBox.Text = result2.ToString();
+                        if (button.Content.ToString().StartsWith("X") || button.Content.ToString().StartsWith("U"))
+                        { 
 
                             button.Background = Brushes.LightPink;
 
