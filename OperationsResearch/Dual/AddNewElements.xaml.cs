@@ -17,6 +17,9 @@ namespace OperationsResearch.Dual
 
         public SavedElements savedElements = new SavedElements();
 
+
+    
+
         public static int rows = 0;
         public static int columns = 0;
         public static int index = 0;
@@ -72,6 +75,8 @@ namespace OperationsResearch.Dual
             strColumns = Convert.ToString(columnsStr);
         }
 
+
+
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
         public void CreateTextBox()
         {
@@ -100,7 +105,6 @@ namespace OperationsResearch.Dual
                 Label headerLabel = CreateHeaderLabel(header, columns + k + 1);
                 textBoxContainer.Children.Add(headerLabel);
             }
-
             AddHeadersForSignAndValues(columns + additionalVariables.GetLength(1));
             AddRowsWithElements();
         }
@@ -349,8 +353,10 @@ namespace OperationsResearch.Dual
                         Text = additionalVariables[i, k].ToString()
                     };
 
+
                     int row = i;
                     int col = k;
+
                     textBox.TextChanged += (sender, e) =>
                     {
                         if (int.TryParse(textBox.Text, out int value))

@@ -63,46 +63,96 @@ namespace OperationsResearch.Dual
 
         private void FillStackPanels()
         {
-            // Очищення контейнерів перед додаванням нових даних
+            // Очищение контейнера перед добавлением новых данных
             ResultContainer.Children.Clear();
 
-            // Заповнення першого контейнера даними з arrayZ
+            // Заполнение первого контейнера данными из arrayZ
             StackPanel zPanel = new StackPanel { Orientation = Orientation.Horizontal };
 
             for (int i = 0; i < arrayZ.Length; i++)
             {
-                zPanel.Children.Add(new TextBlock { Text = arrayZ[i].ToString() });
-                zPanel.Children.Add(new TextBlock { Text = $"x{i + 1}" });
+                zPanel.Children.Add(new TextBlock
+                {
+                    Text = arrayZ[i].ToString(),
+                    FontSize = 18, // Увеличенный размер шрифта
+                    Margin = new Thickness(5, 0, 5, 0) // Отступы вокруг текста
+                });
+                zPanel.Children.Add(new TextBlock
+                {
+                    Text = $"x{i + 1}",
+                    FontSize = 18,
+                    Margin = new Thickness(5, 0, 5, 0)
+                });
 
                 if (i != arrayZ.Length - 1)
                 {
-                    zPanel.Children.Add(new TextBlock { Text = " + " }); ////// ТУТ ИСПРАВИТЬ
+                    zPanel.Children.Add(new TextBlock
+                    {
+                        Text = " + ",
+                        FontSize = 18,
+                        Margin = new Thickness(5, 0, 5, 0)
+                    });
                 }
             }
 
-            zPanel.Children.Add(new TextBlock { Text = " => " });
-            zPanel.Children.Add(new TextBlock { Text = Extremum?.ToString() ?? "N/A" });
+            zPanel.Children.Add(new TextBlock
+            {
+                Text = " => ",
+                FontSize = 18,
+                Margin = new Thickness(5, 0, 5, 0)
+            });
+            zPanel.Children.Add(new TextBlock
+            {
+                Text = Extremum?.ToString() ?? "N/A",
+                FontSize = 18,
+                Margin = new Thickness(5, 0, 5, 0)
+            });
 
             ResultContainer.Children.Add(zPanel);
 
-            // Заповнення другого контейнера даними з arrayDisplay
+            // Заполнение второго контейнера данными из arrayDisplay
             for (int i = 0; i < samleRows; i++)
             {
                 StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
 
                 for (int j = 0; j < samleColumns; j++)
                 {
-                    panel.Children.Add(new TextBlock { Text = arrayDisplay[i,j].ToString() });
-                    panel.Children.Add(new TextBlock { Text = $"x{j + 1}" });
+                    panel.Children.Add(new TextBlock
+                    {
+                        Text = arrayDisplay[i, j].ToString(),
+                        FontSize = 18,
+                        Margin = new Thickness(5, 0, 5, 0)
+                    });
+                    panel.Children.Add(new TextBlock
+                    {
+                        Text = $"x{j + 1}",
+                        FontSize = 18,
+                        Margin = new Thickness(5, 0, 5, 0)
+                    });
 
                     if (j != samleColumns - 1)
                     {
-                        panel.Children.Add(new TextBlock { Text = " + " }); ////// ТУТ ИСПРАВИТЬ
+                        panel.Children.Add(new TextBlock
+                        {
+                            Text = " + ",
+                            FontSize = 18,
+                            Margin = new Thickness(5, 0, 5, 0)
+                        });
                     }
                 }
 
-                panel.Children.Add(new TextBlock { Text = $" {arraySign[i]} " });
-                panel.Children.Add(new TextBlock { Text = arrayResult[i].ToString() });
+                panel.Children.Add(new TextBlock
+                {
+                    Text = $" {arraySign[i]} ",
+                    FontSize = 18,
+                    Margin = new Thickness(5, 0, 5, 0)
+                });
+                panel.Children.Add(new TextBlock
+                {
+                    Text = arrayResult[i].ToString(),
+                    FontSize = 18,
+                    Margin = new Thickness(5, 0, 5, 0)
+                });
 
                 ResultContainer.Children.Add(panel);
             }

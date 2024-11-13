@@ -57,7 +57,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
-                    Background = System.Windows.Media.Brushes.LightPink,
+                    Background = System.Windows.Media.Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
 
@@ -82,7 +82,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
-                    Background = System.Windows.Media.Brushes.LightPink,
+                    Background = System.Windows.Media.Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
 
@@ -103,7 +103,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
-                Background = System.Windows.Media.Brushes.LightPink,
+                Background = System.Windows.Media.Brushes.SkyBlue,
                 Padding = new Thickness(5)
             };
 
@@ -124,7 +124,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
-                    Background = System.Windows.Media.Brushes.LightPink,
+                    Background = System.Windows.Media.Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
 
@@ -182,7 +182,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
-                Background = System.Windows.Media.Brushes.LightPink,
+                Background = System.Windows.Media.Brushes.SkyBlue,
                 Padding = new Thickness(5)
             };
 
@@ -240,7 +240,7 @@ namespace OperationsResearch.Dual
 
             if (button.Background == Brushes.White)
             {
-                button.Background = Brushes.LightBlue; // при нажатии меняем на голубой цвет
+                button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет
 
             }
             else
@@ -263,13 +263,13 @@ namespace OperationsResearch.Dual
                 Console.WriteLine("Tag не задан для этой кнопки.");
             }
 
-            if (button.Background == Brushes.LightPink)
+            if (button.Background == Brushes.SkyBlue)
             {
-                button.Background = Brushes.LightBlue; // при нажатии меняем на голубой цвет
+                button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет
             }
             else
             {
-                button.Background = Brushes.LightPink; // если уже голубой, возвращаем белый
+                button.Background = Brushes.White; // если уже голубой, возвращаем белый
             }
         }
 
@@ -287,19 +287,20 @@ namespace OperationsResearch.Dual
             return result;
         }
 
+
         private void Button_Click_Result(object sender, RoutedEventArgs e)
         {
             foreach (UIElement element in textBoxContainer.Children)
             {
+
                 if (element is Button button)
                 {
-                    if (button.Background == Brushes.LightBlue)
+
+                    if (button.Background == Brushes.LightGreen)
                     {
                         if (button.Content.ToString().StartsWith("X") || button.Content.ToString().StartsWith("U"))
-                        { 
-
-                            button.Background = Brushes.LightPink;
-
+                        {
+                            button.Background = Brushes.SkyBlue;
                         }
                         else
                         {

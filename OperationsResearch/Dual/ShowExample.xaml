@@ -6,50 +6,87 @@
         xmlns:local="clr-namespace:OperationsResearch.Dual"
         mc:Ignorable="d"
         Title="ShowExample" 
-        Height="450" Width="800" 
+        Height="500" Width="850" 
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResizeWithGrip">
-
+        ResizeMode="CanResizeWithGrip"
+        Background="#FFF0F4F8">
+    
     <!-- Основная сетка -->
-    <Grid Margin="0,0,0,0"  Background="#FFD9FFFE">
-        <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="2,7,0,0" VerticalAlignment="Top" Width="113" Height="22" Click="Button_Click_Exit" Background="#FFABFFEE" Grid.ColumnSpan="2"/>
-
+    <Grid Margin="10">
+        <!-- Кнопка "Повернутись назад" -->
+        <Button Content="Повернутись назад" 
+                HorizontalAlignment="Left" 
+                Margin="0,10,0,0" 
+                VerticalAlignment="Top" 
+                Width="130" 
+                Height="30" 
+                Click="Button_Click_Exit" 
+                Background="#FF56C596" 
+                Foreground="White"
+                FontWeight="Bold"
+                BorderThickness="0"
+                ToolTip="Вернуться на предыдущую страницу"/>
+        
         <!-- Сетка для размещения элементов внутри окна -->
-        <Grid>
-            <!-- Определение строк. Первая строка для основной таблицы, вторая строка для Z-функции, третья для кнопки "Далі" -->
+        <Grid Margin="0,40,0,0">
+            <!-- Определение строк -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <!-- Растягивается в зависимости от размера окна -->
                 <RowDefinition Height="Auto" />
-                <!-- Z-функция -->
                 <RowDefinition Height="Auto" />
-                <!-- Кнопка "Далі" внизу -->
             </Grid.RowDefinitions>
-
+            
             <!-- Контейнер для основной таблицы -->
-            <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
-                <!-- Уменьшил Margin -->
+            <Border Grid.Row="0" 
+                    CornerRadius="8" 
+                    Background="White" 
+                    Margin="5" 
+                    Padding="10" 
+                    BorderBrush="#FFD1E8E2" 
+                    BorderThickness="1">
+                <!-- Применение DropShadowEffect -->
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
+                </Border.Effect>
+                
                 <Grid x:Name="textBoxContainer" 
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Top"
-                      ShowGridLines="True"
-                      Width="Auto"
-                      Height="Auto"/>
-            </Grid>
-
+                      ShowGridLines="True"/>
+            </Border>
+            
             <!-- Контейнер для Z-функции -->
-            <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5">
-                <!-- Уменьшил Margin -->
+            <Border Grid.Row="1" 
+                    CornerRadius="8" 
+                    Background="White" 
+                    Margin="5" 
+                    Padding="10" 
+                    BorderBrush="#FFD1E8E2" 
+                    BorderThickness="1">
+                <!-- Применение DropShadowEffect -->
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
+                </Border.Effect>
+
                 <Grid x:Name="textBoxContainerZ" 
                       HorizontalAlignment="Stretch" 
-                      VerticalAlignment="Top"
-                      ShowGridLines="True"
-                      Width="Auto"
-                      Height="Auto"/>
-            </Grid>
+                      VerticalAlignment="Top" 
+                      ShowGridLines="True"/>
+            </Border>
 
-            <!-- Кнопка "Далі" внизу -->
-            <Button Grid.Row="2" Content="Далі" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="34" Click="Button_Click_Next" Background="#FFABFFEE"/>
+            <!-- Кнопка "Далі" -->
+            <Button Grid.Row="2" 
+                    Content="Далі" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Width="180" 
+                    Height="40" 
+                    Click="Button_Click_Next" 
+                    Background="#FF56C596" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    BorderThickness="0" 
+                    ToolTip="Перейти к следующему шагу"/>
         </Grid>
     </Grid>
 </Window>

@@ -8,14 +8,83 @@
         Title="ShowSamle"
         Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResizeWithGrip">
-    
-    <Grid Margin="0,0,0,0"  Background="#FFD9FFFE">
-        <Button Content="Повернутись назад" HorizontalAlignment="Left" Margin="10,10,0,402"  Width="113" Height="22" Click="Button_Click_Exit" Background="#FFABFFEE"/>
+        ResizeMode="CanResizeWithGrip"
+        Background="#FFF0F4F8">
 
-        <Button Content="Далі" HorizontalAlignment="Center" Margin="0,394,0,0" VerticalAlignment="Top" Width="800" Height="40" Click="Button_Click_Next" Background="#FFABFFEE"/>
+    <!-- Основная сетка -->
+    <Grid Margin="10">
+        <!-- Кнопка "Повернутись назад" -->
+        <Button Content="Повернутись назад" 
+                HorizontalAlignment="Left" 
+                Margin="10,10,0,0" 
+                VerticalAlignment="Top" 
+                Width="130" 
+                Height="30" 
+                Click="Button_Click_Exit" 
+                Background="#FF56C596" 
+                Foreground="White"
+                FontWeight="Bold"
+                BorderThickness="0"
+                ToolTip="Вернуться на предыдущую страницу"/>
 
-        <StackPanel x:Name="ResultContainer" Orientation="Vertical" Margin="0,132,0,93"/>
+        <!-- Основной контейнер для вывода результата -->
+        <StackPanel x:Name="ResultContainer" 
+                    Orientation="Vertical" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="20,50,20,100">
+            <!-- Пример элементов для отображения результатов с тенью и скругленными углами -->
+            <Border Background="White" 
+                    CornerRadius="8" 
+                    Padding="10" 
+                    Margin="5" 
+                    BorderBrush="#FFD1E8E2" 
+                    BorderThickness="1">
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" 
+                                      BlurRadius="10" 
+                                      ShadowDepth="2" 
+                                      Opacity="0.5"/>
+                </Border.Effect>
+                <TextBlock Text="Здесь отображается результат 1" 
+                           FontSize="16" 
+                           Foreground="#FF333333" 
+                           TextWrapping="Wrap"/>
+            </Border>
 
+            <Border Background="White" 
+                    CornerRadius="8" 
+                    Padding="10" 
+                    Margin="5" 
+                    BorderBrush="#FFD1E8E2" 
+                    BorderThickness="1">
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" 
+                                      BlurRadius="10" 
+                                      ShadowDepth="2" 
+                                      Opacity="0.5"/>
+                </Border.Effect>
+                <TextBlock Text="Здесь отображается результат 2" 
+                           FontSize="16" 
+                           Foreground="#FF333333" 
+                           TextWrapping="Wrap"/>
+            </Border>
+
+            <!-- Дополнительные элементы по необходимости -->
+        </StackPanel>
+
+        <!-- Кнопка "Далі" -->
+        <Button Content="Далі" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom" 
+                Width="300" 
+                Height="40" 
+                Click="Button_Click_Next" 
+                Background="#FF56C596" 
+                Foreground="White" 
+                FontWeight="Bold" 
+                BorderThickness="0" 
+                Margin="0,0,0,20" 
+                ToolTip="Перейти к следующему шагу"/>
     </Grid>
 </Window>

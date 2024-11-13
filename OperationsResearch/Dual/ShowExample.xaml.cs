@@ -159,7 +159,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
-                    Background = System.Windows.Media.Brushes.LightPink,
+                    Background = System.Windows.Media.Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
 
@@ -179,7 +179,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
-                Background = System.Windows.Media.Brushes.LightPink,
+                Background = System.Windows.Media.Brushes.SkyBlue,
                 Padding = new Thickness(5)
             };
 
@@ -194,7 +194,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
-                Background = System.Windows.Media.Brushes.LightPink,
+                Background = System.Windows.Media.Brushes.SkyBlue,
                 Padding = new Thickness(5)
             };
 
@@ -214,7 +214,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
-                    Background = System.Windows.Media.Brushes.LightPink,
+                    Background = System.Windows.Media.Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
 
@@ -349,7 +349,7 @@ namespace OperationsResearch.Dual
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
-                    Background = System.Windows.Media.Brushes.LightPink,
+                    Background = System.Windows.Media.Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
 
@@ -367,7 +367,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
-                Background = System.Windows.Media.Brushes.LightPink,
+                Background = System.Windows.Media.Brushes.SkyBlue,
                 Padding = new Thickness(5)
             };
 
@@ -384,7 +384,7 @@ namespace OperationsResearch.Dual
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
                 BorderBrush = System.Windows.Media.Brushes.Black,
-                Background = System.Windows.Media.Brushes.LightPink,
+                Background = System.Windows.Media.Brushes.SkyBlue,
                 Padding = new Thickness(5)
             };
 
