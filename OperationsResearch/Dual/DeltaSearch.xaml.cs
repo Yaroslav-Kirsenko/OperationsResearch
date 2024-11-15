@@ -19,6 +19,11 @@ namespace OperationsResearch.Dual
 
         public TextBox deltaValueTextBox;
 
+        public double result;
+
+
+
+
         SavedElements savedElements = new SavedElements();
 
         public int rows = SavedElements.SetRowsFullArray();
@@ -61,7 +66,7 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                headerLabelX.Click += Button_Click_Header;
+                headerLabelX.Click += Button_Click_Side;
 
 
                 Grid.SetRow(headerLabelX, 0);
@@ -129,6 +134,7 @@ namespace OperationsResearch.Dual
                 };
 
                 rowLabel.Click += Button_Click_Header;
+                
 
                 Grid.SetRow(rowLabel, i + 1);
                 Grid.SetColumn(rowLabel, 0);
@@ -219,72 +225,88 @@ namespace OperationsResearch.Dual
         }
 
 
-      
+
 
 
 
         // Обработчик нажатия кнопки
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             Button button = sender as Button;
 
-            if (button.Tag != null)
+            if (button.Tag != null && double.TryParse(button.Tag.ToString(), out double tagValue))
             {
-                Console.WriteLine(button.Tag); // Вывод в консоль значения Tag
+                Console.WriteLine(tagValue); // Вывод в консоль значения Tag
+
+                if (button.Background == Brushes.White)
+                {
+                    result *= tagValue;
+                    Console.WriteLine("Operation: " + result);
+                    button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет
+                }
+                else
+                {
+                    button.Background = Brushes.White; // если уже голубой, возвращаем белый
+                }
             }
             else
             {
-                Console.WriteLine("Tag не задан для этой кнопки.");
-            }
-
-            if (button.Background == Brushes.White)
-            {
-                button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет
-
-            }
-            else
-            {
-                button.Background = Brushes.White; // если уже голубой, возвращаем белый
+                Console.WriteLine("Tag не задан или не может быть преобразован в double для этой кнопки.");
             }
         }
-
 
         private void Button_Click_Header(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
 
-            if (button.Tag != null)
+            if (button.Tag != null && double.TryParse(button.Tag.ToString(), out double tagValue))
             {
-                Console.WriteLine(button.Tag); // Вывод в консоль значения Tag
+                Console.WriteLine(tagValue); // Вывод в консоль значения Tag
+
+                if (button.Background == Brushes.SkyBlue)
+                {
+                    result += tagValue;
+                    Console.WriteLine("Operation: " + result);
+
+                    button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет
+                }
+                else
+                {
+                    button.Background = Brushes.SkyBlue; // если уже голубой, возвращаем белый
+                }
             }
             else
             {
-                Console.WriteLine("Tag не задан для этой кнопки.");
+                Console.WriteLine("Tag не задан или не может быть преобразован в double для этой кнопки.");
             }
+        }
 
-            if (button.Background == Brushes.SkyBlue)
+        private void Button_Click_Side(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            if (button.Tag != null && double.TryParse(button.Tag.ToString(), out double tagValue))
             {
-                button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет
+                Console.WriteLine(tagValue); // Вывод в консоль значения Tag
+
+                if (button.Background == Brushes.SkyBlue)
+                {
+     
+
+                    result-= tagValue;
+                    Console.WriteLine("Operation: " + result);
+
+                    button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет
+                }
+                else
+                {
+                    button.Background = Brushes.SkyBlue; // если уже голубой, возвращаем белый
+                }
             }
             else
             {
-                button.Background = Brushes.White; // если уже голубой, возвращаем белый
+                Console.WriteLine("Tag не задан или не может быть преобразован в double для этой кнопки.");
             }
-        }
-
-        public static double CalculateFormula(double row1, double textBox1, double row2, double textBox2, double column)
-        {
-            double result = (row1 * textBox1 + row2 * textBox2) - column;
-            Console.WriteLine($"Результат формулы: {result}");
-            return result;
-        }
-
-        public static double CalculateFormulaLast(double row1, double textBox1, double row2, double textBox2)
-        {
-            double result = (row1 * textBox1 + row2 * textBox2);
-            Console.WriteLine($"Результат формулы: {result}");
-            return result;
         }
 
 
@@ -300,6 +322,7 @@ namespace OperationsResearch.Dual
                     {
                         if (button.Content.ToString().StartsWith("X") || button.Content.ToString().StartsWith("U"))
                         {
+                            deltaTextBox.Text = result.ToString();
                             button.Background = Brushes.SkyBlue;
                         }
                         else
@@ -309,15 +332,21 @@ namespace OperationsResearch.Dual
                     }
                 }
             }
+            result = 0;
         }
-
-
-
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
 
+            AddNewElements addNewElements = new AddNewElements();
 
+
+            addNewElements.GetRows(rowsX);
+            addNewElements.GetColumns(columnsX);
+            addNewElements.CreateTextBox();
+            addNewElements.Zfunc();
+            addNewElements.Show();
+            this.Hide();
         }
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)

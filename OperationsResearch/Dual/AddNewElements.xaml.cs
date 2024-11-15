@@ -80,6 +80,7 @@ namespace OperationsResearch.Dual
         // Метод для создания основной таблицы с текстовыми полями, знаками и значениями
         public void CreateTextBox()
         {
+
             textBoxContainer.Children.Clear();
             textBoxContainer.RowDefinitions.Clear();
             textBoxContainer.ColumnDefinitions.Clear();
@@ -241,6 +242,7 @@ namespace OperationsResearch.Dual
                 BorderThickness = new Thickness(1),
                 BorderBrush = Brushes.Black
             };
+
 
             extremumComboBox.SelectionChanged += (sender, e) =>
             {
@@ -577,6 +579,7 @@ namespace OperationsResearch.Dual
 
 
             deltaSearch.CreateTextBox();
+            //deltaSearch.TextBoxResult();
 
             deltaSearch.Show();
 

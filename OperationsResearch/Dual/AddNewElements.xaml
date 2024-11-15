@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OperationsResearch.Dual"
         mc:Ignorable="d"
         Title="AddNewElements" 
-        Height="450" Width="800"
+        Height="500" Width="800"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         Background="#FFF0F4F8">

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OperationsResearch.Dual"
         mc:Ignorable="d"
         Title="ShowSamle"
-        Height="450" Width="800"
+        Height="500" Width="800"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         Background="#FFF0F4F8">
@@ -46,7 +46,7 @@
                                       ShadowDepth="2" 
                                       Opacity="0.5"/>
                 </Border.Effect>
-                <TextBlock Text="Здесь отображается результат 1" 
+                <TextBlock
                            FontSize="16" 
                            Foreground="#FF333333" 
                            TextWrapping="Wrap"/>
@@ -64,7 +64,7 @@
                                       ShadowDepth="2" 
                                       Opacity="0.5"/>
                 </Border.Effect>
-                <TextBlock Text="Здесь отображается результат 2" 
+                <TextBlock 
                            FontSize="16" 
                            Foreground="#FF333333" 
                            TextWrapping="Wrap"/>

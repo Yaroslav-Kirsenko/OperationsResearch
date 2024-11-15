@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OperationsResearch.Dual"
         mc:Ignorable="d"
         Title="ColumAndRowsDual"
-        Height="450" Width="850"
+        Height="500" Width="850"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         Background="#FFF0F4F8">
@@ -74,7 +74,7 @@
         <!-- Кнопка "Повернутись назад" -->
         <Button Content="Повернутись назад" 
                 HorizontalAlignment="Left" 
-                Margin="10,7,0,0" 
+                Margin="10,4,0,0" 
                 VerticalAlignment="Top" 
                 Width="130" 
                 Height="30" 
@@ -84,12 +84,12 @@
                 FontWeight="Bold"
                 BorderThickness="0"
                 ToolTip="Вернуться на предыдущую страницу" 
-                Grid.ColumnSpan="2"/>
+                Grid.ColumnSpan="2" RenderTransformOrigin="0.498,0.254"/>
 
         <!-- Кнопка "Готово" -->
         <Button Content="Готово" 
                 HorizontalAlignment="Left" 
-                Margin="10,284,0,0" 
+                Margin="33,257,0,0" 
                 VerticalAlignment="Top" 
                 Width="780" 
                 Height="35" 
@@ -97,8 +97,7 @@
                 Background="#FF56C596" 
                 Foreground="White" 
                 FontWeight="Bold" 
-                BorderThickness="0" 
-                Grid.Column="1"
-                ToolTip="Подтвердить и продолжить"/>
+                BorderThickness="0"
+                ToolTip="Подтвердить и продолжить" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

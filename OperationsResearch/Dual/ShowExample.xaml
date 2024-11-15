@@ -10,9 +10,10 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         Background="#FFF0F4F8">
-    
+
     <!-- Основная сетка -->
     <Grid Margin="10">
+
         <!-- Кнопка "Повернутись назад" -->
         <Button Content="Повернутись назад" 
                 HorizontalAlignment="Left" 
@@ -26,16 +27,17 @@
                 FontWeight="Bold"
                 BorderThickness="0"
                 ToolTip="Вернуться на предыдущую страницу"/>
-        
+
         <!-- Сетка для размещения элементов внутри окна -->
         <Grid Margin="0,40,0,0">
+
             <!-- Определение строк -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <!-- Контейнер для основной таблицы -->
             <Border Grid.Row="0" 
                     CornerRadius="8" 
@@ -48,13 +50,13 @@
                 <Border.Effect>
                     <DropShadowEffect Color="Gray" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
                 </Border.Effect>
-                
+
+                <!-- Убираем ShowGridLines -->
                 <Grid x:Name="textBoxContainer" 
                       HorizontalAlignment="Stretch" 
-                      VerticalAlignment="Top"
-                      ShowGridLines="True"/>
+                      VerticalAlignment="Top"/>
             </Border>
-            
+
             <!-- Контейнер для Z-функции -->
             <Border Grid.Row="1" 
                     CornerRadius="8" 
@@ -68,10 +70,10 @@
                     <DropShadowEffect Color="Gray" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
                 </Border.Effect>
 
+                <!-- Убираем ShowGridLines -->
                 <Grid x:Name="textBoxContainerZ" 
                       HorizontalAlignment="Stretch" 
-                      VerticalAlignment="Top" 
-                      ShowGridLines="True"/>
+                      VerticalAlignment="Top"/>
             </Border>
 
             <!-- Кнопка "Далі" -->

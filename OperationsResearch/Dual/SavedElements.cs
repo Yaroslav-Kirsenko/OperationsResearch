@@ -114,7 +114,6 @@ namespace OperationsResearch.Dual
                 else
                 {
                     additionalVariables = new int[rows, columns];
-
                 }
             }
         }

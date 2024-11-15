@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -75,25 +74,25 @@ namespace OperationsResearch.Dual
 
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-               textBox.Background = System.Windows.Media.Brushes.LightPink;
+                textBox.Background = System.Windows.Media.Brushes.LightPink;
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                textBox.Background = System.Windows.Media.Brushes.White; 
+                textBox.Background = System.Windows.Media.Brushes.White;
                 return true;
             }
 
-           
+
             if (int.TryParse(textBox.Text, out _))
             {
-                textBox.Background = System.Windows.Media.Brushes.White; 
+                textBox.Background = System.Windows.Media.Brushes.White;
                 return true;
             }
             else
             {
-                textBox.Background = System.Windows.Media.Brushes.LightPink; 
+                textBox.Background = System.Windows.Media.Brushes.LightPink;
                 return false;
             }
         }
@@ -106,7 +105,7 @@ namespace OperationsResearch.Dual
             {
                 if (child is TextBox textBox)
                 {
-                    
+
                     if (!ValidateTextBoxInput(textBox))
                     {
                         hasErrors = true;
@@ -127,7 +126,7 @@ namespace OperationsResearch.Dual
 
             if (hasErrors)
             {
-                
+
                 MessageBox.Show("Будь ласка, виправте всі помилки вводу перед переходом.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
@@ -142,7 +141,7 @@ namespace OperationsResearch.Dual
             textBoxContainer.ColumnDefinitions.Clear();
 
             // Включаем отображение линий сетки
-            textBoxContainer.ShowGridLines = true;
+            textBoxContainer.ShowGridLines = false;             //////////////////////////////////////////////////////
 
             // Создаем строку для заголовков столбцов (X1, X2 и т.д.)
             textBoxContainer.RowDefinitions.Add(new RowDefinition());
@@ -239,11 +238,11 @@ namespace OperationsResearch.Dual
                     {
                         if (ValidateTextBoxInput(textBox) && int.TryParse(textBox.Text, out int result))
                         {
-                            SavedElements.array[row,column] = result;
+                            SavedElements.array[row, column] = result;
                         }
                         else
                         {
-                            SavedElements.array[row,column] = 0;
+                            SavedElements.array[row, column] = 0;
                         }
                     };
 
@@ -252,16 +251,19 @@ namespace OperationsResearch.Dual
                     textBoxContainer.Children.Add(textBox);
                 }
 
-                ComboBox signComboBox = new ComboBox
+
+                ComboBox signComboBox = new ComboBox //////////////////////////////////////////////////////////////////////
                 {
-                    Width = 100,
                     ItemsSource = new List<string> { "=", "<=", ">=" },
-                    SelectedIndex = 0, // Устанавливаем начальное значение
-                    Margin = new Thickness(5),
-                    Padding = new Thickness(5),
+                    SelectedIndex = 0,
                     BorderThickness = new Thickness(1),
-                    BorderBrush = System.Windows.Media.Brushes.Black
+                    BorderBrush = System.Windows.Media.Brushes.Black,
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    Margin = new Thickness(0)
                 };
+
+
 
                 int rows = i;
 
@@ -334,7 +336,7 @@ namespace OperationsResearch.Dual
             textBoxContainerZ.RowDefinitions.Clear();
             textBoxContainerZ.ColumnDefinitions.Clear();
 
-            textBoxContainerZ.ShowGridLines = true;
+            textBoxContainerZ.ShowGridLines = false;                //////////////////////////////////////////////////
             textBoxContainerZ.RowDefinitions.Add(new RowDefinition());
             textBoxContainerZ.ColumnDefinitions.Add(new ColumnDefinition());
 
@@ -431,17 +433,22 @@ namespace OperationsResearch.Dual
                 textBoxContainerZ.Children.Add(textBox);
             }
 
-            ComboBox extremumComboBox = new ComboBox
+
+
+            ComboBox extremumComboBox = new ComboBox        /////////////////////////////////////
             {
 
-                Width = 100,
                 ItemsSource = new List<string> { "max", "min" },
                 SelectedIndex = 0,
-                Margin = new Thickness(5),
                 Padding = new Thickness(5),
                 BorderThickness = new Thickness(1),
-                BorderBrush = System.Windows.Media.Brushes.Black
+                BorderBrush = System.Windows.Media.Brushes.Black,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Margin = new Thickness(0)
             };
+
+
             string value = extremumComboBox.SelectedItem.ToString();
             savedElements.InitializeExtremum(value);
 
@@ -475,7 +482,7 @@ namespace OperationsResearch.Dual
 
 
 
-           ShowSamle showSamle = new ShowSamle();
+            ShowSamle showSamle = new ShowSamle();
 
             showSamle.GetRowsSamle(rows);
             showSamle.GetColumnsSamle(columns);
