@@ -84,7 +84,7 @@ namespace OperationsResearch.Dual
             textBoxContainer.Children.Clear();
             textBoxContainer.RowDefinitions.Clear();
             textBoxContainer.ColumnDefinitions.Clear();
-            textBoxContainer.ShowGridLines = true;
+            textBoxContainer.ShowGridLines = false;
 
             // Заголовки столбцов для X переменных
             textBoxContainer.RowDefinitions.Add(new RowDefinition());
@@ -116,7 +116,7 @@ namespace OperationsResearch.Dual
             textBoxContainerZ.Children.Clear();
             textBoxContainerZ.RowDefinitions.Clear();
             textBoxContainerZ.ColumnDefinitions.Clear();
-            textBoxContainerZ.ShowGridLines = true;
+            textBoxContainerZ.ShowGridLines = false;
 
             // Создаем строку заголовков для функции Z
             textBoxContainerZ.RowDefinitions.Add(new RowDefinition());
@@ -234,13 +234,14 @@ namespace OperationsResearch.Dual
 
             ComboBox extremumComboBox = new ComboBox
             {
-                Width = 100,
                 ItemsSource = new List<string> { "max", "min" },
                 SelectedItem = SavedElements.Extremum,
-                Margin = new Thickness(5),
                 Padding = new Thickness(5),
                 BorderThickness = new Thickness(1),
-                BorderBrush = Brushes.Black
+                BorderBrush = System.Windows.Media.Brushes.Black,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Margin = new Thickness(0)
             };
 
 
@@ -375,13 +376,14 @@ namespace OperationsResearch.Dual
 
                 ComboBox signComboBox = new ComboBox
                 {
-                    Width = 100,
+                    
                     ItemsSource = new List<string> { "=", "<=", ">=" },
                     SelectedItem = SavedElements.arraySign[i],
-                    Margin = new Thickness(5),
-                    Padding = new Thickness(5),
                     BorderThickness = new Thickness(1),
-                    BorderBrush = Brushes.Black
+                    BorderBrush = System.Windows.Media.Brushes.Black,
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    Margin = new Thickness(0)
                 };
 
                 Grid.SetRow(signComboBox, i + 1);

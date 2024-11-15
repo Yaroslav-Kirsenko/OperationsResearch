@@ -26,11 +26,6 @@ namespace OperationsResearch
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
-
         private void Button_Click_Dual(object sender, RoutedEventArgs e)
         {
             ColumAndRowsDual columAndRowsDual = new ColumAndRowsDual();

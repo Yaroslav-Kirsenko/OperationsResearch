@@ -54,7 +54,8 @@
                 <!-- Убираем ShowGridLines -->
                 <Grid x:Name="textBoxContainer" 
                       HorizontalAlignment="Stretch" 
-                      VerticalAlignment="Top"/>
+                      VerticalAlignment="Top"
+                       ShowGridLines="True"/>
             </Border>
 
             <!-- Контейнер для Z-функции -->
@@ -73,7 +74,8 @@
                 <!-- Убираем ShowGridLines -->
                 <Grid x:Name="textBoxContainerZ" 
                       HorizontalAlignment="Stretch" 
-                      VerticalAlignment="Top"/>
+                      VerticalAlignment="Top"
+                       ShowGridLines="True"/>
             </Border>
 
             <!-- Кнопка "Далі" -->

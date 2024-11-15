@@ -40,7 +40,7 @@ namespace OperationsResearch.Dual
             textBoxContainer.ColumnDefinitions.Clear();
 
             // Включаем отображение линий сетки
-            textBoxContainer.ShowGridLines = true;
+            textBoxContainer.ShowGridLines = false;
 
             // Создаем строку для заголовков столбцов (X1, X2 и т.д.)
             textBoxContainer.RowDefinitions.Add(new RowDefinition());
@@ -138,13 +138,13 @@ namespace OperationsResearch.Dual
 
                 ComboBox signComboBox = new ComboBox
                 {
-                    Width = 100,
                     ItemsSource = new List<string> { "=", "<=", ">=" },
                     SelectedItem = SavedElements.arraySign[i], // Устанавливаем начальное значение
-                    Margin = new Thickness(5),
-                    Padding = new Thickness(5),
                     BorderThickness = new Thickness(1),
-                    BorderBrush = System.Windows.Media.Brushes.Black
+                    BorderBrush = System.Windows.Media.Brushes.Black,
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    Margin = new Thickness(0)
                 };
 
                 int row = i; // Сохраняем индекс строки для использования в обработчике события
@@ -227,7 +227,7 @@ namespace OperationsResearch.Dual
             textBoxContainerZ.RowDefinitions.Clear();
             textBoxContainerZ.ColumnDefinitions.Clear();
 
-            textBoxContainerZ.ShowGridLines = true;
+            textBoxContainerZ.ShowGridLines = false;
             textBoxContainerZ.RowDefinitions.Add(new RowDefinition());
             textBoxContainerZ.ColumnDefinitions.Add(new ColumnDefinition());
 
@@ -307,13 +307,14 @@ namespace OperationsResearch.Dual
 
             ComboBox extremumComboBox = new ComboBox
             {
-                Width = 100,
                 ItemsSource = new List<string> { "max", "min" },
                 SelectedItem = SavedElements.Extremum,
-                Margin = new Thickness(5),
                 Padding = new Thickness(5),
                 BorderThickness = new Thickness(1),
-                BorderBrush = System.Windows.Media.Brushes.Black
+                BorderBrush = System.Windows.Media.Brushes.Black,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Margin = new Thickness(0)
             };
 
 

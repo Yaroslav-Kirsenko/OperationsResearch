@@ -44,7 +44,7 @@ namespace OperationsResearch.Dual
             textBoxContainer.RowDefinitions.Clear();
             textBoxContainer.ColumnDefinitions.Clear();
 
-            textBoxContainer.ShowGridLines = true;
+            textBoxContainer.ShowGridLines = false;
 
             // Создаем строку для заголовков столбцов (X1, X2 и т.д.)
             textBoxContainer.RowDefinitions.Add(new RowDefinition());
