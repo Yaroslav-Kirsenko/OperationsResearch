@@ -19,7 +19,7 @@ namespace OperationsResearch.Dual
 
         public TextBox deltaValueTextBox;
 
-        public double result;
+        public int result = 0;
 
 
 
@@ -66,7 +66,7 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                headerLabelX.Click += Button_Click_Side;
+                headerLabelX.Click += Button_Click_Header;
 
 
                 Grid.SetRow(headerLabelX, 0);
@@ -133,8 +133,8 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                rowLabel.Click += Button_Click_Header;
-                
+                rowLabel.Click += Button_Click_Side;
+
 
                 Grid.SetRow(rowLabel, i + 1);
                 Grid.SetColumn(rowLabel, 0);
@@ -234,13 +234,13 @@ namespace OperationsResearch.Dual
         {
             Button button = sender as Button;
 
-            if (button.Tag != null && double.TryParse(button.Tag.ToString(), out double tagValue))
+            if (button.Tag != null && int.TryParse(button.Tag.ToString(), out int tagValue))
             {
                 Console.WriteLine(tagValue); // Вывод в консоль значения Tag
 
                 if (button.Background == Brushes.White)
                 {
-                    result *= tagValue;
+                    result *= tagValue;   /// числа
                     Console.WriteLine("Operation: " + result);
                     button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет
                 }
@@ -259,13 +259,13 @@ namespace OperationsResearch.Dual
         {
             Button button = sender as Button;
 
-            if (button.Tag != null && double.TryParse(button.Tag.ToString(), out double tagValue))
+            if (button.Tag != null && int.TryParse(button.Tag.ToString(), out int tagValue))
             {
                 Console.WriteLine(tagValue); // Вывод в консоль значения Tag
 
                 if (button.Background == Brushes.SkyBlue)
                 {
-                    result += tagValue;
+                    result -= tagValue; /// голова -> x1 x2 u1 u2
                     Console.WriteLine("Operation: " + result);
 
                     button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет
@@ -285,15 +285,15 @@ namespace OperationsResearch.Dual
         {
             Button button = sender as Button;
 
-            if (button.Tag != null && double.TryParse(button.Tag.ToString(), out double tagValue))
+            if (button.Tag != null && int.TryParse(button.Tag.ToString(), out int tagValue))
             {
                 Console.WriteLine(tagValue); // Вывод в консоль значения Tag
 
                 if (button.Background == Brushes.SkyBlue)
                 {
-     
 
-                    result-= tagValue;
+                     
+                    result += tagValue;   /// бок/слева ->  u1 u2
                     Console.WriteLine("Operation: " + result);
 
                     button.Background = Brushes.LightGreen; // при нажатии меняем на голубой цвет

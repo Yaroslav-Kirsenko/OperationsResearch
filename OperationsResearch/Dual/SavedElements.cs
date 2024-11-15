@@ -118,7 +118,7 @@ namespace OperationsResearch.Dual
             }
         }
 
-        public void InitializeArrayZ(int columns1)
+        public void InitializeArrayZ(int columns1)                /////////////////////////////////////////////////////////////////////////////////////////////
         {
             columns = columns1;
 
