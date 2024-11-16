@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OperationsResearch.Dual
 {
@@ -210,19 +211,10 @@ namespace OperationsResearch.Dual
                     IsReadOnly = true,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
-                    Padding = new Thickness(5)
+                    Padding = new Thickness(5),
+                   
                 };
 
-                int col = j;
-
-                deltaTextBox.TextChanged += (sender, e) =>
-                {
-                    if (int.TryParse(deltaTextBox.Text, out int value))
-                    {
-                        SavedElements.arrayDelta[col] = value;
-
-                    }
-                };
 
                 Grid.SetRow(deltaTextBox, rows + 1);
                 Grid.SetColumn(deltaTextBox, j + 1);
@@ -315,6 +307,7 @@ namespace OperationsResearch.Dual
             }
         }
 
+        public int indexDelta = 0;
 
         private void Button_Click_Result(object sender, RoutedEventArgs e)
         {
@@ -328,9 +321,12 @@ namespace OperationsResearch.Dual
                     {
                         if (button.Content.ToString().StartsWith("X") || button.Content.ToString().StartsWith("U"))
                         {
+                            /////if!!!!!!!!!!!!!!!!!!
+                            SavedElements.arrayDelta[indexDelta] = result;
 
-                            deltaTextBox.Text = result.ToString();
+                            //deltaTextBox.Text = result.ToString();
 
+                            deltaTextBox.Text = SavedElements.arrayDelta[indexDelta].ToString();
                             button.Background = Brushes.SkyBlue;
                         }
                         else
@@ -340,6 +336,7 @@ namespace OperationsResearch.Dual
                     }
                 }
             }
+            indexDelta++;
             result = 0;
         }
 
