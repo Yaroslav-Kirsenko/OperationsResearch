@@ -13,6 +13,8 @@ namespace OperationsResearch.Dual
         public static int[,] array;
         public static int[] arrayResult;
         public static int[] arrayZ;
+        public static int[] arrayDelta;
+
 
         public static string[] arraySign;
         public static string Extremum;
@@ -22,6 +24,7 @@ namespace OperationsResearch.Dual
         public static int rows = 0;
         public static int columns = 0;
 
+        public static int columnsDelta = 0;
 
         public static int SetRowsFullArray()
         {
@@ -128,6 +131,16 @@ namespace OperationsResearch.Dual
             }
         }
 
+        public void InitializeArrayDelta(int columns1, int columns2)                /////////////////////////////////////////////////////////////////////////////////////////////
+        {
+            columnsDelta = columns1 + columns2 + 1;
+
+            if (columnsDelta > 0)
+            {
+                arrayDelta = new int[columnsDelta];  // Инициализация одномерного массива Delta
+            }
+        }
+
 
         public void InitializeExtremum(string value)
         {
@@ -215,6 +228,19 @@ namespace OperationsResearch.Dual
             for (int j = 0; j < columns; j++)
             {
                 Console.Write(arrayZ[j] + " ");
+            }
+            Console.WriteLine();
+        }
+
+
+        // Метод для вывода значений массива Z в консоль
+        public static void ShowValuesDleta()
+        {
+            Console.WriteLine("ARRAY Delta");
+
+            for (int j = 0; j < columnsDelta; j++)
+            {
+                Console.Write(arrayDelta[j] + " ");
             }
             Console.WriteLine();
         }

@@ -13,7 +13,9 @@ namespace OperationsResearch.Dual
         public DeltaSearch()
         {
             InitializeComponent();
+            InitializeArrayDelta();
         }
+
 
         public TextBox deltaTextBox;
 
@@ -21,7 +23,7 @@ namespace OperationsResearch.Dual
 
         public int result = 0;
 
-
+        public static int[] arrayDelta;
 
 
         SavedElements savedElements = new SavedElements();
@@ -37,6 +39,11 @@ namespace OperationsResearch.Dual
         public int rowsU = SavedElements.SetRowsU();
 
         public int columnsU = SavedElements.SetColumnsU();
+
+        private void InitializeArrayDelta()
+        {
+            savedElements.InitializeArrayDelta(columnsX, columnsU);
+        }
 
         public void CreateTextBox()
         {
@@ -196,7 +203,7 @@ namespace OperationsResearch.Dual
             Grid.SetColumn(deltaLabel, 0);
             textBoxContainer.Children.Add(deltaLabel);
 
-            for (int j = 0; j < columnsX + columnsU; j++)
+            for (int j = 0; j < columnsX + columnsU + 1; j++)
             {
                 deltaTextBox = new TextBox
                 {
@@ -206,22 +213,21 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
+                int col = j;
+
+                deltaTextBox.TextChanged += (sender, e) =>
+                {
+                    if (int.TryParse(deltaTextBox.Text, out int value))
+                    {
+                        SavedElements.arrayDelta[col] = value;
+
+                    }
+                };
+
                 Grid.SetRow(deltaTextBox, rows + 1);
                 Grid.SetColumn(deltaTextBox, j + 1);
                 textBoxContainer.Children.Add(deltaTextBox);
             }
-
-            deltaValueTextBox = new TextBox
-            {
-                IsReadOnly = true,
-                BorderThickness = new Thickness(1),
-                BorderBrush = System.Windows.Media.Brushes.Black,
-                Padding = new Thickness(5)
-            };
-
-            Grid.SetRow(deltaValueTextBox, rows + 1);
-            Grid.SetColumn(deltaValueTextBox, columnsX + columnsU + 1);
-            textBoxContainer.Children.Add(deltaValueTextBox);
         }
 
 
@@ -292,7 +298,7 @@ namespace OperationsResearch.Dual
                 if (button.Background == Brushes.SkyBlue)
                 {
 
-                     
+
                     result += tagValue;   /// бок/слева ->  u1 u2
                     Console.WriteLine("Operation: " + result);
 
@@ -322,7 +328,9 @@ namespace OperationsResearch.Dual
                     {
                         if (button.Content.ToString().StartsWith("X") || button.Content.ToString().StartsWith("U"))
                         {
+
                             deltaTextBox.Text = result.ToString();
+
                             button.Background = Brushes.SkyBlue;
                         }
                         else
@@ -358,6 +366,7 @@ namespace OperationsResearch.Dual
             SavedElements.ShowExtremum();
             SavedElements.ShowadditionalVariables();
             SavedElements.ShowFullArray();
+            SavedElements.ShowValuesDleta();
 
         }
     }
