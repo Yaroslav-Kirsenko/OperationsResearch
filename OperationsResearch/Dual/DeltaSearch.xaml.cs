@@ -203,9 +203,10 @@ namespace OperationsResearch.Dual
             Grid.SetRow(deltaLabel, rows + 1);
             Grid.SetColumn(deltaLabel, 0);
             textBoxContainer.Children.Add(deltaLabel);
-
+            
             for (int j = 0; j < columnsX + columnsU + 1; j++)
             {
+                
                 deltaTextBox = new TextBox
                 {
                     IsReadOnly = true,
@@ -214,17 +215,13 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5),
                    
                 };
-
+                
 
                 Grid.SetRow(deltaTextBox, rows + 1);
                 Grid.SetColumn(deltaTextBox, j + 1);
                 textBoxContainer.Children.Add(deltaTextBox);
             }
         }
-
-
-
-
 
 
         // Обработчик нажатия кнопки
@@ -306,27 +303,45 @@ namespace OperationsResearch.Dual
                 Console.WriteLine("Tag не задан или не может быть преобразован в double для этой кнопки.");
             }
         }
+        private void WriteResultToColumn(int rowIndex, int columnIndex, int value)
+        {
+            foreach (UIElement child in textBoxContainer.Children)
+            {
+                if (Grid.GetRow(child) == rowIndex + 1 && Grid.GetColumn(child) == columnIndex && child is TextBox textBox)
+                {
+                    textBox.Text = value.ToString();
+                    return;
+                }
+            }
+        }
 
-        public int indexDelta = 0;
+
+        public int indexDelta = 1;
+        public int countDelta = 1;
 
         private void Button_Click_Result(object sender, RoutedEventArgs e)
         {
+            // Проверяем, превышает ли количество вычислений число доступных колонок Delta
+            if (countDelta > columnsX + columnsU+1) // Проверяем количество доступных колонок
+            {
+                MessageBox.Show("Помилка: кількість обчислень перевищує число доступних стовпців.", "Помилка обчислень", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             foreach (UIElement element in textBoxContainer.Children)
             {
-
                 if (element is Button button)
                 {
-
                     if (button.Background == Brushes.LightGreen)
                     {
                         if (button.Content.ToString().StartsWith("X") || button.Content.ToString().StartsWith("U"))
                         {
-                            /////if!!!!!!!!!!!!!!!!!!
-                            SavedElements.arrayDelta[indexDelta] = result;
+                            // Сохраняем результат в массив
+                            SavedElements.arrayDelta[countDelta - 1] = result;
 
-                            //deltaTextBox.Text = result.ToString();
+                            // Используем метод для записи результата в текущую колонку Delta
+                            WriteResultToColumn(rows, countDelta, SavedElements.arrayDelta[countDelta - 1]);
 
-                            deltaTextBox.Text = SavedElements.arrayDelta[indexDelta].ToString();
                             button.Background = Brushes.SkyBlue;
                         }
                         else
@@ -336,9 +351,12 @@ namespace OperationsResearch.Dual
                     }
                 }
             }
-            indexDelta++;
-            result = 0;
+
+            countDelta++; // Увеличиваем индекс для следующей колонки
+            result = 0;   // Сбрасываем результат
         }
+
+
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
