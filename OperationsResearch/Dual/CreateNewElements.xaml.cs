@@ -153,6 +153,12 @@ namespace OperationsResearch.Dual
                 {
                     if (signComboBox.SelectedItem.ToString() == ">=" || signComboBox.SelectedItem.ToString() == "<=")
                     {
+
+                        string selectedSign = signComboBox.SelectedItem.ToString();
+
+                        // Сохраняем измененный знак в массиве
+                        SavedElements.arraySign[row] = selectedSign;
+
                         // Инвертируем все значения в строке
                         for (int j = 0; j < columns; j++)
                         {
@@ -322,6 +328,11 @@ namespace OperationsResearch.Dual
             {
                 if (extremumComboBox.SelectedItem != null)
                 {
+                    string selectedItem = extremumComboBox.SelectedItem.ToString();
+
+                    // Сохраняем измененный знак в массиве
+                    SavedElements.Extremum = selectedItem;
+
 
                     for (int j = 0; j < columns; j++)
                     {

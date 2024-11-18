@@ -24,6 +24,10 @@ namespace OperationsResearch.Dual
         public static int rows = 0;
         public static int columns = 0;
 
+
+        public static int rowsAdditional = 0;
+        public static int columnsAdditional = 0;
+
         public static int columnsDelta = 0;
 
         public static int SetRowsFullArray()
@@ -63,7 +67,7 @@ namespace OperationsResearch.Dual
 
         public static int SetColumnsU()
         {
-           
+
             int cols = additionalVariables.GetLength(1);
             return cols;
         }
@@ -106,17 +110,25 @@ namespace OperationsResearch.Dual
 
         public void InitializeAdditionalVariables(int rows1, int columns1)
         {
-            rows = rows1;
-            columns = columns1;
-            if (rows > 0 && columns > 0)
+            rowsAdditional = rows1;
+            columnsAdditional = columns1;
+            if (rowsAdditional > 0 && columnsAdditional > 0)
             {
-                if (rows > columns) {
-                    int value = rows - columns;
-                    additionalVariables = new int[rows, columns + value];
+                if (rowsAdditional > columnsAdditional)
+                {
+                    int value = rowsAdditional - columnsAdditional;
+                    additionalVariables = new int[rowsAdditional, columnsAdditional + value];
+                }
+                else if (columnsAdditional > rowsAdditional)
+                {
+                    columnsAdditional = rowsAdditional;
+                    additionalVariables = new int[rowsAdditional, columnsAdditional];
+
+                    Console.WriteLine("columnsAdditional = " + columnsAdditional);
                 }
                 else
                 {
-                    additionalVariables = new int[rows, columns];
+                    additionalVariables = new int[rowsAdditional, columnsAdditional];
                 }
             }
         }
@@ -191,7 +203,7 @@ namespace OperationsResearch.Dual
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    Console.Write(array[i,j] + " ");
+                    Console.Write(array[i, j] + " ");
                 }
                 Console.WriteLine();
             }
@@ -204,9 +216,9 @@ namespace OperationsResearch.Dual
 
             Console.WriteLine("ShowadditionalVariables");
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < rowsAdditional; i++)
             {
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < columnsAdditional; j++)
                 {
                     Console.Write(additionalVariables[i, j] + " ");
                 }

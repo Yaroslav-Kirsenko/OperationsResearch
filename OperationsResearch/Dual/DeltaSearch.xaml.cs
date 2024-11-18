@@ -303,6 +303,7 @@ namespace OperationsResearch.Dual
                 Console.WriteLine("Tag не задан или не может быть преобразован в double для этой кнопки.");
             }
         }
+
         private void WriteResultToColumn(int rowIndex, int columnIndex, int value)
         {
             foreach (UIElement child in textBoxContainer.Children)
@@ -383,6 +384,11 @@ namespace OperationsResearch.Dual
             SavedElements.ShowFullArray();
             SavedElements.ShowValuesDleta();
 
+            WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
+
+            workWithSupportElement.Show();
+
+            this.Close();
         }
     }
 }

@@ -94,6 +94,15 @@
                         FontWeight="Bold" 
                         BorderThickness="0" 
                         ToolTip="Перейти к следующему шагу"/>
+                <Button Content="Видалити змінну" 
+                        Width="180" 
+                        Height="35" 
+                        Click="Button_Click_Delete" 
+                        Background="#FF56C596" 
+                        Foreground="White" 
+                        FontWeight="Bold" 
+                        BorderThickness="0" 
+                        ToolTip="Удалить переменную"/>
             </StackPanel>
         </Grid>
     </Grid>

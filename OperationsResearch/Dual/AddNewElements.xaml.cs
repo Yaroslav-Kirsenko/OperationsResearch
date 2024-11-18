@@ -542,6 +542,35 @@ namespace OperationsResearch.Dual
             return result;
         }
 
+        private void RemoveVariableU()
+        {
+            if (additionalVariables.GetLength(1) == 0)
+            {
+                MessageBox.Show("Немає змінних щоб їх видалити.", "Видалення змінних", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Уменьшаем количество столбцов в массиве
+            int newColumns = additionalVariables.GetLength(1) - 1;
+            int[,] newAdditionalVariables = new int[rows, newColumns];
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < newColumns; j++)
+                {
+                    newAdditionalVariables[i, j] = additionalVariables[i, j];
+                }
+            }
+
+            additionalVariables = newAdditionalVariables;
+
+            // Обновляем индекс
+            index--;
+
+            // Пересоздаем таблицу
+            CreateTextBox();
+        }
+
 
 
 
@@ -550,6 +579,12 @@ namespace OperationsResearch.Dual
 
             AddNewVariableU();
         }
+
+        private void Button_Click_Delete(object sender, RoutedEventArgs e)
+        {
+            RemoveVariableU();
+        }
+
 
 
 
