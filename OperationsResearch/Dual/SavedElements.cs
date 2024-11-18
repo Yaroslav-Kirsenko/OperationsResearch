@@ -119,7 +119,7 @@ namespace OperationsResearch.Dual
                     int value = rowsAdditional - columnsAdditional;
                     additionalVariables = new int[rowsAdditional, columnsAdditional + value];
                 }
-                else if (columnsAdditional > rowsAdditional)
+                else if (columnsAdditional > rowsAdditional)            ///////////////////////////////
                 {
                     columnsAdditional = rowsAdditional;
                     additionalVariables = new int[rowsAdditional, columnsAdditional];
