@@ -15,6 +15,7 @@ namespace OperationsResearch.Dual
         {
             InitializeComponent();
             InitializeArrayDelta();
+
         }
 
         
@@ -394,9 +395,13 @@ namespace OperationsResearch.Dual
 
             WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
 
+            workWithSupportElement.CreateTextBox();
+        
+
             workWithSupportElement.Show();
 
             this.Close();
         }
+
     }
 }

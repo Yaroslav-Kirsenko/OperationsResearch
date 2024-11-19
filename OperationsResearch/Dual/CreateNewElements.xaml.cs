@@ -400,5 +400,6 @@ namespace OperationsResearch.Dual
 
             this.Hide();
         }
+
     }
 }

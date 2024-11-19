@@ -19,6 +19,7 @@ namespace OperationsResearch.Dual
             InitializeComponent();
             LoadData();
             DataContext = this; // Встановлюємо DataContext для прив'язки
+
         }
 
         public static string rows = "";

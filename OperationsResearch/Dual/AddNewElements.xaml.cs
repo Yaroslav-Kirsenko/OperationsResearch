@@ -13,6 +13,7 @@ namespace OperationsResearch.Dual
         public AddNewElements()
         {
             InitializeComponent();
+
         }
 
         public SavedElements savedElements = new SavedElements();
@@ -638,9 +639,7 @@ namespace OperationsResearch.Dual
             deltaSearch.Show();
 
             this.Hide();
-
-
+            
         }
     }
-
 }

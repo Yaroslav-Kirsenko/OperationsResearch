@@ -6,11 +6,90 @@
         xmlns:local="clr-namespace:OperationsResearch.Dual"
         mc:Ignorable="d"
         Title="WorkWithTablet"
-        Height="450" Width="800"
+        Height="500" Width="800"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         Background="#FFF0F4F8">
-    <Grid>
-        
+    <!-- Основная сетка -->
+    <Grid Margin="10">
+
+        <!-- Кнопка "Повернутись назад" -->
+        <Button Content="Повернутись назад" 
+            HorizontalAlignment="Left" 
+            Margin="0,10,0,0" 
+            VerticalAlignment="Top" 
+            Width="130" 
+            Height="30" 
+            Click="Button_Click_Exit" 
+            Background="#FF56C596" 
+            Foreground="White"
+            FontWeight="Bold"
+            BorderThickness="0"
+            ToolTip="Вернуться на предыдущую страницу"/>
+
+        <!-- Сетка для размещения элементов внутри окна -->
+        <Grid Margin="0,40,0,0">
+
+            <!-- Определение строк -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Контейнер для основной таблицы -->
+            <Border Grid.Row="0" 
+                CornerRadius="8" 
+                Background="White" 
+                Margin="5,5,5,176" 
+                Padding="10" 
+                BorderBrush="#FFD1E8E2" 
+                BorderThickness="1">
+                <!-- Применение DropShadowEffect -->
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
+                </Border.Effect>
+
+                <!-- Убираем ShowGridLines -->
+                <Grid x:Name="textBoxContainer" 
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Top"
+                   ShowGridLines="True"/>
+            </Border>
+
+            <!-- Контейнер для Result-функции -->
+            <Border 
+                CornerRadius="8" 
+                Background="White" 
+                Margin="5,225,5,5" 
+                Padding="10" 
+                BorderBrush="#FFD1E8E2" 
+                BorderThickness="1" Grid.RowSpan="2">
+                <!-- Применение DropShadowEffect -->
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
+                </Border.Effect>
+
+                <!-- Убираем ShowGridLines -->
+                <Grid x:Name="textBoxContainerResult" 
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Top"
+                   ShowGridLines="True"/>
+            </Border>
+
+            <!-- Кнопка "Далі" -->
+            <Button Grid.Row="2" 
+                Content="Далі" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="180" 
+                Height="40" 
+                Click="Button_Click_Next" 
+                Background="#FF56C596" 
+                Foreground="White" 
+                FontWeight="Bold" 
+                BorderThickness="0" 
+                ToolTip="Перейти к следующему шагу"/>
+        </Grid>
     </Grid>
 </Window>
