@@ -41,7 +41,7 @@
             <Border Grid.Row="0" 
                 CornerRadius="8" 
                 Background="White" 
-                Margin="5" 
+                Margin="5,5,5,176" 
                 Padding="10" 
                 BorderBrush="#FFD1E8E2" 
                 BorderThickness="1">
@@ -58,13 +58,13 @@
             </Border>
 
             <!-- Контейнер для Result-функции -->
-            <Border Grid.Row="1" 
+            <Border 
                 CornerRadius="8" 
                 Background="White" 
-                Margin="5" 
+                Margin="5,225,5,5" 
                 Padding="10" 
                 BorderBrush="#FFD1E8E2" 
-                BorderThickness="1">
+                BorderThickness="1" Grid.RowSpan="2">
                 <!-- Применение DropShadowEffect -->
                 <Border.Effect>
                     <DropShadowEffect Color="Gray" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>

@@ -303,7 +303,7 @@ namespace OperationsResearch.Dual
             // Добавляем строки с номерами и кнопками вместо текстовых полей
             for (int i = 0; i < rows; i++)
             {
-                textBoxContainer.RowDefinitions.Add(new RowDefinition());
+                textBoxContainerResult.RowDefinitions.Add(new RowDefinition());
 
                 Button rowLabel = new Button
                 {
@@ -378,7 +378,7 @@ namespace OperationsResearch.Dual
 
             Grid.SetRow(deltaLabel, rows + 1);
             Grid.SetColumn(deltaLabel, 0);
-            textBoxContainer.Children.Add(deltaLabel);
+            textBoxContainerResult.Children.Add(deltaLabel);
 
             for (int j = 0; j < columnsX + columnsU + 1; j++)
             {
