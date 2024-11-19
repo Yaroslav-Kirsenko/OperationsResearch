@@ -48,6 +48,8 @@ namespace OperationsResearch.Dual
 
             WorkWithTablet workWithTablet = new WorkWithTablet();
 
+            workWithTablet.CreateTextBox();
+
             workWithTablet.Show();
 
             this.Close();
