@@ -408,6 +408,17 @@ namespace OperationsResearch.Dual
         private bool ValidateTextBoxInput(TextBox textBox)
         {
 
+            // Проверка, что введённое значение -1, 0 или 1
+            if (int.TryParse(textBox.Text, out int value) && (value == -1 || value == 0 || value == 1))
+            {
+                textBox.Background = System.Windows.Media.Brushes.White;
+                return true;
+            }
+            else
+            {
+                textBox.Background = System.Windows.Media.Brushes.LightPink;
+                return false;
+            }
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
                 textBox.Background = System.Windows.Media.Brushes.LightPink;
@@ -434,12 +445,18 @@ namespace OperationsResearch.Dual
         }
         private bool ValidateAllUTextBoxes()
         {
+            
             bool hasErrors = false;
 
             foreach (var child in textBoxContainer.Children)
             {
+               
                 if (child is TextBox textBox && !textBox.IsReadOnly)
                 {
+                    if (!ValidateTextBoxInput(textBox))
+                    {
+                        hasErrors = true;
+                    }
                     if (!int.TryParse(textBox.Text, out _))
                     {
                         hasErrors = true;

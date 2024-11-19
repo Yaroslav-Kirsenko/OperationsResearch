@@ -17,12 +17,12 @@ namespace OperationsResearch.Dual
             InitializeArrayDelta();
         }
 
-
+        
         public TextBox deltaTextBox;
 
         public TextBox deltaValueTextBox;
 
-        public int result = 0;
+        public int result;
 
         public static int[] arrayDelta;
 
@@ -316,18 +316,20 @@ namespace OperationsResearch.Dual
             }
         }
 
-
+        
         public int indexDelta = 1;
         public int countDelta = 1;
 
         private void Button_Click_Result(object sender, RoutedEventArgs e)
         {
             // Проверяем, превышает ли количество вычислений число доступных колонок Delta
-            if (countDelta > columnsX + columnsU+1) // Проверяем количество доступных колонок
+            if (countDelta > columnsX + columnsU + 1)
             {
                 MessageBox.Show("Помилка: кількість обчислень перевищує число доступних стовпців.", "Помилка обчислень", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+            bool hasResult = false; // Флаг для проверки наличия результата
 
             foreach (UIElement element in textBoxContainer.Children)
             {
@@ -344,6 +346,7 @@ namespace OperationsResearch.Dual
                             WriteResultToColumn(rows, countDelta, SavedElements.arrayDelta[countDelta - 1]);
 
                             button.Background = Brushes.SkyBlue;
+                            hasResult = true; // Устанавливаем флаг, если был результат
                         }
                         else
                         {
@@ -353,9 +356,14 @@ namespace OperationsResearch.Dual
                 }
             }
 
-            countDelta++; // Увеличиваем индекс для следующей колонки
-            result = 0;   // Сбрасываем результат
+            if (hasResult) // Увеличиваем countDelta только при наличии результата
+            {
+                countDelta++; // Увеличиваем индекс для следующей колонки
+            }
+
+            result = 0; // Сбрасываем результат
         }
+
 
 
 
