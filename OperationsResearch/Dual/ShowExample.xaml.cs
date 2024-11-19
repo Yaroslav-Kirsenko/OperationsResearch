@@ -12,6 +12,7 @@ namespace OperationsResearch.Dual
         public ShowExample()
         {
             InitializeComponent();
+
         }
 
         public ShowSamle showSamle = new ShowSamle();

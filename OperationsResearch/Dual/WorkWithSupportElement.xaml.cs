@@ -22,6 +22,7 @@ namespace OperationsResearch.Dual
         public WorkWithSupportElement()
         {
             InitializeComponent();
+
         }
 
 
@@ -244,6 +245,7 @@ namespace OperationsResearch.Dual
             WorkWithTablet workWithTablet = new WorkWithTablet();
 
             workWithTablet.CreateTextBox();
+            workWithTablet.CreateTextBoxResult();
 
             workWithTablet.Show();
 
