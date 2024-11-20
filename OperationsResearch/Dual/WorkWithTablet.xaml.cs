@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OperationsResearch.Dual
 {
@@ -202,23 +192,24 @@ namespace OperationsResearch.Dual
             for (int j = 0; j < columnsX + columnsU + 1; j++)
             {
 
-                Button deltaButton= new Button
+                Button deltaTextBox = new Button
                 {
                     Content = SavedElements.arrayDelta[j].ToString(),
                     Tag = SavedElements.arrayDelta[j].ToString(),
-                    Background = Brushes.White,
                     BorderThickness = new Thickness(1),
+                    Background = Brushes.White,
                     BorderBrush = System.Windows.Media.Brushes.Black,
-                    Padding = new Thickness(5)
+                    Padding = new Thickness(5),
 
                 };
 
 
-                Grid.SetRow(deltaButton, rows + 1);
-                Grid.SetColumn(deltaButton, j + 1);
-                textBoxContainer.Children.Add(deltaButton);
+                Grid.SetRow(deltaTextBox, rows + 1);
+                Grid.SetColumn(deltaTextBox, j + 1);
+                textBoxContainer.Children.Add(deltaTextBox);
             }
         }
+
 
 
 
@@ -239,10 +230,9 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainerResult.ColumnDefinitions.Add(new ColumnDefinition());
 
-                Button headerLabelX = new Button
+                Label headerLabelXResult = new Label
                 {
                     Content = $"X{j + 1}",
-                    Tag = SavedElements.arrayZ[j].ToString(), // Сохраняем значение из массива в свойство Tag                                                       
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -250,12 +240,11 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                //headerLabelX.Click += Button_Click_Header;
 
 
-                Grid.SetRow(headerLabelX, 0);
-                Grid.SetColumn(headerLabelX, j + 1);
-                textBoxContainerResult.Children.Add(headerLabelX);
+                Grid.SetRow(headerLabelXResult, 0);
+                Grid.SetColumn(headerLabelXResult, j + 1);
+                textBoxContainerResult.Children.Add(headerLabelXResult);
             }
 
             // Добавляем заголовки для столбцов U1, U2, ...
@@ -263,10 +252,9 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainerResult.ColumnDefinitions.Add(new ColumnDefinition());
 
-                Button headerLabelU = new Button
+                Label headerLabelUResult = new Label
                 {
                     Content = $"U{j + 1}",
-                    Tag = 0,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
@@ -277,15 +265,15 @@ namespace OperationsResearch.Dual
 
                 //headerLabelU.Click += Button_Click_Header;
 
-                Grid.SetRow(headerLabelU, 0);
-                Grid.SetColumn(headerLabelU, columnsX + j + 1);
-                textBoxContainerResult.Children.Add(headerLabelU);
+                Grid.SetRow(headerLabelUResult, 0);
+                Grid.SetColumn(headerLabelUResult, columnsX + j + 1);
+                textBoxContainerResult.Children.Add(headerLabelUResult);
             }
 
             // Добавляем заголовок "Значення" в конец
             textBoxContainerResult.ColumnDefinitions.Add(new ColumnDefinition());
 
-            Label valueHeader = new Label
+            Label valueHeaderResult = new Label
             {
                 Content = "Значення",
                 HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -296,19 +284,18 @@ namespace OperationsResearch.Dual
                 Padding = new Thickness(5)
             };
 
-            Grid.SetRow(valueHeader, 0);
-            Grid.SetColumn(valueHeader, columnsX + columnsU + 1);
-            textBoxContainerResult.Children.Add(valueHeader);
+            Grid.SetRow(valueHeaderResult, 0);
+            Grid.SetColumn(valueHeaderResult, columnsX + columnsU + 1);
+            textBoxContainerResult.Children.Add(valueHeaderResult);
 
             // Добавляем строки с номерами и кнопками вместо текстовых полей
             for (int i = 0; i < rows; i++)
             {
                 textBoxContainerResult.RowDefinitions.Add(new RowDefinition());
 
-                Button rowLabel = new Button
+                Label rowLabelResult = new Label
                 {
                     Content = $"U{i + 1}",
-                    Tag = 0,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
@@ -317,38 +304,37 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                //rowLabel.Click += Button_Click_Side;
 
 
-                Grid.SetRow(rowLabel, i + 1);
-                Grid.SetColumn(rowLabel, 0);
-                textBoxContainerResult.Children.Add(rowLabel);
+                Grid.SetRow(rowLabelResult, i + 1);
+                Grid.SetColumn(rowLabelResult, 0);
+                textBoxContainerResult.Children.Add(rowLabelResult);
 
                 // Создаем кнопки для каждой строки
                 for (int j = 0; j < columnsX + columnsU; j++)
                 {
-                    Button button = new Button
+                    TextBox textBoxResult = new TextBox
                     {
-                        Content = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
-                        Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
+                        IsReadOnly = true,
+                        //Text = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
+                        //Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
                         Padding = new Thickness(5)
                     };
 
-                    //button.Click += Button_Click; // добавляем обработчик нажатия кнопки
 
-                    Grid.SetRow(button, i + 1);
-                    Grid.SetColumn(button, j + 1);
-                    textBoxContainerResult.Children.Add(button);
+                    Grid.SetRow(textBoxResult, i + 1);
+                    Grid.SetColumn(textBoxResult, j + 1);
+                    textBoxContainerResult.Children.Add(textBoxResult);
                 }
 
                 // Кнопка для "Значення"
-                Button valueButton = new Button
+                TextBox valueTextBoxResult = new TextBox
                 {
-                    Content = SavedElements.arrayResult[i].ToString(),
-                    Tag = SavedElements.arrayResult[i].ToString(),
+                    IsReadOnly = true,
+                    //Text = SavedElements.arrayResult[i].ToString(),
                     Background = Brushes.White,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -357,15 +343,15 @@ namespace OperationsResearch.Dual
 
                 //valueButton.Click += Button_Click;
 
-                Grid.SetRow(valueButton, i + 1);
-                Grid.SetColumn(valueButton, columnsX + columnsU + 1);
-                textBoxContainerResult.Children.Add(valueButton);
+                Grid.SetRow(valueTextBoxResult, i + 1);
+                Grid.SetColumn(valueTextBoxResult, columnsX + columnsU + 1);
+                textBoxContainerResult.Children.Add(valueTextBoxResult);
             }
 
             // Добавляем строку Delta
             textBoxContainerResult.RowDefinitions.Add(new RowDefinition());
 
-            Label deltaLabel = new Label
+            Label deltaLabelResult = new Label
             {
                 Content = "Delta",
                 HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -376,17 +362,18 @@ namespace OperationsResearch.Dual
                 Padding = new Thickness(5)
             };
 
-            Grid.SetRow(deltaLabel, rows + 1);
-            Grid.SetColumn(deltaLabel, 0);
-            textBoxContainerResult.Children.Add(deltaLabel);
+            Grid.SetRow(deltaLabelResult, rows + 1);
+            Grid.SetColumn(deltaLabelResult, 0);
+            textBoxContainerResult.Children.Add(deltaLabelResult);
 
             for (int j = 0; j < columnsX + columnsU + 1; j++)
             {
 
-                Button deltaButton = new Button
+                TextBox deltaTextBoxResult = new TextBox
                 {
-                    Content = SavedElements.arrayDelta[j].ToString(),
-                    Tag = SavedElements.arrayDelta[j].ToString(),
+                    IsReadOnly = true,
+                    //Text = SavedElements.arrayDelta[j].ToString(),
+                    //Tag = SavedElements.arrayDelta[j].ToString(),
                     Background = Brushes.White,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -395,9 +382,9 @@ namespace OperationsResearch.Dual
                 };
 
 
-                Grid.SetRow(deltaButton, rows + 1);
-                Grid.SetColumn(deltaButton, j + 1);
-                textBoxContainerResult.Children.Add(deltaButton);
+                Grid.SetRow(deltaTextBoxResult, rows + 1);
+                Grid.SetColumn(deltaTextBoxResult, j + 1);
+                textBoxContainerResult.Children.Add(deltaTextBoxResult);
             }
         }
 
@@ -405,6 +392,13 @@ namespace OperationsResearch.Dual
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
 
+            WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
+
+            workWithSupportElement.CreateTextBox();
+
+            workWithSupportElement.Show();
+
+            this.Close();
 
         }
 
@@ -420,6 +414,8 @@ namespace OperationsResearch.Dual
             //SavedElements.ShowValuesDleta();
 
             WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
+
+            workWithSupportElement.CreateTextBox();
 
             workWithSupportElement.Show();
 

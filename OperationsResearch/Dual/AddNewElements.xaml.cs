@@ -634,7 +634,6 @@ namespace OperationsResearch.Dual
 
 
             deltaSearch.CreateTextBox();
-            //deltaSearch.TextBoxResult();
 
             deltaSearch.Show();
 

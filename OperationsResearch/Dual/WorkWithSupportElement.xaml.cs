@@ -25,6 +25,22 @@ namespace OperationsResearch.Dual
 
         }
 
+        private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateTextBox(textBox1);
+            
+        }
+
+        // Метод для обработки изменения текста в textBox2
+        private void textBox2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateTextBox(textBox2);
+        }
+
+
+
+        public static int supportElementRow = 0;
+        public static int supportElementColumn=0;
 
         SavedElements savedElements = new SavedElements();
 
@@ -58,10 +74,9 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition());
 
-                Button headerLabelX = new Button
+                Label headerLabelX = new Label
                 {
                     Content = $"X{j + 1}",
-                    Tag = SavedElements.arrayZ[j].ToString(), // Сохраняем значение из массива в свойство Tag                                                       
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -82,10 +97,10 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition());
 
-                Button headerLabelU = new Button
+                Label headerLabelU = new Label
                 {
+
                     Content = $"U{j + 1}",
-                    Tag = 0,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
@@ -124,10 +139,9 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                Button rowLabel = new Button
+                Label rowLabel = new Label
                 {
                     Content = $"U{i + 1}",
-                    Tag = 0,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
@@ -136,7 +150,6 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                //rowLabel.Click += Button_Click_Side;
 
 
                 Grid.SetRow(rowLabel, i + 1);
@@ -146,9 +159,10 @@ namespace OperationsResearch.Dual
                 // Создаем кнопки для каждой строки
                 for (int j = 0; j < columnsX + columnsU; j++)
                 {
-                    Button button = new Button
+                    TextBox textBox = new TextBox
                     {
-                        Content = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
+                        IsReadOnly = true,
+                        Text = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
@@ -156,18 +170,17 @@ namespace OperationsResearch.Dual
                         Padding = new Thickness(5)
                     };
 
-                    //button.Click += Button_Click; // добавляем обработчик нажатия кнопки
 
-                    Grid.SetRow(button, i + 1);
-                    Grid.SetColumn(button, j + 1);
-                    textBoxContainer.Children.Add(button);
+                    Grid.SetRow(textBox, i + 1);
+                    Grid.SetColumn(textBox, j + 1);
+                    textBoxContainer.Children.Add(textBox);
                 }
 
                 // Кнопка для "Значення"
-                Button valueButton = new Button
+                TextBox valueTextBox = new TextBox
                 {
-                    Content = SavedElements.arrayResult[i].ToString(),
-                    Tag = SavedElements.arrayResult[i].ToString(),
+                    IsReadOnly = true,
+                    Text = SavedElements.arrayResult[i].ToString(),
                     Background = Brushes.White,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -176,9 +189,9 @@ namespace OperationsResearch.Dual
 
                 //valueButton.Click += Button_Click;
 
-                Grid.SetRow(valueButton, i + 1);
-                Grid.SetColumn(valueButton, columnsX + columnsU + 1);
-                textBoxContainer.Children.Add(valueButton);
+                Grid.SetRow(valueTextBox, i + 1);
+                Grid.SetColumn(valueTextBox, columnsX + columnsU + 1);
+                textBoxContainer.Children.Add(valueTextBox);
             }
 
             // Добавляем строку Delta
@@ -202,9 +215,10 @@ namespace OperationsResearch.Dual
             for (int j = 0; j < columnsX + columnsU + 1; j++)
             {
 
-                Button deltaButton = new Button
+                TextBox deltaTextBox = new TextBox
                 {
-                    Content = SavedElements.arrayDelta[j].ToString(),
+                    IsReadOnly = true,
+                    Text = SavedElements.arrayDelta[j].ToString(),
                     Tag = SavedElements.arrayDelta[j].ToString(),
                     Background = Brushes.White,
                     BorderThickness = new Thickness(1),
@@ -214,16 +228,127 @@ namespace OperationsResearch.Dual
                 };
 
 
-                Grid.SetRow(deltaButton, rows + 1);
-                Grid.SetColumn(deltaButton, j + 1);
-                textBoxContainer.Children.Add(deltaButton);
+                Grid.SetRow(deltaTextBox, rows + 1);
+                Grid.SetColumn(deltaTextBox, j + 1);
+                textBoxContainer.Children.Add(deltaTextBox);
             }
         }
+
+
+        private bool ValidateTextBox(TextBox textBox)
+        {
+            // Проверка на пустое поле
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Background = Brushes.LightPink;
+                return false;
+            }
+
+            // Проверка на корректное числовое значение и на значение больше 1
+            if (int.TryParse(textBox.Text, out int value))
+            {
+                textBox.Background = Brushes.White;
+                return true;
+            }
+            else
+            {
+                textBox.Background = Brushes.LightPink;
+                return false;
+            }
+        }
+
+        private void Button_Up1(object sender, RoutedEventArgs e)
+        {
+            if (ValidateTextBox(textBox1))
+            {
+                textBox1.Text = (int.Parse(textBox1.Text) + 1).ToString();
+            }
+        }
+
+        private void Button_Down1(object sender, RoutedEventArgs e)
+        {
+            if (ValidateTextBox(textBox1))
+            {
+                int currentValue = int.Parse(textBox1.Text);
+                if (currentValue > 1) textBox1.Text = (currentValue - 1).ToString();
+            }
+        }
+
+        private void Button_Up2(object sender, RoutedEventArgs e)
+        {
+            if (ValidateTextBox(textBox2))
+            {
+                textBox2.Text = (int.Parse(textBox2.Text) + 1).ToString();
+            }
+        }
+
+        private void Button_Down2(object sender, RoutedEventArgs e)
+        {
+            if (ValidateTextBox(textBox2))
+            {
+                int currentValue = int.Parse(textBox2.Text);
+                if (currentValue > 1) textBox2.Text = (currentValue - 1).ToString();
+            }
+        }
+
+        private TextBox _previousTextBox; // Поле для хранения ранее выбранного TextBox
+
+        private void Button_Click_Search(object sender, RoutedEventArgs e)
+        {
+            // Проверяем корректность значений в текстовых полях
+            if (!ValidateTextBox(textBox1) || !ValidateTextBox(textBox2))
+            {
+                MessageBox.Show("Будь ласка, виправте всі помилки вводу перед переходом.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            int rowIndex = int.Parse(textBox1.Text) - 1;
+            int columnIndex = int.Parse(textBox2.Text) - 1;
+
+            if (rowIndex < 0 || rowIndex >= rows || columnIndex < 0 || columnIndex >= (columnsX + columnsU))
+            {
+                MessageBox.Show("Ви вийшли за грані таблички", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            TextBox selectedTextBox = null;
+
+            foreach (UIElement element in textBoxContainer.Children)
+            {
+                if (Grid.GetRow(element) == rowIndex + 1 && Grid.GetColumn(element) == columnIndex + 1)
+                {
+                    if (element is TextBox textBox)
+                    {
+                        selectedTextBox = textBox;
+                        break;
+                    }
+                }
+            }
+
+            if (selectedTextBox != null)
+            {
+                // Возвращаем предыдущий TextBox в исходный цвет
+                if (_previousTextBox != null && _previousTextBox != selectedTextBox)
+                {
+                    _previousTextBox.Background = Brushes.White;
+                }
+
+                // Устанавливаем новый цвет для выбранного TextBox
+                selectedTextBox.Background = Brushes.MediumPurple;
+
+                // Сохраняем текущий TextBox как предыдущий
+                _previousTextBox = selectedTextBox;
+            }
+        }
+
 
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
             DeltaSearch deltaSearch = new DeltaSearch();
+
+            deltaSearch.CreateTextBox();
+
 
             deltaSearch.Show();
 
@@ -254,7 +379,7 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_The_End(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }
