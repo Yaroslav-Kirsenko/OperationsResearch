@@ -40,8 +40,7 @@ namespace OperationsResearch.Dual
             rows = Convert.ToInt32(rowsStr);
             InitializeAdditionalVariables();
             InitializeFullArray();
-
-
+            additionalVariables = new int[rows, columns];
         }
 
 
@@ -481,9 +480,24 @@ namespace OperationsResearch.Dual
 
         private void AddNewVariableU()
         {
-            index++;
+            // Сбрасываем счётчик index при каждом новом создании переменных
+            if (additionalVariables.GetLength(1) == 0)
+            {
+                index = 1;
+            }
+            else
+            {
+                index++;
+            }
 
-            // Создаем новый массив с увеличенным числом столбцов
+            // Перевірка, чи кількість змінних U не перевищує кількість рядків
+            if (additionalVariables.GetLength(1) >= rows)
+            {
+                MessageBox.Show("Максимальна кількість додаткових змінних U досягнута.", "Додавання змінних", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Створюємо новий масив з додатковим стовпцем
             int newColumns = additionalVariables.GetLength(1) + 1;
 
             int[,] newAdditionalVariables = new int[rows, newColumns];
@@ -500,6 +514,8 @@ namespace OperationsResearch.Dual
             additionalVariables = newAdditionalVariables;
             CreateTextBox();
         }
+
+
 
         public static int[,] Concat2DArrays(int[,] array1, int[,] array2)
         {

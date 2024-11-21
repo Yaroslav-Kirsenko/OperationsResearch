@@ -72,6 +72,8 @@ namespace OperationsResearch.Dual
             return cols;
         }
 
+
+
         public void InitializeFullArray(int rows1, int columns1)
         {
             rows = rows1;
