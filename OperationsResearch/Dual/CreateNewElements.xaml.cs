@@ -138,7 +138,7 @@ namespace OperationsResearch.Dual
 
                 ComboBox signComboBox = new ComboBox
                 {
-                    ItemsSource = new List<string> { "=", "<=", ">=" },
+                    ItemsSource = new List<string> { "=", "≤", "≥" },
                     SelectedItem = SavedElements.arraySign[i], // Устанавливаем начальное значение
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -151,7 +151,7 @@ namespace OperationsResearch.Dual
 
                 signComboBox.SelectionChanged += (sender, e) =>
                 {
-                    if (signComboBox.SelectedItem.ToString() == ">=" || signComboBox.SelectedItem.ToString() == "<=")
+                    if (signComboBox.SelectedItem.ToString() == "≥" || signComboBox.SelectedItem.ToString() == "≤")
                     {
 
                         string selectedSign = signComboBox.SelectedItem.ToString();

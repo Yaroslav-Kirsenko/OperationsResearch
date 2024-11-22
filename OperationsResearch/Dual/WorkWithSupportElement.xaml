@@ -30,16 +30,16 @@
         <Grid Margin="10,50,10,10">
             <!-- Определение строк: основная таблица, текстовые поля и кнопки -->
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="Auto" MinHeight="152" />
-                <RowDefinition Height="Auto" MinHeight="115" />
+                <RowDefinition  Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Контейнер для основной таблицы -->
             <Border Grid.Row="0" 
                     CornerRadius="8" 
                     Background="White" 
-                    Margin="5,-20,5,102" 
+                    Margin="5,0,5,102" 
                     Padding="10" 
                     BorderBrush="#FFD1E8E2" 
                     BorderThickness="1" Grid.RowSpan="2">
@@ -48,7 +48,7 @@
                 </Border.Effect>
                 <Grid x:Name="textBoxContainer" 
                       HorizontalAlignment="Stretch" 
-                      VerticalAlignment="Stretch" 
+                      VerticalAlignment="Top" 
                       ShowGridLines="True" />
             </Border>
 

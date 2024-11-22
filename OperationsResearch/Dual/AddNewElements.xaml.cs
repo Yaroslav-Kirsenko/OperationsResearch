@@ -377,7 +377,7 @@ namespace OperationsResearch.Dual
                 ComboBox signComboBox = new ComboBox
                 {
                     
-                    ItemsSource = new List<string> { "=", "<=", ">=" },
+                    ItemsSource = new List<string> { "=", "≤", "≥" },
                     SelectedItem = SavedElements.arraySign[i],
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,

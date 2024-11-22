@@ -255,7 +255,7 @@ namespace OperationsResearch.Dual
 
                 ComboBox signComboBox = new ComboBox //////////////////////////////////////////////////////////////////////
                 {
-                    ItemsSource = new List<string> { "=", "<=", ">=" },
+                    ItemsSource = new List<string> { "=", "≤", "≥" },
                     SelectedIndex = 0,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,

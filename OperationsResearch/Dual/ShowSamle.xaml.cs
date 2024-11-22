@@ -98,7 +98,7 @@ namespace OperationsResearch.Dual
 
             zPanel.Children.Add(new TextBlock
             {
-                Text = " => ",
+                Text = "→",
                 FontSize = 18,
                 Margin = new Thickness(5, 0, 5, 0)
             });

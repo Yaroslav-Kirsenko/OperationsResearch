@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OperationsResearch.Dual
 {
@@ -22,13 +12,11 @@ namespace OperationsResearch.Dual
         public WorkWithSupportElement()
         {
             InitializeComponent();
-
         }
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
             ValidateTextBox(textBox1);
-            
         }
 
         // Метод для обработки изменения текста в textBox2
@@ -40,7 +28,7 @@ namespace OperationsResearch.Dual
 
 
         public static int supportElementRow = 0;
-        public static int supportElementColumn=0;
+        public static int supportElementColumn = 0;
 
         SavedElements savedElements = new SavedElements();
 
@@ -55,6 +43,7 @@ namespace OperationsResearch.Dual
         public int rowsU = SavedElements.SetRowsU();
 
         public int columnsU = SavedElements.SetColumnsU();
+
 
 
         public void CreateTextBox()
@@ -302,10 +291,13 @@ namespace OperationsResearch.Dual
                 return;
             }
 
-            int rowIndex = int.Parse(textBox1.Text) - 1;
-            int columnIndex = int.Parse(textBox2.Text) - 1;
+            supportElementRow = int.Parse(textBox1.Text) - 1;
+            supportElementColumn = int.Parse(textBox2.Text) - 1;
 
-            if (rowIndex < 0 || rowIndex >= rows || columnIndex < 0 || columnIndex >= (columnsX + columnsU))
+            SavedElements.supportElementRow = supportElementRow;
+            SavedElements.supportElementColumn = supportElementColumn;
+
+            if (supportElementRow < 0 || supportElementRow >= rows || supportElementColumn < 0 || supportElementColumn >= (columnsX + columnsU))
             {
                 MessageBox.Show("Ви вийшли за грані таблички", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -315,11 +307,12 @@ namespace OperationsResearch.Dual
 
             foreach (UIElement element in textBoxContainer.Children)
             {
-                if (Grid.GetRow(element) == rowIndex + 1 && Grid.GetColumn(element) == columnIndex + 1)
+                if (Grid.GetRow(element) == supportElementRow + 1 && Grid.GetColumn(element) == supportElementColumn + 1)
                 {
                     if (element is TextBox textBox)
                     {
                         selectedTextBox = textBox;
+                        SavedElements.supportElement = int.Parse(selectedTextBox.Text);
                         break;
                     }
                 }
@@ -366,6 +359,9 @@ namespace OperationsResearch.Dual
             //SavedElements.ShowadditionalVariables();
             //SavedElements.ShowFullArray();
             //SavedElements.ShowValuesDleta();
+
+            SavedElements.ShowSupportElement();
+            SavedElements.ShowSupportElementRowAndColumn();
 
             WorkWithTablet workWithTablet = new WorkWithTablet();
 

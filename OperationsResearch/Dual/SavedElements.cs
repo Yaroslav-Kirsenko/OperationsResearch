@@ -5,6 +5,10 @@ namespace OperationsResearch.Dual
     public class SavedElements
     {
 
+        public static int supportElement;
+
+        public static int supportElementRow;
+        public static int supportElementColumn;
 
         public static int[,] fullArray;
 
@@ -71,7 +75,6 @@ namespace OperationsResearch.Dual
             int cols = additionalVariables.GetLength(1);
             return cols;
         }
-
 
 
         public void InitializeFullArray(int rows1, int columns1)
@@ -209,6 +212,24 @@ namespace OperationsResearch.Dual
                 }
                 Console.WriteLine();
             }
+        }
+
+
+        public static void ShowSupportElement()
+        {
+
+            Console.WriteLine("Show SupportElement");
+            Console.WriteLine(supportElement);
+
+        }
+
+        public static void ShowSupportElementRowAndColumn()
+        {
+
+            Console.WriteLine("Show SupportElement");
+            Console.WriteLine("Row "+ supportElementRow);
+            Console.WriteLine("Column " + supportElementColumn);
+
         }
 
 

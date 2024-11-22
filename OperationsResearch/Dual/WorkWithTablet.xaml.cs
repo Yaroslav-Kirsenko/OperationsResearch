@@ -114,7 +114,7 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                Button rowLabel = new Button
+                Label rowLabel = new Label
                 {
                     Content = $"U{i + 1}",
                     Tag = 0,
