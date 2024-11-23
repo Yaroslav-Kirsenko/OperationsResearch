@@ -41,7 +41,7 @@
             <Border Grid.Row="0" 
                 CornerRadius="8" 
                 Background="White" 
-                Margin="5,5,5,176" 
+                Margin="5,5,5,217" 
                 Padding="10" 
                 BorderBrush="#FFD1E8E2" 
                 BorderThickness="1">
@@ -90,6 +90,19 @@
                 FontWeight="Bold" 
                 BorderThickness="0" 
                 ToolTip="Перейти к следующему шагу"/>
+            <Button 
+                x:Name="MyButton"
+                Content="" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Width="57" 
+                Height="20" 
+                Click="Button_Click_SupportElement" 
+                Background="#FF56C596" 
+                Foreground="White" 
+                FontWeight="Bold" 
+                BorderThickness="0" 
+                ToolTip="Перейти к следующему шагу" Margin="693,0,0,0"/>
         </Grid>
     </Grid>
 </Window>

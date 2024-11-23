@@ -12,7 +12,7 @@ namespace OperationsResearch.Dual
         public WorkWithTablet()
         {
             InitializeComponent();
-
+            MyButton.Content = "/" + SavedElements.supportElement.ToString(); // MyButton — имя кнопки
         }
 
 
@@ -146,6 +146,11 @@ namespace OperationsResearch.Dual
                         Padding = new Thickness(5)
                     };
 
+                    if (SavedElements.supportElementRow == i && SavedElements.supportElementColumn == j)
+                    {
+                        button.Background = Brushes.MediumPurple;
+                    }
+
                     //button.Click += Button_Click; // добавляем обработчик нажатия кнопки
 
                     Grid.SetRow(button, i + 1);
@@ -233,6 +238,7 @@ namespace OperationsResearch.Dual
                 Label headerLabelXResult = new Label
                 {
                     Content = $"X{j + 1}",
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -385,6 +391,15 @@ namespace OperationsResearch.Dual
                 Grid.SetRow(deltaTextBoxResult, rows + 1);
                 Grid.SetColumn(deltaTextBoxResult, j + 1);
                 textBoxContainerResult.Children.Add(deltaTextBoxResult);
+            }
+        }
+
+        private void Button_Click_SupportElement(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                button.Content = "/" + SavedElements.supportElement.ToString(); // Преобразуем int в строку
             }
         }
 
