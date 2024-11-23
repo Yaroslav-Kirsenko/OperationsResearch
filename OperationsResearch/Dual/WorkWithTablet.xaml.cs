@@ -30,6 +30,9 @@ namespace OperationsResearch.Dual
 
         public int columnsU = SavedElements.SetColumnsU();
 
+        TextBox textBoxResult;
+        TextBox valueTextBoxResult;
+
 
         public void CreateTextBox()
         {
@@ -319,7 +322,7 @@ namespace OperationsResearch.Dual
                 // Создаем кнопки для каждой строки
                 for (int j = 0; j < columnsX + columnsU; j++)
                 {
-                    TextBox textBoxResult = new TextBox
+                    textBoxResult = new TextBox
                     {
                         IsReadOnly = true,
                         //Text = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
@@ -399,9 +402,75 @@ namespace OperationsResearch.Dual
             Button button = sender as Button;
             if (button != null)
             {
-                button.Content = "/" + SavedElements.supportElement.ToString(); // Преобразуем int в строку
+                // Индексы строки и столбца, где находится supportElement
+                int rowIndex = SavedElements.supportElementRow;
+                int columnIndex = SavedElements.supportElementColumn;
+
+                // Получаем значение supportElement
+                int supportElementValue = SavedElements.array[rowIndex, columnIndex];
+
+                // Проверяем, чтобы деление на 0 не происходило
+                if (supportElementValue == 0)
+                {
+                    MessageBox.Show("Support element value cannot be zero!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Делим каждый элемент строки на supportElement
+                for (int j = 0; j < SavedElements.array.GetLength(1); j++)
+                {
+                    if (j < columnsX)
+                    {
+                        SavedElements.array[rowIndex, j] /= supportElementValue;
+                        SavedElements.arrayResult[rowIndex] /= supportElementValue;
+                    }
+                    else
+                    {
+                        SavedElements.additionalVariables[rowIndex, j - columnsX] /= supportElementValue;
+                    }
+                }
+
+
+                // Добавляем строки с номерами и кнопками вместо текстовых полей
+
+                for (int j = 0; j < columnsX + columnsU; j++)
+                {
+                    textBoxResult = new TextBox
+                    {
+                        IsReadOnly = true,
+                        Text = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
+                        Tag = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
+                        Background = Brushes.White,
+                        BorderThickness = new Thickness(1),
+                        BorderBrush = System.Windows.Media.Brushes.Black,
+                        Padding = new Thickness(5)
+                    };
+
+                    Grid.SetRow(textBoxResult, rowIndex + 1);
+                    Grid.SetColumn(textBoxResult, j + 1);
+                    textBoxContainerResult.Children.Add(textBoxResult);
+
+
+                    valueTextBoxResult = new TextBox
+                    {
+                        IsReadOnly = true,
+                        Text = SavedElements.arrayResult[rowIndex].ToString(),
+                        Background = Brushes.White,
+                        BorderThickness = new Thickness(1),
+                        BorderBrush = System.Windows.Media.Brushes.Black,
+                        Padding = new Thickness(5)
+                    };
+
+                    //valueButton.Click += Button_Click;
+
+                    Grid.SetRow(valueTextBoxResult, rowIndex + 1);
+                    Grid.SetColumn(valueTextBoxResult, columnsX + columnsU + 1);
+                    textBoxContainerResult.Children.Add(valueTextBoxResult);
+                }
             }
         }
+
+
 
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
