@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlTypes;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -18,7 +19,9 @@ namespace OperationsResearch.Dual
 
         }
 
-        
+        public  int[] ValidatearrayDelta;
+        public int ValidateDeltavar;
+
         public TextBox deltaTextBox;
 
         public TextBox deltaValueTextBox;
@@ -222,6 +225,14 @@ namespace OperationsResearch.Dual
                 Grid.SetColumn(deltaTextBox, j + 1);
                 textBoxContainer.Children.Add(deltaTextBox);
             }
+        }
+
+        public void ValidateDelta()
+        {
+
+
+
+
         }
 
 
