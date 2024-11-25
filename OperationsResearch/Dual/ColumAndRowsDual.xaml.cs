@@ -12,8 +12,6 @@ namespace OperationsResearch.Dual
         public ColumAndRowsDual()
         {
             InitializeComponent();
-            this.Closing += MainWindow_Closing; 
-
             textBox1.Text = savedTextBox1Value;
             textBox2.Text = savedTextBox2Value;
         }
