@@ -334,6 +334,19 @@ namespace OperationsResearch.Dual
             }
         }
 
+        private bool HasValidationErrors()
+        {
+            bool hasError = false;
+
+            // Проверка textBox1
+            if (!ValidateTextBox(textBox1) && !ValidateTextBox(textBox2))
+            {
+
+                MessageBox.Show("Будь ласка, виправте всі помилки вводу перед переходом.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Warning);
+                hasError = true;
+            }
+            return hasError;
+        }
 
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
@@ -363,14 +376,38 @@ namespace OperationsResearch.Dual
             SavedElements.ShowSupportElement();
             SavedElements.ShowSupportElementRowAndColumn();
 
+            if (HasValidationErrors()) { return; }
+
+
+            bool isTextBox1Valid = ValidateTextBox(textBox1);
+            bool isTextBox2Valid = ValidateTextBox(textBox2);
+
+            if (!isTextBox1Valid || !isTextBox2Valid)
+            {
+                return;
+            }
+
             WorkWithTablet workWithTablet = new WorkWithTablet();
 
-            workWithTablet.CreateTextBox();
-            workWithTablet.CreateTextBoxResult();
+            int value1 = int.Parse(textBox1.Text);
+            int value2 = int.Parse(textBox2.Text);
 
-            workWithTablet.Show();
+            if (value1 > 0 && value2 > 0)
+            {
 
-            this.Close();
+                workWithTablet.CreateTextBox();
+                workWithTablet.CreateTextBoxResult();
+
+                workWithTablet.Show();
+
+                this.Close();
+            }
+            else
+            {
+                textBox1.Background = Brushes.LightPink;
+                textBox2.Background = Brushes.LightPink;
+                MessageBox.Show("Будь ласка, виправте всі помилки вводу перед переходом.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void Button_Click_The_End(object sender, RoutedEventArgs e)
