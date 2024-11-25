@@ -410,6 +410,7 @@ namespace OperationsResearch.Dual
             }
         }
 
+
         private void Button_Click_The_End(object sender, RoutedEventArgs e)
         {
             this.Close();
