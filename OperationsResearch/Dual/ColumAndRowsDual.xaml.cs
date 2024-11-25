@@ -153,10 +153,5 @@ namespace OperationsResearch.Dual
             mainWindow.Show();
             this.Hide();
         }
-
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
     }
 }
