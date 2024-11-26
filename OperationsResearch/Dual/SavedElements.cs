@@ -18,6 +18,15 @@ namespace OperationsResearch.Dual
         public static double[] arrayResult;
         public static double[] arrayDelta;
 
+
+        public static double[,] fullArrayNewTablet;
+
+
+        public static double[,] additionalVariablesNewTablet;
+        public static double[,] arrayNewTablet;
+        public static double[] arrayResultNewTablet;
+        public static double[] arrayDeltaNewTablet;
+
         public static int[] arrayZ;
 
 
@@ -326,5 +335,198 @@ namespace OperationsResearch.Dual
         //        showSamle.GetDisplaySamle(array);
         //    }
         //}
+
+        public void InitializeFullArrayNewTablet(int rows1, int columns1)
+        {
+            rows = rows1;
+            columns = columns1;
+
+            if (rows > 0 && columns > 0)
+            {
+                fullArrayNewTablet = new double[rows, columns];
+            }
+        }
+
+        public void InitializeArrayNewTablet(int rows1, int columns1)
+        {
+            rows = rows1;
+            columns = columns1;
+
+            if (rows > 0 && columns > 0)
+            {
+                array = new double[rows, columns];
+            }
+        }
+
+
+
+        public void InitializeArrayResultNewTablet(int rows2)
+        {
+
+            rows = rows2;
+
+            if (rows > 0)
+            {
+                arrayResult = new double[rows];  // Инициализация одномерного массива res
+            }
+        }
+
+
+        public void InitializeAdditionalVariablesNewTablet(int rows1, int columns1)
+        {
+            rowsAdditional = rows1;
+            columnsAdditional = columns1;
+            if (rowsAdditional > 0 && columnsAdditional > 0)
+            {
+                if (rowsAdditional > columnsAdditional)
+                {
+                    int value = rowsAdditional - columnsAdditional;
+                    additionalVariables = new double[rowsAdditional, columnsAdditional + value];
+                }
+                else if (columnsAdditional > rowsAdditional)            ///////////////////////////////
+                {
+                    columnsAdditional = rowsAdditional;
+                    additionalVariables = new double[rowsAdditional, columnsAdditional];
+
+                    Console.WriteLine("columnsAdditional = " + columnsAdditional);
+                }
+                else
+                {
+                    additionalVariables = new double[rowsAdditional, columnsAdditional];
+                }
+            }
+        }
+
+        public static void ShowFullArrayNewTablet()
+        {
+
+            Console.WriteLine("ShowFullArrayNewTablet");
+
+
+            int rows1 = fullArray.GetLength(0);
+            int cols1 = fullArray.GetLength(1);
+
+            for (int i = 0; i < rows1; i++)
+            {
+                for (int j = 0; j < cols1; j++)
+                {
+                    Console.Write(fullArray[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void ShowValuesNewTablet()
+        {
+
+            Console.WriteLine("ARRAYNewTablet");
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    Console.Write(array[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+
+        public static void ShowSupportElementNewTablet()
+        {
+
+            Console.WriteLine("Show SupportElement");
+            Console.WriteLine(supportElement);
+
+        }
+
+        public static void ShowSupportElementRowAndColumnNewTablet()
+        {
+
+            Console.WriteLine("Show SupportElement");
+            Console.WriteLine("Row " + supportElementRow);
+            Console.WriteLine("Column " + supportElementColumn);
+
+        }
+
+
+
+        public static void ShowadditionalVariablesNewTablet()
+        {
+
+            Console.WriteLine("ShowadditionalVariables");
+
+            for (int i = 0; i < rowsAdditional; i++)
+            {
+                for (int j = 0; j < columnsAdditional; j++)
+                {
+                    Console.Write(additionalVariables[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+
+
+
+
+
+
+        // Метод для вывода значений массива Z в консоль
+        public static void ShowValuesZNewTablet()
+        {
+            Console.WriteLine("ARRAY Z");
+
+            for (int j = 0; j < columns; j++)
+            {
+                Console.Write(arrayZ[j] + " ");
+            }
+            Console.WriteLine();
+        }
+
+
+        // Метод для вывода значений массива Z в консоль
+        public static void ShowValuesDletaNewTablet()
+        {
+            Console.WriteLine("ARRAY Delta");
+
+            for (int j = 0; j < columnsDelta; j++)
+            {
+                Console.Write(arrayDelta[j] + " ");
+            }
+            Console.WriteLine();
+        }
+
+
+        public static void ShowValuesRezultNewTablet()
+        {
+            Console.WriteLine("ARRAY result");
+
+            for (int i = 0; i < rows; i++)
+            {
+                Console.Write(arrayResult[i] + " ");
+            }
+            Console.WriteLine();
+        }
+
+
+        public static void ShowValuesSignNewTablet()
+        {
+            Console.WriteLine("ARRAY Sign");
+
+            for (int i = 0; i < rows; i++)
+            {
+                Console.Write(arraySign[i] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static void ShowExtremumNewTablet()
+        {
+            Console.WriteLine("Extremum");
+            Console.Write(Extremum);
+        }
+
+
     }
 }
