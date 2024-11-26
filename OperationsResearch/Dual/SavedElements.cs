@@ -5,19 +5,20 @@ namespace OperationsResearch.Dual
     public class SavedElements
     {
 
-        public static int supportElement;
+        public static double supportElement;
 
         public static int supportElementRow;
         public static int supportElementColumn;
 
-        public static int[,] fullArray;
+        public static double[,] fullArray;
 
 
-        public static int[,] additionalVariables;
-        public static int[,] array;
-        public static int[] arrayResult;
+        public static double[,] additionalVariables;
+        public static double[,] array;
+        public static double[] arrayResult;
+        public static double[] arrayDelta;
+
         public static int[] arrayZ;
-        public static int[] arrayDelta;
 
 
         public static string[] arraySign;
@@ -84,7 +85,7 @@ namespace OperationsResearch.Dual
 
             if (rows > 0 && columns > 0)
             {
-                fullArray = new int[rows, columns];
+                fullArray = new double[rows, columns];
             }
         }
 
@@ -95,7 +96,7 @@ namespace OperationsResearch.Dual
 
             if (rows > 0 && columns > 0)
             {
-                array = new int[rows, columns];
+                array = new double[rows, columns];
             }
         }
 
@@ -108,7 +109,7 @@ namespace OperationsResearch.Dual
 
             if (rows > 0)
             {
-                arrayResult = new int[rows];  // Инициализация одномерного массива res
+                arrayResult = new double[rows];  // Инициализация одномерного массива res
             }
         }
 
@@ -122,18 +123,18 @@ namespace OperationsResearch.Dual
                 if (rowsAdditional > columnsAdditional)
                 {
                     int value = rowsAdditional - columnsAdditional;
-                    additionalVariables = new int[rowsAdditional, columnsAdditional + value];
+                    additionalVariables = new double[rowsAdditional, columnsAdditional + value];
                 }
                 else if (columnsAdditional > rowsAdditional)            ///////////////////////////////
                 {
                     columnsAdditional = rowsAdditional;
-                    additionalVariables = new int[rowsAdditional, columnsAdditional];
+                    additionalVariables = new double[rowsAdditional, columnsAdditional];
 
                     Console.WriteLine("columnsAdditional = " + columnsAdditional);
                 }
                 else
                 {
-                    additionalVariables = new int[rowsAdditional, columnsAdditional];
+                    additionalVariables = new double[rowsAdditional, columnsAdditional];
                 }
             }
         }
@@ -154,7 +155,7 @@ namespace OperationsResearch.Dual
 
             if (columnsDelta > 0)
             {
-                arrayDelta = new int[columnsDelta];  // Инициализация одномерного массива Delta
+                arrayDelta = new double[columnsDelta];  // Инициализация одномерного массива Delta
             }
         }
 

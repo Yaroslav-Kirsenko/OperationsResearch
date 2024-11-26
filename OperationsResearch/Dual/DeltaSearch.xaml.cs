@@ -316,7 +316,7 @@ namespace OperationsResearch.Dual
             }
         }
 
-        private void WriteResultToColumn(int rowIndex, int columnIndex, int value)
+        private void WriteResultToColumn(int rowIndex, int columnIndex, double value)
         {
             foreach (UIElement child in textBoxContainer.Children)
             {

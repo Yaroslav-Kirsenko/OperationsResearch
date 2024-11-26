@@ -25,8 +25,8 @@ namespace OperationsResearch.Dual
         public static string rows = "";
         public static string columns = "";
 
-        public int[,] arrayDisplay { get; set; }
-        public int[] arrayResult { get; set; }
+        public double[,] arrayDisplay { get; set; }
+        public double[] arrayResult { get; set; }
         public int[] arrayZ { get; set; }
         public string[] arraySign { get; set; }
         public string Extremum { get; set; }

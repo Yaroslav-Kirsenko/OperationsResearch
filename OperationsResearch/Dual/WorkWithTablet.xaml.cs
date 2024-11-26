@@ -407,7 +407,7 @@ namespace OperationsResearch.Dual
                 int columnIndex = SavedElements.supportElementColumn;
 
                 // Получаем значение supportElement
-                int supportElementValue = SavedElements.array[rowIndex, columnIndex];
+                double supportElementValue = SavedElements.array[rowIndex, columnIndex];
 
                 // Проверяем, чтобы деление на 0 не происходило
                 if (supportElementValue == 0)
@@ -421,6 +421,7 @@ namespace OperationsResearch.Dual
                 {
                     if (j < columnsX)
                     {
+
                         SavedElements.array[rowIndex, j] /= supportElementValue;
                         SavedElements.arrayResult[rowIndex] /= supportElementValue;
                     }
@@ -506,7 +507,7 @@ namespace OperationsResearch.Dual
             this.Close();
         }
 
-
+       
 
     }
 }

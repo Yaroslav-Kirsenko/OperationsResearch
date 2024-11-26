@@ -29,9 +29,9 @@ namespace OperationsResearch.Dual
         public static string strColumns = "";
 
         // Двумерный массив для хранения значений дополнительных переменных U
-        public static int[,] additionalVariables;
+        public static double[,] additionalVariables;
 
-        public static int[,] fullArray;
+        public static double[,] fullArray;
 
 
         // Установка количества строк
@@ -40,7 +40,7 @@ namespace OperationsResearch.Dual
             rows = Convert.ToInt32(rowsStr);
             InitializeAdditionalVariables();
             InitializeFullArray();
-            additionalVariables = new int[rows, columns];
+            additionalVariables = new double[rows, columns];
         }
 
 
@@ -50,7 +50,7 @@ namespace OperationsResearch.Dual
             columns = Convert.ToInt32(columnsStr);
             InitializeAdditionalVariables();
             InitializeFullArray();
-            additionalVariables = new int[rows, 0]; // Изначально нет дополнительных переменных
+            additionalVariables = new double[rows, 0]; // Изначально нет дополнительных переменных
 
         }
 
@@ -500,7 +500,7 @@ namespace OperationsResearch.Dual
             // Створюємо новий масив з додатковим стовпцем
             int newColumns = additionalVariables.GetLength(1) + 1;
 
-            int[,] newAdditionalVariables = new int[rows, newColumns];
+            double[,] newAdditionalVariables = new double[rows, newColumns];
 
             for (int i = 0; i < rows; i++)
             {
@@ -517,7 +517,7 @@ namespace OperationsResearch.Dual
 
 
 
-        public static int[,] Concat2DArrays(int[,] array1, int[,] array2)
+        public static double[,] Concat2DArrays(double[,] array1, double[,] array2)
         {
             int rows1 = array1.GetLength(0);
             int cols1 = array1.GetLength(1);
@@ -531,7 +531,7 @@ namespace OperationsResearch.Dual
             //}
 
             // Создаём результирующий массив с корректными размерами
-            int[,] result = new int[rows1, cols1+cols2];
+            double[,] result = new double[rows1, cols1+cols2];
 
             // Копируем первый массив
             for (int i = 0; i < rows1; i++)
@@ -586,7 +586,7 @@ namespace OperationsResearch.Dual
 
             // Уменьшаем количество столбцов в массиве
             int newColumns = additionalVariables.GetLength(1) - 1;
-            int[,] newAdditionalVariables = new int[rows, newColumns];
+            double[,] newAdditionalVariables = new double[rows, newColumns];
 
             for (int i = 0; i < rows; i++)
             {
