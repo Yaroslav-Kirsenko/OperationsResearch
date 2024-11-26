@@ -398,13 +398,11 @@ namespace OperationsResearch.Dual
             }
         }
 
+
         //public static string ToFraction(double value, double tolerance = 1E-10)
         //{
         //    if (value == 0)
         //        return "0";
-
-        //    //if (value == 1)
-        //    //    return "1";
 
         //    int sign = Math.Sign(value);
         //    value = Math.Abs(value);
@@ -414,67 +412,38 @@ namespace OperationsResearch.Dual
 
         //    double fraction = numerator / (double)denominator;
 
+        //    // Используем вспомогательные переменные для числителя и знаменателя
+        //    long prevNumerator = 0;
+        //    long prevDenominator = 0;
+
         //    while (Math.Abs(fraction - value) > tolerance)
         //    {
         //        if (fraction < value)
-        //            numerator++;
+        //        {
+        //            // Увеличиваем числитель
+        //            long tempNumerator = numerator;
+        //            numerator = numerator + prevNumerator;
+        //            prevNumerator = tempNumerator;
+        //        }
         //        else
-        //            denominator++;
+        //        {
+        //            // Увеличиваем знаменатель
+        //            long tempDenominator = denominator;
+        //            denominator = denominator + prevDenominator;
+        //            prevDenominator = tempDenominator;
+        //        }
 
-        //        fraction = numerator / (double)denominator;
+        //        fraction = (double)numerator / denominator;
         //    }
+
+        //    // Проверяем на целочисленное значение
+        //    if (Math.Abs(value - Math.Round(value)) <= tolerance)
+        //        return ((int)Math.Round(value)).ToString();
 
         //    Console.WriteLine($"{sign * numerator}/{denominator}");
 
         //    return $"{sign * numerator}/{denominator}";
         //}
-
-        public static string ToFraction(double value, double tolerance = 1E-10)
-        {
-            if (value == 0)
-                return "0";
-
-            int sign = Math.Sign(value);
-            value = Math.Abs(value);
-
-            long numerator = 1;
-            long denominator = 1;
-
-            double fraction = numerator / (double)denominator;
-
-            // Используем вспомогательные переменные для числителя и знаменателя
-            long prevNumerator = 0;
-            long prevDenominator = 0;
-
-            while (Math.Abs(fraction - value) > tolerance)
-            {
-                if (fraction < value)
-                {
-                    // Увеличиваем числитель
-                    long tempNumerator = numerator;
-                    numerator = numerator + prevNumerator;
-                    prevNumerator = tempNumerator;
-                }
-                else
-                {
-                    // Увеличиваем знаменатель
-                    long tempDenominator = denominator;
-                    denominator = denominator + prevDenominator;
-                    prevDenominator = tempDenominator;
-                }
-
-                fraction = (double)numerator / denominator;
-            }
-
-            // Проверяем на целочисленное значение
-            if (Math.Abs(value - Math.Round(value)) <= tolerance)
-                return ((int)Math.Round(value)).ToString();
-
-            Console.WriteLine($"{sign * numerator}/{denominator}");
-
-            return $"{sign * numerator}/{denominator}";
-        }
-
 
         private void Button_Click_SupportElement(object sender, RoutedEventArgs e)
         {
@@ -494,17 +463,22 @@ namespace OperationsResearch.Dual
                     MessageBox.Show("Support element value cannot be zero!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+
                 // Делим каждый элемент строки на supportElement
                 for (int j = 0; j < SavedElements.fullArray.GetLength(1); j++)
                 {
-              
-                        SavedElements.fullArray[rowIndex, j] /= supportElementValue;
-                    
-                    //else
-                    //{
-                    //    SavedElements.additionalVariables[rowIndex, j - columnsX] /= supportElementValue;
-                    //}
-                   
+
+                    //SavedElements.fullArray[rowIndex, j] /= supportElementValue;
+                    if (j < columnsX)
+                    {
+
+                        SavedElements.array[rowIndex, j] /= supportElementValue;
+                        //SavedElements.arrayResult[rowIndex] /= supportElementValue;
+                    }
+                    else
+                    {
+                        SavedElements.additionalVariables[rowIndex, j - columnsX] /= supportElementValue;
+                    }
                 }
 
                 SavedElements.arrayResult[rowIndex] /= supportElementValue;
@@ -517,17 +491,14 @@ namespace OperationsResearch.Dual
                     textBoxResult = new TextBox
                     {
                         IsReadOnly = true,
-                        //Text = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
-                        Text = ToFraction(SavedElements.fullArray[rowIndex, j]),
-                        //Text = (j < columnsX) ? ToFraction(SavedElements.array[rowIndex, j]).ToString() : ToFraction(SavedElements.additionalVariables[rowIndex, j] - columnsX).ToString(),
+                        //Text = ToFraction(SavedElements.fullArray[rowIndex, j]),
+                        Text = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
                         //Tag = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
                         Padding = new Thickness(5)
                     };
-
-                    
 
                     Grid.SetRow(textBoxResult, rowIndex + 1);
                     Grid.SetColumn(textBoxResult, j + 1);
@@ -537,8 +508,8 @@ namespace OperationsResearch.Dual
                     valueTextBoxResult = new TextBox
                     {
                         IsReadOnly = true,
-                        Text = ToFraction(SavedElements.arrayResult[rowIndex]),
-                        //Text = SavedElements.arrayResult[rowIndex].ToString(),
+                        Text = SavedElements.arrayResult[rowIndex].ToString(),
+                        //Text = ToFraction(SavedElements.arrayResult[rowIndex]),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
