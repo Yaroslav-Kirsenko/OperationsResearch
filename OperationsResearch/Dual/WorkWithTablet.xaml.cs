@@ -412,7 +412,7 @@ namespace OperationsResearch.Dual
                 int columnIndex = SavedElements.supportElementColumn;
 
                 // Получаем значение supportElement
-                int supportElementValue = (int)SavedElements.supportElement;
+                double supportElementValue = SavedElements.supportElement;
 
                 // Проверяем, чтобы деление на 0 не происходило
                 if (supportElementValue == 0)
@@ -475,8 +475,6 @@ namespace OperationsResearch.Dual
                         Padding = new Thickness(5)
                     };
 
-                    //valueButton.Click += Button_Click;
-
                     Grid.SetRow(valueTextBoxResult, rowIndex + 1);
                     Grid.SetColumn(valueTextBoxResult, columnsX + columnsU + 1);
                     textBoxContainerResult.Children.Add(valueTextBoxResult);
@@ -503,12 +501,12 @@ namespace OperationsResearch.Dual
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
             //SavedElements.ShowValues();
-            //SavedElements.ShowValuesRezult();
             //SavedElements.ShowValuesZ();
             //SavedElements.ShowValuesSign();
             //SavedElements.ShowExtremum();
             //SavedElements.ShowadditionalVariables();
             SavedElements.ShowFullArray();
+            SavedElements.ShowValuesRezult();
             //SavedElements.ShowValuesDleta();
 
             WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();

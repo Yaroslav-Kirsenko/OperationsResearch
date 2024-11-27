@@ -542,7 +542,6 @@ namespace OperationsResearch.Dual
             Console.Write(Extremum);
         }
 
-
         public static string ToFraction(double value, double tolerance = 1E-10)
         {
             if (value == 0)
@@ -566,8 +565,8 @@ namespace OperationsResearch.Dual
 
             for (int denominator = 1; denominator <= maxDenominator; denominator++)
             {
-                int numerator = (int)Math.Round(value * denominator);
-                double error = Math.Abs(value - (double)numerator / denominator);
+                int numerator = (int)Math.Round(fractionalPart * denominator); // Работаем только с дробной частью
+                double error = Math.Abs(fractionalPart - (double)numerator / denominator);
 
                 if (error < bestError)
                 {
@@ -580,11 +579,13 @@ namespace OperationsResearch.Dual
                 }
             }
 
-            if (wholePart > 0)
-                return $"{sign * (wholePart * bestDenominator + bestNumerator)}/{bestDenominator}";
-            else
-                return $"{sign * bestNumerator}/{bestDenominator}";
+            // Формируем числитель с учетом целой части
+            int finalNumerator = wholePart * bestDenominator + bestNumerator;
+            int finalDenominator = bestDenominator;
+
+            return $"{sign * finalNumerator}/{finalDenominator}";
         }
+
 
     }
 }
