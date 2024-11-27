@@ -654,7 +654,6 @@ namespace OperationsResearch.Dual
             deltaSearch.Show();
 
             this.Hide();
-            
         }
     }
 }

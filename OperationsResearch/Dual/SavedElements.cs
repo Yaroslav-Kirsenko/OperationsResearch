@@ -87,6 +87,21 @@ namespace OperationsResearch.Dual
         }
 
 
+        public void InitializeSupportElement(double support)
+        {
+           supportElement = support;
+        }
+
+        public void InitializeSupportElementRow(int support)
+        {
+            supportElementRow = support;
+        }
+
+        public void InitializeSupportElementColumn(int support)
+        {
+            supportElementColumn = support;
+        }
+
         public void InitializeFullArray(int rows1, int columns1)
         {
             rows = rows1;
@@ -527,6 +542,49 @@ namespace OperationsResearch.Dual
             Console.Write(Extremum);
         }
 
+
+        public static string ToFraction(double value, double tolerance = 1E-10)
+        {
+            if (value == 0)
+                return "0";
+
+            // Максимальный знаменатель для ограничения итераций
+            const int maxDenominator = 10000;
+
+            int sign = Math.Sign(value);
+            value = Math.Abs(value);
+
+            int wholePart = (int)Math.Floor(value);
+            double fractionalPart = value - wholePart;
+
+            if (fractionalPart < tolerance)
+                return (sign * wholePart).ToString(); // Если дробная часть очень мала, вернуть целое число
+
+            int bestNumerator = 1;
+            int bestDenominator = 1;
+            double bestError = Math.Abs(value - (double)bestNumerator / bestDenominator);
+
+            for (int denominator = 1; denominator <= maxDenominator; denominator++)
+            {
+                int numerator = (int)Math.Round(value * denominator);
+                double error = Math.Abs(value - (double)numerator / denominator);
+
+                if (error < bestError)
+                {
+                    bestNumerator = numerator;
+                    bestDenominator = denominator;
+                    bestError = error;
+
+                    if (error < tolerance) // Достаточно близко к точному значению
+                        break;
+                }
+            }
+
+            if (wholePart > 0)
+                return $"{sign * (wholePart * bestDenominator + bestNumerator)}/{bestDenominator}";
+            else
+                return $"{sign * bestNumerator}/{bestDenominator}";
+        }
 
     }
 }

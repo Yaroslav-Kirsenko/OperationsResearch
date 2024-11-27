@@ -12,6 +12,9 @@ namespace OperationsResearch.Dual
         public WorkWithSupportElement()
         {
             InitializeComponent();
+            InitializesupportElement();
+            InitializeSupportElementRow();
+            InitializeSupportElementColumn();
         }
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
@@ -25,10 +28,24 @@ namespace OperationsResearch.Dual
             ValidateTextBox(textBox2);
         }
 
+        public void InitializesupportElement()
+        {
+            savedElements.InitializeSupportElement(supportElement);
+        }
 
+        public void InitializeSupportElementRow()
+        {
+            savedElements.InitializeSupportElementRow(supportElementRow);
+        }
+
+        public void InitializeSupportElementColumn()
+        {
+            savedElements.InitializeSupportElementColumn(supportElementColumn);
+        }
 
         public static int supportElementRow = 0;
         public static int supportElementColumn = 0;
+        public static double supportElement = 0;
 
         SavedElements savedElements = new SavedElements();
 
@@ -146,13 +163,15 @@ namespace OperationsResearch.Dual
                 textBoxContainer.Children.Add(rowLabel);
 
                 // Создаем кнопки для каждой строки
-                for (int j = 0; j < columnsX + columnsU; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     TextBox textBox = new TextBox
                     {
                         IsReadOnly = true,
-                        Text = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
-                        Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
+                        Text = SavedElements.ToFraction(SavedElements.fullArray[i, j]),
+                        Tag = SavedElements.fullArray[i, j].ToString(),
+                        //Text = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
+                        //Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
@@ -169,7 +188,7 @@ namespace OperationsResearch.Dual
                 TextBox valueTextBox = new TextBox
                 {
                     IsReadOnly = true,
-                    Text = SavedElements.arrayResult[i].ToString(),
+                    Text = SavedElements.ToFraction(SavedElements.arrayResult[i]),
                     Background = Brushes.White,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -281,7 +300,6 @@ namespace OperationsResearch.Dual
         }
 
         private TextBox _previousTextBox; // Поле для хранения ранее выбранного TextBox
-
         private void Button_Click_Search(object sender, RoutedEventArgs e)
         {
             // Проверяем корректность значений в текстовых полях
@@ -291,33 +309,52 @@ namespace OperationsResearch.Dual
                 return;
             }
 
-            supportElementRow = int.Parse(textBox1.Text) - 1;
-            supportElementColumn = int.Parse(textBox2.Text) - 1;
-
-            SavedElements.supportElementRow = supportElementRow;
-            SavedElements.supportElementColumn = supportElementColumn;
-
-            if (supportElementRow < 0 || supportElementRow >= rows || supportElementColumn < 0 || supportElementColumn >= (columnsX + columnsU))
+            // Проверяем, пустые ли значения
+            if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
             {
-                MessageBox.Show("Ви вийшли за грані таблички", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Поля не можуть бути порожніми.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            TextBox selectedTextBox = null;
+            // Пробуем преобразовать значения в числа
+            if (!int.TryParse(textBox1.Text, out int row) || !int.TryParse(textBox2.Text, out int column))
+            {
+                MessageBox.Show("Введіть коректні числові значення.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
+            // Приведение к индексации массива (от 0)
+            SavedElements.supportElementRow = row - 1;
+            SavedElements.supportElementColumn = column - 1;
+
+            // Проверяем, находятся ли индексы в пределах допустимого диапазона
+            if (SavedElements.supportElementRow < 0 || SavedElements.supportElementRow >= rows ||
+                SavedElements.supportElementColumn < 0 || SavedElements.supportElementColumn >= columns)
+            {
+                MessageBox.Show("Ви вийшли за грані таблички", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Получаем значение опорного элемента из массива fullArray
+            double supportElementValue = SavedElements.fullArray[SavedElements.supportElementRow, SavedElements.supportElementColumn];
+            supportElement = supportElementValue;
+
+            // Поиск TextBox, соответствующего опорному элементу
+            TextBox selectedTextBox = null;
             foreach (UIElement element in textBoxContainer.Children)
             {
-                if (Grid.GetRow(element) == supportElementRow + 1 && Grid.GetColumn(element) == supportElementColumn + 1)
+                if (Grid.GetRow(element) == SavedElements.supportElementRow + 1 &&
+                    Grid.GetColumn(element) == SavedElements.supportElementColumn + 1)
                 {
                     if (element is TextBox textBox)
                     {
                         selectedTextBox = textBox;
-                        SavedElements.supportElement = int.Parse(selectedTextBox.Text);
                         break;
                     }
                 }
             }
 
+            // Если TextBox найден, выделяем его цветом
             if (selectedTextBox != null)
             {
                 // Возвращаем предыдущий TextBox в исходный цвет
@@ -332,7 +369,13 @@ namespace OperationsResearch.Dual
                 // Сохраняем текущий TextBox как предыдущий
                 _previousTextBox = selectedTextBox;
             }
+            else
+            {
+                MessageBox.Show("Опорний елемент не знайдено в табличці.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+
 
         private bool HasValidationErrors()
         {
@@ -364,6 +407,7 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
+            SavedElements.supportElement = supportElement;
             //SavedElements.ShowValues();
             //SavedElements.ShowValuesRezult();
             //SavedElements.ShowValuesZ();

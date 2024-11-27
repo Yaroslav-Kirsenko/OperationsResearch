@@ -13,7 +13,7 @@ namespace OperationsResearch.Dual
         public WorkWithTablet()
         {
             InitializeComponent();
-            MyButton.Content = "/" + SavedElements.supportElement.ToString(); // MyButton — имя кнопки
+            MyButton.Content = "/ " + SavedElements.ToFraction(SavedElements.supportElement); // MyButton — имя кнопки
         }
 
 
@@ -138,12 +138,15 @@ namespace OperationsResearch.Dual
                 textBoxContainer.Children.Add(rowLabel);
 
                 // Создаем кнопки для каждой строки
-                for (int j = 0; j < columnsX + columnsU; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     Button button = new Button
                     {
-                        Content = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
-                        Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
+
+                        Content = SavedElements.ToFraction(SavedElements.fullArray[i, j]),
+                        Tag = SavedElements.fullArray[i, j].ToString(),
+                        //Content = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
+                        //Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
@@ -165,7 +168,7 @@ namespace OperationsResearch.Dual
                 // Кнопка для "Значення"
                 Button valueButton = new Button
                 {
-                    Content = SavedElements.arrayResult[i].ToString(),
+                    Content = SavedElements.ToFraction(SavedElements.arrayResult[i]),
                     Tag = SavedElements.arrayResult[i].ToString(),
                     Background = Brushes.White,
                     BorderThickness = new Thickness(1),
@@ -321,7 +324,7 @@ namespace OperationsResearch.Dual
                 textBoxContainerResult.Children.Add(rowLabelResult);
 
                 // Создаем кнопки для каждой строки
-                for (int j = 0; j < columnsX + columnsU; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     textBoxResult = new TextBox
                     {
@@ -399,52 +402,6 @@ namespace OperationsResearch.Dual
         }
 
 
-        //public static string ToFraction(double value, double tolerance = 1E-10)
-        //{
-        //    if (value == 0)
-        //        return "0";
-
-        //    int sign = Math.Sign(value);
-        //    value = Math.Abs(value);
-
-        //    long numerator = 1;
-        //    long denominator = 1;
-
-        //    double fraction = numerator / (double)denominator;
-
-        //    // Используем вспомогательные переменные для числителя и знаменателя
-        //    long prevNumerator = 0;
-        //    long prevDenominator = 0;
-
-        //    while (Math.Abs(fraction - value) > tolerance)
-        //    {
-        //        if (fraction < value)
-        //        {
-        //            // Увеличиваем числитель
-        //            long tempNumerator = numerator;
-        //            numerator = numerator + prevNumerator;
-        //            prevNumerator = tempNumerator;
-        //        }
-        //        else
-        //        {
-        //            // Увеличиваем знаменатель
-        //            long tempDenominator = denominator;
-        //            denominator = denominator + prevDenominator;
-        //            prevDenominator = tempDenominator;
-        //        }
-
-        //        fraction = (double)numerator / denominator;
-        //    }
-
-        //    // Проверяем на целочисленное значение
-        //    if (Math.Abs(value - Math.Round(value)) <= tolerance)
-        //        return ((int)Math.Round(value)).ToString();
-
-        //    Console.WriteLine($"{sign * numerator}/{denominator}");
-
-        //    return $"{sign * numerator}/{denominator}";
-        //}
-
         private void Button_Click_SupportElement(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -455,7 +412,7 @@ namespace OperationsResearch.Dual
                 int columnIndex = SavedElements.supportElementColumn;
 
                 // Получаем значение supportElement
-                int supportElementValue = (int)SavedElements.array[rowIndex, columnIndex];
+                int supportElementValue = (int)SavedElements.supportElement;
 
                 // Проверяем, чтобы деление на 0 не происходило
                 if (supportElementValue == 0)
@@ -468,17 +425,17 @@ namespace OperationsResearch.Dual
                 for (int j = 0; j < SavedElements.fullArray.GetLength(1); j++)
                 {
 
-                    //SavedElements.fullArray[rowIndex, j] /= supportElementValue;
-                    if (j < columnsX)
-                    {
+                    SavedElements.fullArray[rowIndex, j] /= supportElementValue;
+                    //if (j < columnsX)
+                    //{
 
-                        SavedElements.array[rowIndex, j] /= supportElementValue;
-                        //SavedElements.arrayResult[rowIndex] /= supportElementValue;
-                    }
-                    else
-                    {
-                        SavedElements.additionalVariables[rowIndex, j - columnsX] /= supportElementValue;
-                    }
+                    //    SavedElements.array[rowIndex, j] /= supportElementValue;
+                    //    //SavedElements.arrayResult[rowIndex] /= supportElementValue;
+                    //}
+                    //else
+                    //{
+                    //    SavedElements.additionalVariables[rowIndex, j - columnsX] /= supportElementValue;
+                    //}
                 }
 
                 SavedElements.arrayResult[rowIndex] /= supportElementValue;
@@ -486,13 +443,15 @@ namespace OperationsResearch.Dual
 
                 // Добавляем строки с номерами и кнопками вместо текстовых полей
 
-                for (int j = 0; j < columnsX + columnsU; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     textBoxResult = new TextBox
                     {
                         IsReadOnly = true,
-                        //Text = ToFraction(SavedElements.fullArray[rowIndex, j]),
-                        Text = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
+                        Text = SavedElements.ToFraction(SavedElements.fullArray[rowIndex, j]),
+                        //Text = SavedElements.fullArray[rowIndex, j].ToString(),
+                        Tag = SavedElements.fullArray[rowIndex, j].ToString(),
+                        //Text = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
                         //Tag = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
@@ -508,8 +467,8 @@ namespace OperationsResearch.Dual
                     valueTextBoxResult = new TextBox
                     {
                         IsReadOnly = true,
-                        Text = SavedElements.arrayResult[rowIndex].ToString(),
-                        //Text = ToFraction(SavedElements.arrayResult[rowIndex]),
+                        //Text = SavedElements.arrayResult[rowIndex].ToString(),
+                        Text = SavedElements.ToFraction(SavedElements.arrayResult[rowIndex]),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
@@ -549,7 +508,7 @@ namespace OperationsResearch.Dual
             //SavedElements.ShowValuesSign();
             //SavedElements.ShowExtremum();
             //SavedElements.ShowadditionalVariables();
-            //SavedElements.ShowFullArray();
+            SavedElements.ShowFullArray();
             //SavedElements.ShowValuesDleta();
 
             WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
@@ -560,8 +519,5 @@ namespace OperationsResearch.Dual
 
             this.Close();
         }
-
-
-
     }
 }
