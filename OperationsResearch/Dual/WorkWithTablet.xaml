@@ -103,6 +103,19 @@
                 FontWeight="Bold" 
                 BorderThickness="0" 
                 ToolTip="Перейти к следующему шагу" Margin="693,0,0,0"/>
+            <Button 
+                x:Name="MyButton2"
+                Content="" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Width="57" 
+                Height="20" 
+                Click="Button_Click_SearhElement" 
+                Background="#FF56C596" 
+                Foreground="White" 
+                FontWeight="Bold" 
+                BorderThickness="0" 
+                ToolTip="Перейти к следующему шагу" Margin="614,0,0,0"/>
         </Grid>
     </Grid>
 </Window>

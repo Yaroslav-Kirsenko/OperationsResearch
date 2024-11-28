@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -242,7 +241,7 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainerResult.ColumnDefinitions.Add(new ColumnDefinition());
 
-                Label headerLabelXResult = new Label
+                Button headerLabelXResult = new Button
                 {
                     Content = $"X{j + 1}",
                     HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -265,7 +264,7 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainerResult.ColumnDefinitions.Add(new ColumnDefinition());
 
-                Label headerLabelUResult = new Label
+                Button headerLabelUResult = new Button
                 {
                     Content = $"U{j + 1}",
                     HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -306,7 +305,7 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainerResult.RowDefinitions.Add(new RowDefinition());
 
-                Label rowLabelResult = new Label
+                Button rowLabelResult = new Button
                 {
                     Content = $"U{i + 1}",
                     HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -484,6 +483,13 @@ namespace OperationsResearch.Dual
 
 
 
+
+        private void Button_Click_SearhElement(object sender, RoutedEventArgs e)
+        {
+
+
+
+        }
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
