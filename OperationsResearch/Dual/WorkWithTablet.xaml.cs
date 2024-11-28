@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -13,7 +14,10 @@ namespace OperationsResearch.Dual
         {
             InitializeComponent();
             MyButton.Content = "/ " + SavedElements.ToFraction(SavedElements.supportElement); // MyButton — имя кнопки
+            MyButton2.Content = "* " + SavedElements.ToFraction(SavedElements.fullArray[indexU, SavedElements.supportElementColumn]) + " +"; // MyButton — имя кнопки
+
         }
+
 
 
         SavedElements savedElements = new SavedElements();
@@ -117,10 +121,10 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                Label rowLabel = new Label
+                Button rowLabel = new Button
                 {
                     Content = $"U{i + 1}",
-                    Tag = 0,
+                    Tag = i,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
@@ -129,7 +133,7 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
-                //rowLabel.Click += Button_Click_Side;
+                rowLabel.Click += Button_Click_Side;
 
 
                 Grid.SetRow(rowLabel, i + 1);
@@ -182,10 +186,11 @@ namespace OperationsResearch.Dual
                 textBoxContainer.Children.Add(valueButton);
             }
 
+
             // Добавляем строку Delta
             textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-            Label deltaLabel = new Label
+            Button deltaLabel = new Button
             {
                 Content = "Delta",
                 HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -364,7 +369,7 @@ namespace OperationsResearch.Dual
             // Добавляем строку Delta
             textBoxContainerResult.RowDefinitions.Add(new RowDefinition());
 
-            Label deltaLabelResult = new Label
+            Button deltaLabelResult = new Button
             {
                 Content = "Delta",
                 HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -401,6 +406,60 @@ namespace OperationsResearch.Dual
             }
         }
 
+        public int indexU;
+
+        private void Button_Click_Side(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            if (button != null && button.Tag is int index)
+            {
+                indexU = index;
+                Console.WriteLine($"Индекс кнопки: {indexU}"); // Выводим индекс кнопки из Tag
+
+                // Логика изменения цвета
+                if (button.Background == Brushes.SkyBlue)
+                {
+                    button.Background = Brushes.LightGreen; // Меняем цвет на зеленый
+                }
+                else
+                {
+                    button.Background = Brushes.SkyBlue; // Меняем цвет на голубой
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ошибка: Tag кнопки не определён или имеет неверный формат.");
+            }
+        }
+
+
+        public int indexDelta;
+
+        private void Button_Click_Side_Delta(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            if (button != null && button.Tag is int index)
+            {
+                indexDelta = rows;
+                Console.WriteLine($"Индекс кнопки: {indexU}"); // Выводим индекс кнопки из Tag
+
+                // Логика изменения цвета
+                if (button.Background == Brushes.SkyBlue)
+                {
+                    button.Background = Brushes.LightGreen; // Меняем цвет на зеленый
+                }
+                else
+                {
+                    button.Background = Brushes.SkyBlue; // Меняем цвет на голубой
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ошибка: Tag кнопки не определён или имеет неверный формат.");
+            }
+        }
 
         private void Button_Click_SupportElement(object sender, RoutedEventArgs e)
         {
@@ -488,8 +547,100 @@ namespace OperationsResearch.Dual
         private void Button_Click_SearhElement(object sender, RoutedEventArgs e)
         {
 
+            Button button = sender as Button;
+            if (button != null)
+            {
+                // Индексы строки и столбца, где находится supportElement
+                int rowIndex = SavedElements.supportElementRow;
+                int columnIndex = SavedElements.supportElementColumn;
 
 
+
+                // Получаем значение supportElement
+                double supportElementValue = SavedElements.fullArray[indexU, columnIndex];
+
+                // Проверяем, чтобы деление на 0 не происходило
+                if (supportElementValue == 0)
+                {
+                    MessageBox.Show("Support element value cannot be zero!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Делим каждый элемент строки на supportElement
+                for (int j = 0; j < SavedElements.fullArray.GetLength(1); j++)
+                {
+                    if (indexU != 0)
+                    {
+                        SavedElements.fullArray[indexU, j] = (SavedElements.fullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.fullArray[indexU, j];
+                    }
+                    else
+                    {
+                        SavedElements.fullArray[indexU, j] = (SavedElements.fullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.fullArray[indexU, j];
+                    }
+
+                }
+
+                if (indexU != 0)
+                {
+                    SavedElements.arrayResult[indexU] = (SavedElements.arrayResult[rowIndex] * (supportElementValue * -1)) + SavedElements.arrayResult[indexU];
+                }
+                else
+                {
+                    SavedElements.arrayResult[indexU] = (SavedElements.arrayResult[rowIndex] * (supportElementValue * -1)) + SavedElements.arrayResult[indexU];
+
+                }
+
+                if(indexDelta != 0)
+                {
+                    SavedElements.arrayDelta[indexDelta] = (SavedElements.arrayDelta[columnIndex] * (supportElementValue * -1)) + SavedElements.arrayDelta[indexDelta];
+                }
+                else
+                {
+                    SavedElements.arrayDelta[indexDelta] = (SavedElements.arrayDelta[columnIndex] * (supportElementValue * -1)) + SavedElements.arrayDelta[indexDelta];
+
+                }
+
+
+                // Добавляем строки с номерами и кнопками вместо текстовых полей
+
+                for (int j = 0; j < columns; j++)
+                {
+                    textBoxResult = new TextBox
+                    {
+                        IsReadOnly = true,
+                        Text = SavedElements.ToFraction(SavedElements.fullArray[indexU, j]),
+                        //Text = SavedElements.fullArray[rowIndex, j].ToString(),
+                        Tag = SavedElements.fullArray[indexU, j].ToString(),
+                        //Text = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
+                        //Tag = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
+                        Background = Brushes.White,
+                        BorderThickness = new Thickness(1),
+                        BorderBrush = System.Windows.Media.Brushes.Black,
+                        Padding = new Thickness(5)
+                    };
+
+                    Grid.SetRow(textBoxResult, indexU + 1);
+                    Grid.SetColumn(textBoxResult, j + 1);
+                    textBoxContainerResult.Children.Add(textBoxResult);
+
+
+                    valueTextBoxResult = new TextBox
+                    {
+                        IsReadOnly = true,
+                        //Text = SavedElements.arrayResult[rowIndex].ToString(),
+                        Text = SavedElements.ToFraction(SavedElements.arrayResult[indexU]),
+                        Background = Brushes.White,
+                        BorderThickness = new Thickness(1),
+                        BorderBrush = System.Windows.Media.Brushes.Black,
+                        Padding = new Thickness(5)
+                    };
+
+                    Grid.SetRow(valueTextBoxResult, indexU + 1);
+                    Grid.SetColumn(valueTextBoxResult, columnsX + columnsU + 1);
+                    textBoxContainerResult.Children.Add(valueTextBoxResult);
+                }
+            }
+            indexU = 0;
         }
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
@@ -526,3 +677,6 @@ namespace OperationsResearch.Dual
         }
     }
 }
+
+
+
