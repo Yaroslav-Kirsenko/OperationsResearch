@@ -360,6 +360,7 @@ namespace OperationsResearch.Dual
                 textBoxContainerResult.Children.Add(valueTextBoxResult);
             }
 
+
             // Добавляем строку Delta
             textBoxContainerResult.RowDefinitions.Add(new RowDefinition());
 
