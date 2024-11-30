@@ -17,6 +17,8 @@ namespace OperationsResearch.Dual
             InitializeSupportElementColumn();
         }
 
+        Label rowLabel;
+
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
             ValidateTextBox(textBox1);
@@ -141,20 +143,39 @@ namespace OperationsResearch.Dual
             textBoxContainer.Children.Add(valueHeader);
 
             // Добавляем строки с номерами и кнопками вместо текстовых полей
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < SavedElements.newRows; i++)
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                Label rowLabel = new Label
+                if (i == SavedElements.newRows - 1)
                 {
-                    Content = $"U{i + 1}",
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    BorderThickness = new Thickness(1),
-                    BorderBrush = System.Windows.Media.Brushes.Black,
-                    Background = System.Windows.Media.Brushes.SkyBlue,
-                    Padding = new Thickness(5)
-                };
+                    rowLabel = new Label
+                    {
+                        Content = "Delta",
+                        Tag = i,
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        BorderThickness = new Thickness(1),
+                        BorderBrush = System.Windows.Media.Brushes.Black,
+                        Background = System.Windows.Media.Brushes.SkyBlue,
+                        Padding = new Thickness(5)
+                    };
+                }
+                else
+                {
+                    rowLabel = new Label
+                    {
+                        Content = $"U{i + 1}",
+                        Tag = i,
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        BorderThickness = new Thickness(1),
+                        BorderBrush = System.Windows.Media.Brushes.Black,
+                        Background = System.Windows.Media.Brushes.SkyBlue,
+                        Padding = new Thickness(5)
+                    };
+                }
+
 
 
 
@@ -168,8 +189,8 @@ namespace OperationsResearch.Dual
                     TextBox textBox = new TextBox
                     {
                         IsReadOnly = true,
-                        Text = SavedElements.ToFraction(SavedElements.fullArray[i, j]),
-                        Tag = SavedElements.fullArray[i, j].ToString(),
+                        Text = SavedElements.ToFraction(SavedElements.newFullArray[i, j]),
+                        Tag = SavedElements.newFullArray[i, j].ToString(),
                         //Text = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         //Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Background = Brushes.White,
@@ -188,7 +209,7 @@ namespace OperationsResearch.Dual
                 TextBox valueTextBox = new TextBox
                 {
                     IsReadOnly = true,
-                    Text = SavedElements.ToFraction(SavedElements.arrayResult[i]),
+                    Text = SavedElements.ToFraction(SavedElements.newArrayResult[i]),
                     Background = Brushes.White,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -200,45 +221,6 @@ namespace OperationsResearch.Dual
                 Grid.SetRow(valueTextBox, i + 1);
                 Grid.SetColumn(valueTextBox, columnsX + columnsU + 1);
                 textBoxContainer.Children.Add(valueTextBox);
-            }
-
-            // Добавляем строку Delta
-            textBoxContainer.RowDefinitions.Add(new RowDefinition());
-
-            Label deltaLabel = new Label
-            {
-                Content = "Delta",
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                BorderThickness = new Thickness(1),
-                BorderBrush = System.Windows.Media.Brushes.Black,
-                Background = System.Windows.Media.Brushes.SkyBlue,
-                Padding = new Thickness(5)
-            };
-
-            Grid.SetRow(deltaLabel, rows + 1);
-            Grid.SetColumn(deltaLabel, 0);
-            textBoxContainer.Children.Add(deltaLabel);
-
-            for (int j = 0; j < columnsX + columnsU + 1; j++)
-            {
-
-                TextBox deltaTextBox = new TextBox
-                {
-                    IsReadOnly = true,
-                    Text = SavedElements.arrayDelta[j].ToString(),
-                    Tag = SavedElements.arrayDelta[j].ToString(),
-                    Background = Brushes.White,
-                    BorderThickness = new Thickness(1),
-                    BorderBrush = System.Windows.Media.Brushes.Black,
-                    Padding = new Thickness(5)
-
-                };
-
-
-                Grid.SetRow(deltaTextBox, rows + 1);
-                Grid.SetColumn(deltaTextBox, j + 1);
-                textBoxContainer.Children.Add(deltaTextBox);
             }
         }
 

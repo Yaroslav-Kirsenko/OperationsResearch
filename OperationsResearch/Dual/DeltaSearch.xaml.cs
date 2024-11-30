@@ -19,6 +19,7 @@ namespace OperationsResearch.Dual
 
         }
 
+
         public  int[] ValidatearrayDelta;
         public int ValidateDeltavar;
 
@@ -207,8 +208,10 @@ namespace OperationsResearch.Dual
             Grid.SetRow(deltaLabel, rows + 1);
             Grid.SetColumn(deltaLabel, 0);
             textBoxContainer.Children.Add(deltaLabel);
-            
-            for (int j = 0; j < columnsX + columnsU + 1; j++)
+
+            SavedElements.newColumns = columnsX + columnsU + 1;
+
+            for (int j = 0; j < SavedElements.newColumns; j++)
             {
                 
                 deltaTextBox = new TextBox
@@ -225,13 +228,7 @@ namespace OperationsResearch.Dual
                 Grid.SetColumn(deltaTextBox, j + 1);
                 textBoxContainer.Children.Add(deltaTextBox);
             }
-        }
-
-        public void ValidateDelta()
-        {
-
-
-
+           
 
         }
 
@@ -377,6 +374,75 @@ namespace OperationsResearch.Dual
         }
 
 
+        private void ConcatArrayAndAddLastDeltaElement()
+        {
+            // Проверяем, инициализированы ли массивы
+            if (SavedElements.fullArray == null || SavedElements.arrayDelta == null || SavedElements.arrayResult == null)
+            {
+                MessageBox.Show("Массивы не инициализированы.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            int rows = SavedElements.fullArray.GetLength(0);
+            int cols = SavedElements.fullArray.GetLength(1);
+
+            // Создаем новый массив с увеличенным количеством строк на 1
+            SavedElements.newRows = rows + 1;
+            SavedElements.newFullArray = new double[SavedElements.newRows, cols];
+
+            // Копируем исходный массив fullArray в новый массив
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    SavedElements.newFullArray[i, j] = SavedElements.fullArray[i, j];
+                }
+            }
+
+
+            // Добавляем arrayDelta как последнюю строку
+            for (int j = 0; j < cols; j++)
+            {
+                SavedElements.newFullArray[rows, j] = SavedElements.arrayDelta[j];
+            }
+
+            // Создаем новый массив для результатов с добавленной строкой
+            SavedElements.newArrayResult = new double[SavedElements.newRows];
+            for (int i = 0; i < SavedElements.arrayResult.Length; i++)
+            {
+                SavedElements.newArrayResult[i] = SavedElements.arrayResult[i];
+            }
+            int deltaLastIndex = SavedElements.arrayDelta.Length - 1;
+            // Добавляем последний элемент Delta в arrayResult
+            if (SavedElements.arrayDelta.Length > 0)
+            {
+                SavedElements.newArrayResult[rows] = SavedElements.arrayDelta[deltaLastIndex]; // Последний элемент Delta
+            }
+
+            // Обновляем массивы (при необходимости)
+            SavedElements.fullArray = SavedElements.newFullArray;
+            SavedElements.arrayResult = SavedElements.newArrayResult;
+
+            // Выводим результат для проверки
+            Console.WriteLine("Обновленный массив fullArray:");
+            for (int i = 0; i < SavedElements.newFullArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < SavedElements.newFullArray.GetLength(1); j++)
+                {
+                    Console.Write(SavedElements.newFullArray[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Обновленный массив arrayResult:");
+            foreach (var value in SavedElements.newArrayResult)
+            {
+                Console.Write(value + " ");
+            }
+            Console.WriteLine();
+        }
+
+
 
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
@@ -395,14 +461,18 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
-            SavedElements.ShowValues();
-            SavedElements.ShowValuesRezult();
-            SavedElements.ShowValuesZ();
-            SavedElements.ShowValuesSign();
-            SavedElements.ShowExtremum();
-            SavedElements.ShowadditionalVariables();
-            SavedElements.ShowFullArray();
-            SavedElements.ShowValuesDleta();
+            ConcatArrayAndAddLastDeltaElement();
+            //SavedElements.ShowValues();
+            //SavedElements.ShowValuesRezult();
+            //SavedElements.ShowValuesZ();
+            //SavedElements.ShowValuesSign();
+            //SavedElements.ShowExtremum();
+            //SavedElements.ShowadditionalVariables();
+            //SavedElements.ShowFullArray();
+            //SavedElements.ShowValuesDleta();
+
+            SavedElements.ShowNewFullArray();
+            SavedElements.ShowNewValuesRezult();
 
             WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
 
