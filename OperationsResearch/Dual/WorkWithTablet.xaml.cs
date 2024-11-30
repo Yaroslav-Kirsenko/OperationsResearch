@@ -555,15 +555,15 @@ namespace OperationsResearch.Dual
                 }
 
                 // Делим каждый элемент строки на supportElement
-                for (int j = 0; j < SavedElements.fullArray.GetLength(1); j++)
+                for (int j = 0; j < SavedElements.newFullArray.GetLength(1); j++)
                 {
                     if (indexU != 0)
                     {
-                        SavedElements.fullArray[indexU, j] = (SavedElements.newFullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.newFullArray[indexU, j];
+                        SavedElements.newFullArray[indexU, j] = (SavedElements.newFullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.newFullArray[indexU, j];
                     }
                     else
                     {
-                        SavedElements.fullArray[indexU, j] = (SavedElements.newFullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.newFullArray[indexU, j];
+                        SavedElements.newFullArray[indexU, j] = (SavedElements.newFullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.newFullArray[indexU, j];
                     }
 
                 }
