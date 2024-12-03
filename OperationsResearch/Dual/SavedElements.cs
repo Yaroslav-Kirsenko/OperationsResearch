@@ -35,8 +35,9 @@ namespace OperationsResearch.Dual
 
 
         public static string[] arraySign;
-        public static string Extremum;
+        public static string[] arrayRowSign;             /////////////////////////////////////
 
+        public static string Extremum;
 
 
         public static int rows = 0;
@@ -51,6 +52,18 @@ namespace OperationsResearch.Dual
 
         public static int columnsDelta = 0;
 
+        public void InitializeArrayRowSign(int row1)
+        {
+
+            rows = row1;
+
+            if (rows > 0)
+            {
+                arrayRowSign = new string[rows];  
+            }
+        }
+
+       
         public static int SetRowsFullArray()
         {
             int rows1 = fullArray.GetLength(0);
@@ -371,6 +384,17 @@ namespace OperationsResearch.Dual
             for (int i = 0; i < newRows; i++)
             {
                 Console.Write(newArrayResult[i] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static void ShowValuesArrayRowSign()
+        {
+            Console.WriteLine("ShowValuesArrayRowSign");
+
+            for (int i = 0; i < columns; i++)
+            {
+                Console.Write(arrayRowSign[i] + " ");
             }
             Console.WriteLine();
         }

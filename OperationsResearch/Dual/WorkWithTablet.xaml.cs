@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,11 +14,16 @@ namespace OperationsResearch.Dual
         public WorkWithTablet()
         {
             InitializeComponent();
+            InitializeArrayRowSign();
             MyButton.Content = "/ " + SavedElements.ToFraction(SavedElements.supportElement); // MyButton — имя кнопки
             MyButton2.Content = "* " + SavedElements.ToFraction(SavedElements.fullArray[indexU, SavedElements.supportElementColumn]) + " +"; // MyButton — имя кнопки
 
         }
 
+        private void InitializeArrayRowSign()
+        {
+            savedElements.InitializeArrayRowSign(columns); // Указываем только количество столбцов
+        }
 
 
         SavedElements savedElements = new SavedElements();
@@ -122,7 +128,7 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                if (i== SavedElements.newRows-1)
+                if (i == SavedElements.newRows - 1)
                 {
                     rowLabel = new Button
                     {
@@ -138,7 +144,7 @@ namespace OperationsResearch.Dual
                 }
                 else
                 {
-                     rowLabel = new Button
+                    rowLabel = new Button
                     {
                         Content = $"U{i + 1}",
                         Tag = i,
@@ -151,7 +157,7 @@ namespace OperationsResearch.Dual
                     };
                 }
 
-                
+
 
 
                 rowLabel.Click += Button_Click_Side;
@@ -162,7 +168,7 @@ namespace OperationsResearch.Dual
 
 
 
-               
+
 
                 // Создаем кнопки для каждой строки
                 for (int j = 0; j < columns; j++)
@@ -211,7 +217,7 @@ namespace OperationsResearch.Dual
             }
 
 
-           
+
         }
 
 
@@ -296,11 +302,30 @@ namespace OperationsResearch.Dual
             // Добавляем строки с номерами и кнопками вместо текстовых полей
             for (int i = 0; i < rows; i++)
             {
-                textBoxContainerResult.RowDefinitions.Add(new RowDefinition());
+                textBoxContainerResult.RowDefinitions.Add(new RowDefinition()); ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                Button rowLabelResult = new Button
+                List<string> rowSignLabel = new List<string>();
+
+               
+
+                rowSignLabel.Add($"U{i + 1}");
+                for (int j = 0; j < rows; j++)
                 {
-                    Content = $"U{i + 1}",
+                    rowSignLabel.Add($"X{j + 1}");
+
+                   
+                }
+
+
+                int rowSign = i;
+
+
+                ComboBox rowLabelResult = new ComboBox        ///////////////////////////////////////////////////////////////
+                {
+                    //Content = $"U{i + 1}",
+
+                    ItemsSource = rowSignLabel,
+                    SelectedIndex = 0,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
@@ -308,6 +333,16 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
+
+                rowLabelResult.SelectionChanged += (sender, e) =>
+                {
+                    string selectedSign = rowLabelResult.SelectedItem.ToString();
+
+                    SavedElements.arrayRowSign[columns] = selectedSign;        ////////////////////////////////////////////
+
+                };
+
+
 
 
 
@@ -620,19 +655,6 @@ namespace OperationsResearch.Dual
             indexU = 0;
         }
 
-        private void Button_Click_Exit(object sender, RoutedEventArgs e)
-        {
-
-            WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
-
-            workWithSupportElement.CreateTextBox();
-
-            workWithSupportElement.Show();
-
-            this.Close();
-
-        }
-
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
             //SavedElements.ShowValues();
@@ -641,8 +663,11 @@ namespace OperationsResearch.Dual
             //SavedElements.ShowExtremum();
             //SavedElements.ShowadditionalVariables();
             SavedElements.ShowFullArray();
-            SavedElements.ShowValuesRezult();
+            //SavedElements.ShowValuesRezult();
+            SavedElements.ShowValuesArrayRowSign();
             //SavedElements.ShowValuesDleta();
+
+
 
             WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
 

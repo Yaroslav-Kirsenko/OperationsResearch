@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -18,6 +19,7 @@ namespace OperationsResearch.Dual
         }
 
         Label rowLabel;
+
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -163,17 +165,24 @@ namespace OperationsResearch.Dual
                 }
                 else
                 {
-                    rowLabel = new Label
+                    if (false)            /////   проверка массива на наличие елементов
                     {
-                        Content = $"U{i + 1}",
-                        Tag = i,
-                        HorizontalContentAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        BorderThickness = new Thickness(1),
-                        BorderBrush = System.Windows.Media.Brushes.Black,
-                        Background = System.Windows.Media.Brushes.SkyBlue,
-                        Padding = new Thickness(5)
-                    };
+
+                    }
+                    else
+                    {
+                        rowLabel = new Label
+                        {
+                            Content = $"U{i + 1}",
+                            Tag = i,
+                            HorizontalContentAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            BorderThickness = new Thickness(1),
+                            BorderBrush = System.Windows.Media.Brushes.Black,
+                            Background = System.Windows.Media.Brushes.SkyBlue,
+                            Padding = new Thickness(5)
+                        };
+                    }
                 }
 
 
