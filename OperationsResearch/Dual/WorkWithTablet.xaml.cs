@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,11 +14,16 @@ namespace OperationsResearch.Dual
         public WorkWithTablet()
         {
             InitializeComponent();
+            InitializeArrayRowSign();
             MyButton.Content = "/ " + SavedElements.ToFraction(SavedElements.supportElement); // MyButton — имя кнопки
             MyButton2.Content = "* " + SavedElements.ToFraction(SavedElements.fullArray[indexU, SavedElements.supportElementColumn]) + " +"; // MyButton — имя кнопки
 
         }
 
+        private void InitializeArrayRowSign()
+        {
+            savedElements.InitializeArrayRowSign(columns); // Указываем только количество столбцов
+        }
 
 
         SavedElements savedElements = new SavedElements();
@@ -36,6 +42,7 @@ namespace OperationsResearch.Dual
 
         TextBox textBoxResult;
         TextBox valueTextBoxResult;
+        Button rowLabel;
 
 
         public void CreateTextBox()
@@ -117,28 +124,51 @@ namespace OperationsResearch.Dual
             textBoxContainer.Children.Add(valueHeader);
 
             // Добавляем строки с номерами и кнопками вместо текстовых полей
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < SavedElements.newRows; i++)
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                Button rowLabel = new Button
+                if (i == SavedElements.newRows - 1)
                 {
-                    Content = $"U{i + 1}",
-                    Tag = i,
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    BorderThickness = new Thickness(1),
-                    BorderBrush = System.Windows.Media.Brushes.Black,
-                    Background = System.Windows.Media.Brushes.SkyBlue,
-                    Padding = new Thickness(5)
-                };
+                    rowLabel = new Button
+                    {
+                        Content = "Delta",
+                        Tag = i,
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        BorderThickness = new Thickness(1),
+                        BorderBrush = System.Windows.Media.Brushes.Black,
+                        Background = System.Windows.Media.Brushes.SkyBlue,
+                        Padding = new Thickness(5)
+                    };
+                }
+                else
+                {
+                    rowLabel = new Button
+                    {
+                        Content = $"U{i + 1}",
+                        Tag = i,
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        BorderThickness = new Thickness(1),
+                        BorderBrush = System.Windows.Media.Brushes.Black,
+                        Background = System.Windows.Media.Brushes.SkyBlue,
+                        Padding = new Thickness(5)
+                    };
+                }
+
+
+
 
                 rowLabel.Click += Button_Click_Side;
-
 
                 Grid.SetRow(rowLabel, i + 1);
                 Grid.SetColumn(rowLabel, 0);
                 textBoxContainer.Children.Add(rowLabel);
+
+
+
+
 
                 // Создаем кнопки для каждой строки
                 for (int j = 0; j < columns; j++)
@@ -146,8 +176,8 @@ namespace OperationsResearch.Dual
                     Button button = new Button
                     {
 
-                        Content = SavedElements.ToFraction(SavedElements.fullArray[i, j]),
-                        Tag = SavedElements.fullArray[i, j].ToString(),
+                        Content = SavedElements.ToFraction(SavedElements.newFullArray[i, j]),
+                        Tag = SavedElements.newFullArray[i, j].ToString(),
                         //Content = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         //Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Background = Brushes.White,
@@ -187,43 +217,7 @@ namespace OperationsResearch.Dual
             }
 
 
-            // Добавляем строку Delta
-            textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-            Button deltaLabel = new Button
-            {
-                Content = "Delta",
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                BorderThickness = new Thickness(1),
-                BorderBrush = System.Windows.Media.Brushes.Black,
-                Background = System.Windows.Media.Brushes.SkyBlue,
-                Padding = new Thickness(5)
-            };
-
-            Grid.SetRow(deltaLabel, rows + 1);
-            Grid.SetColumn(deltaLabel, 0);
-            textBoxContainer.Children.Add(deltaLabel);
-
-            for (int j = 0; j < columnsX + columnsU + 1; j++)
-            {
-
-                Button deltaTextBox = new Button
-                {
-                    Content = SavedElements.arrayDelta[j].ToString(),
-                    Tag = SavedElements.arrayDelta[j].ToString(),
-                    BorderThickness = new Thickness(1),
-                    Background = Brushes.White,
-                    BorderBrush = System.Windows.Media.Brushes.Black,
-                    Padding = new Thickness(5),
-
-                };
-
-
-                Grid.SetRow(deltaTextBox, rows + 1);
-                Grid.SetColumn(deltaTextBox, j + 1);
-                textBoxContainer.Children.Add(deltaTextBox);
-            }
         }
 
 
@@ -308,11 +302,30 @@ namespace OperationsResearch.Dual
             // Добавляем строки с номерами и кнопками вместо текстовых полей
             for (int i = 0; i < rows; i++)
             {
-                textBoxContainerResult.RowDefinitions.Add(new RowDefinition());
+                textBoxContainerResult.RowDefinitions.Add(new RowDefinition()); ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                Button rowLabelResult = new Button
+                List<string> rowSignLabel = new List<string>();
+
+               
+
+                rowSignLabel.Add($"U{i + 1}");
+                for (int j = 0; j < rows; j++)
                 {
-                    Content = $"U{i + 1}",
+                    rowSignLabel.Add($"X{j + 1}");
+
+                   
+                }
+
+
+                int rowSign = i;
+
+
+                ComboBox rowLabelResult = new ComboBox        ///////////////////////////////////////////////////////////////
+                {
+                    //Content = $"U{i + 1}",
+
+                    ItemsSource = rowSignLabel,
+                    SelectedIndex = 0,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     BorderThickness = new Thickness(1),
@@ -320,6 +333,16 @@ namespace OperationsResearch.Dual
                     Background = System.Windows.Media.Brushes.SkyBlue,
                     Padding = new Thickness(5)
                 };
+
+                rowLabelResult.SelectionChanged += (sender, e) =>
+                {
+                    string selectedSign = rowLabelResult.SelectedItem.ToString();
+
+                    SavedElements.arrayRowSign[columns] = selectedSign;        ////////////////////////////////////////////
+
+                };
+
+
 
 
 
@@ -507,9 +530,9 @@ namespace OperationsResearch.Dual
                     textBoxResult = new TextBox
                     {
                         IsReadOnly = true,
-                        Text = SavedElements.ToFraction(SavedElements.fullArray[rowIndex, j]),
+                        Text = SavedElements.ToFraction(SavedElements.newFullArray[rowIndex, j]),
                         //Text = SavedElements.fullArray[rowIndex, j].ToString(),
-                        Tag = SavedElements.fullArray[rowIndex, j].ToString(),
+                        Tag = SavedElements.newFullArray[rowIndex, j].ToString(),
                         //Text = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
                         //Tag = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
                         Background = Brushes.White,
@@ -527,7 +550,7 @@ namespace OperationsResearch.Dual
                     {
                         IsReadOnly = true,
                         //Text = SavedElements.arrayResult[rowIndex].ToString(),
-                        Text = SavedElements.ToFraction(SavedElements.arrayResult[rowIndex]),
+                        Text = SavedElements.ToFraction(SavedElements.newArrayResult[rowIndex]),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
@@ -567,39 +590,28 @@ namespace OperationsResearch.Dual
                 }
 
                 // Делим каждый элемент строки на supportElement
-                for (int j = 0; j < SavedElements.fullArray.GetLength(1); j++)
+                for (int j = 0; j < SavedElements.newFullArray.GetLength(1); j++)
                 {
                     if (indexU != 0)
                     {
-                        SavedElements.fullArray[indexU, j] = (SavedElements.fullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.fullArray[indexU, j];
+                        SavedElements.newFullArray[indexU, j] = (SavedElements.newFullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.newFullArray[indexU, j];
                     }
                     else
                     {
-                        SavedElements.fullArray[indexU, j] = (SavedElements.fullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.fullArray[indexU, j];
+                        SavedElements.newFullArray[indexU, j] = (SavedElements.newFullArray[rowIndex, j] * (supportElementValue * -1)) + SavedElements.newFullArray[indexU, j];
                     }
 
                 }
 
                 if (indexU != 0)
                 {
-                    SavedElements.arrayResult[indexU] = (SavedElements.arrayResult[rowIndex] * (supportElementValue * -1)) + SavedElements.arrayResult[indexU];
+                    SavedElements.arrayResult[indexU] = (SavedElements.newArrayResult[rowIndex] * (supportElementValue * -1)) + SavedElements.newArrayResult[indexU];
                 }
                 else
                 {
-                    SavedElements.arrayResult[indexU] = (SavedElements.arrayResult[rowIndex] * (supportElementValue * -1)) + SavedElements.arrayResult[indexU];
+                    SavedElements.arrayResult[indexU] = (SavedElements.newArrayResult[rowIndex] * (supportElementValue * -1)) + SavedElements.newArrayResult[indexU];
 
                 }
-
-                if(indexDelta != 0)
-                {
-                    SavedElements.arrayDelta[indexDelta] = (SavedElements.arrayDelta[columnIndex] * (supportElementValue * -1)) + SavedElements.arrayDelta[indexDelta];
-                }
-                else
-                {
-                    SavedElements.arrayDelta[indexDelta] = (SavedElements.arrayDelta[columnIndex] * (supportElementValue * -1)) + SavedElements.arrayDelta[indexDelta];
-
-                }
-
 
                 // Добавляем строки с номерами и кнопками вместо текстовых полей
 
@@ -608,9 +620,9 @@ namespace OperationsResearch.Dual
                     textBoxResult = new TextBox
                     {
                         IsReadOnly = true,
-                        Text = SavedElements.ToFraction(SavedElements.fullArray[indexU, j]),
+                        Text = SavedElements.ToFraction(SavedElements.newFullArray[indexU, j]),
                         //Text = SavedElements.fullArray[rowIndex, j].ToString(),
-                        Tag = SavedElements.fullArray[indexU, j].ToString(),
+                        Tag = SavedElements.newFullArray[indexU, j].ToString(),
                         //Text = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
                         //Tag = (j < columnsX) ? SavedElements.array[rowIndex, j].ToString() : SavedElements.additionalVariables[rowIndex, j - columnsX].ToString(),
                         Background = Brushes.White,
@@ -628,7 +640,7 @@ namespace OperationsResearch.Dual
                     {
                         IsReadOnly = true,
                         //Text = SavedElements.arrayResult[rowIndex].ToString(),
-                        Text = SavedElements.ToFraction(SavedElements.arrayResult[indexU]),
+                        Text = SavedElements.ToFraction(SavedElements.newArrayResult[indexU]),
                         Background = Brushes.White,
                         BorderThickness = new Thickness(1),
                         BorderBrush = System.Windows.Media.Brushes.Black,
@@ -643,19 +655,6 @@ namespace OperationsResearch.Dual
             indexU = 0;
         }
 
-        private void Button_Click_Exit(object sender, RoutedEventArgs e)
-        {
-
-            WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
-
-            workWithSupportElement.CreateTextBox();
-
-            workWithSupportElement.Show();
-
-            this.Close();
-
-        }
-
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
             //SavedElements.ShowValues();
@@ -664,8 +663,11 @@ namespace OperationsResearch.Dual
             //SavedElements.ShowExtremum();
             //SavedElements.ShowadditionalVariables();
             SavedElements.ShowFullArray();
-            SavedElements.ShowValuesRezult();
+            //SavedElements.ShowValuesRezult();
+            SavedElements.ShowValuesArrayRowSign();
             //SavedElements.ShowValuesDleta();
+
+
 
             WorkWithSupportElement workWithSupportElement = new WorkWithSupportElement();
 

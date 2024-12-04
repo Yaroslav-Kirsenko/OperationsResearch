@@ -12,10 +12,14 @@ namespace OperationsResearch.Dual
 
         public static double[,] fullArray;
 
+        public static double[,] newFullArray;
+
 
         public static double[,] additionalVariables;
         public static double[,] array;
         public static double[] arrayResult;
+        public static double[] newArrayResult;
+
         public static double[] arrayDelta;
 
 
@@ -31,12 +35,16 @@ namespace OperationsResearch.Dual
 
 
         public static string[] arraySign;
-        public static string Extremum;
+        public static string[] arrayRowSign;             /////////////////////////////////////
 
+        public static string Extremum;
 
 
         public static int rows = 0;
         public static int columns = 0;
+
+        public static int newRows = 0;
+        public static int newColumns = 0;
 
 
         public static int rowsAdditional = 0;
@@ -44,6 +52,18 @@ namespace OperationsResearch.Dual
 
         public static int columnsDelta = 0;
 
+        public void InitializeArrayRowSign(int row1)
+        {
+
+            rows = row1;
+
+            if (rows > 0)
+            {
+                arrayRowSign = new string[rows];  
+            }
+        }
+
+       
         public static int SetRowsFullArray()
         {
             int rows1 = fullArray.GetLength(0);
@@ -113,6 +133,17 @@ namespace OperationsResearch.Dual
             }
         }
 
+        public void InitializeNewFullArray(int rows1, int columns1)
+        {
+            newRows = rows1;
+            newColumns = columns1;
+
+            if (rows > 0 && columns > 0)
+            {
+                newFullArray = new double[newRows, newColumns];
+            }
+        }
+
         public void InitializeArray(int rows1, int columns1)
         {
             rows = rows1;
@@ -134,6 +165,16 @@ namespace OperationsResearch.Dual
             if (rows > 0)
             {
                 arrayResult = new double[rows];  // Инициализация одномерного массива res
+            }
+        }
+        public void InitializeNewArrayResult(int rows2)
+        {
+
+            newRows = rows2;
+
+            if (rows > 0)
+            {
+                newArrayResult = new double[newRows];  // Инициализация одномерного массива res
             }
         }
 
@@ -219,6 +260,25 @@ namespace OperationsResearch.Dual
                 for (int j = 0; j < cols1; j++)
                 {
                     Console.Write(fullArray[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void ShowNewFullArray()
+        {
+
+            Console.WriteLine("ShowNewFullArray");
+
+
+            int rows1 = newFullArray.GetLength(0);
+            int cols1 = newFullArray.GetLength(1);
+
+            for (int i = 0; i < rows1; i++)
+            {
+                for (int j = 0; j < cols1; j++)
+                {
+                    Console.Write(newFullArray[i, j] + " ");
                 }
                 Console.WriteLine();
             }
@@ -316,6 +376,29 @@ namespace OperationsResearch.Dual
             }
             Console.WriteLine();
         }
+
+        public static void ShowNewValuesRezult()
+        {
+            Console.WriteLine("ARRAY result");
+
+            for (int i = 0; i < newRows; i++)
+            {
+                Console.Write(newArrayResult[i] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static void ShowValuesArrayRowSign()
+        {
+            Console.WriteLine("ShowValuesArrayRowSign");
+
+            for (int i = 0; i < columns; i++)
+            {
+                Console.Write(arrayRowSign[i] + " ");
+            }
+            Console.WriteLine();
+        }
+
 
 
         public static void ShowValuesSign()
