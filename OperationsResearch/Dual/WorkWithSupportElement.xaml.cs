@@ -279,18 +279,31 @@ namespace OperationsResearch.Dual
 
                 }
             }
+
             minResult = numbers.Min();
-            int  temp_arr1 = numbers.IndexOf(minResult);
+
+            Console.WriteLine("MinResult " + minResult);
+
+            int temp_arr1 = numbers.IndexOf(minResult);
             double temp_arr2 = index[temp_arr1];
+
+            Console.WriteLine("temp_arr2 " + temp_arr2);
+
 
             double temp = temp_arr2 / minResult * (-1);
 
-            int targetRow = -1, targetCol = -1;
+            Console.WriteLine("temp " + temp);
+
+
+            int targetRow = -1;
+
+            int targetCol = -1;
+
             for (int i = 0; i < fullArray.GetLength(0); i++) // Перебор строк
             {
                 for (int j = 0; j < fullArray.GetLength(1); j++) // Перебор столбцов
                 {
-                    if (fullArray[i, j] == temp)
+                    if (Math.Abs(fullArray[i, j]) == temp)
                     {
                         targetRow = i;
                         targetCol = j;
@@ -299,23 +312,22 @@ namespace OperationsResearch.Dual
                 }
                 if (targetRow != -1) break; // Прекращаем поиск, если нашли координаты
             }
+            Console.WriteLine();
+            Console.WriteLine("TargetRow" + targetRow);
+            Console.WriteLine("TargetCol" + targetCol);
 
-           
             if (targetRow == SavedElements.supportElementRow && targetCol == SavedElements.supportElementColumn)
             {
                 MessageBox.Show("Вибраний елемент співпадає з мінімальним значенням!",
                                "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                return minResult; 
             }
             else
             {
                 MessageBox.Show("Вибраний елемент не співпадає з мінімальним значенням.",
                                 "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+               return supportElement;
             }
-
-          
-
-
-            return minResult; // Возвращаем минимальный результат
         }
 
         private bool ValidateTextBox(TextBox textBox)
@@ -417,10 +429,10 @@ namespace OperationsResearch.Dual
             double supportElementValue = SavedElements.fullArray[SavedElements.supportElementRow, SavedElements.supportElementColumn];
             supportElement = supportElementValue;
             double minResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElementValue);
+            supportElementValue = minResult;
 
 
 
-          
 
             // Поиск TextBox, соответствующего опорному элементу
             TextBox selectedTextBox = null;
@@ -490,6 +502,7 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
+
             SavedElements.supportElement = supportElement;
             //SavedElements.ShowValues();
             //SavedElements.ShowValuesRezult();
