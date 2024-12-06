@@ -260,7 +260,6 @@ namespace OperationsResearch.Dual
             double minResult = 0;
 
             // Индекс выбранного элемента
-            int selectedIndex = -1;
             List<double> numbers = new List<double>();
             List<double> index = new List<double>();
 
@@ -276,24 +275,24 @@ namespace OperationsResearch.Dual
                     double absValue = Math.Abs(dividedValue);
                     numbers.Add(absValue);
                     index.Add(deltaValue);
-
                 }
             }
 
             minResult = numbers.Min();
 
-            Console.WriteLine("MinResult " + minResult);
-
             int temp_arr1 = numbers.IndexOf(minResult);
             double temp_arr2 = index[temp_arr1];
 
-            Console.WriteLine("temp_arr2 " + temp_arr2);
-
-
-            double temp = temp_arr2 / minResult * (-1);
-
-            Console.WriteLine("temp " + temp);
-
+           
+            double temp = 0;
+            if ((temp_arr2 / minResult) > 0)
+            {
+                temp = temp_arr2 / minResult * (-1);
+            }
+            else
+            {
+                temp = temp_arr2 / minResult;
+            }
 
             int targetRow = -1;
 
@@ -303,7 +302,7 @@ namespace OperationsResearch.Dual
             {
                 for (int j = 0; j < fullArray.GetLength(1); j++) // Перебор столбцов
                 {
-                    if (Math.Abs(fullArray[i, j]) == temp)
+                    if (fullArray[i, j] == temp)
                     {
                         targetRow = i;
                         targetCol = j;
@@ -320,13 +319,13 @@ namespace OperationsResearch.Dual
             {
                 MessageBox.Show("Вибраний елемент співпадає з мінімальним значенням!",
                                "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
-                return minResult; 
+                return minResult;
             }
             else
             {
                 MessageBox.Show("Вибраний елемент не співпадає з мінімальним значенням.",
                                 "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-               return supportElement;
+                return supportElement;
             }
         }
 
@@ -502,6 +501,15 @@ namespace OperationsResearch.Dual
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
+            double calculatedMinResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElement);
+            bool isElementCorrect = !double.IsNaN(calculatedMinResult) && Math.Abs(calculatedMinResult - supportElement) <= 1e-9;
+
+            if (!isElementCorrect)
+            {
+                MessageBox.Show("Обраний опорний елемент є неправильним. Будь ласка, перевірте та виберіть правильний елемент.",
+                                "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // Прекращаем выполнение при ошибке
+            }
 
             SavedElements.supportElement = supportElement;
             //SavedElements.ShowValues();
