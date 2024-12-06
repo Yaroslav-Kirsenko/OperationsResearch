@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace OperationsResearch.Dual
@@ -244,7 +245,9 @@ namespace OperationsResearch.Dual
                 textBoxContainer.Children.Add(deltaTextBox);
             }
         }
-        public static double ValidateSup(double[,] fullArray, double[] arrayResult, double[] arrayDelta, double supportElementValue)
+       
+
+        public double ValidateSup(double[,] fullArray, double[] arrayResult, double[] arrayDelta, double supportElementValue)
         {
             // Находим минимальное значение в arrayResult
             double minValue = arrayResult.Min();
@@ -283,7 +286,7 @@ namespace OperationsResearch.Dual
             int temp_arr1 = numbers.IndexOf(minResult);
             double temp_arr2 = index[temp_arr1];
 
-           
+
             double temp = 0;
             if ((temp_arr2 / minResult) > 0)
             {
@@ -311,6 +314,7 @@ namespace OperationsResearch.Dual
                 }
                 if (targetRow != -1) break; // Прекращаем поиск, если нашли координаты
             }
+
             Console.WriteLine();
             Console.WriteLine("TargetRow" + targetRow);
             Console.WriteLine("TargetCol" + targetCol);
@@ -319,6 +323,8 @@ namespace OperationsResearch.Dual
             {
                 MessageBox.Show("Вибраний елемент співпадає з мінімальним значенням!",
                                "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                numbers.Clear();
+
                 return minResult;
             }
             else
@@ -385,6 +391,7 @@ namespace OperationsResearch.Dual
             }
         }
 
+        double minResult;
         private TextBox _previousTextBox; // Поле для хранения ранее выбранного TextBox
         private void Button_Click_Search(object sender, RoutedEventArgs e)
         {
@@ -427,8 +434,8 @@ namespace OperationsResearch.Dual
             // Получаем значение опорного элемента из массива fullArray
             double supportElementValue = SavedElements.fullArray[SavedElements.supportElementRow, SavedElements.supportElementColumn];
             supportElement = supportElementValue;
-            double minResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElementValue);
-            supportElementValue = minResult;
+            minResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElementValue);
+            //supportElementValue = minResult;
 
 
 
@@ -498,18 +505,45 @@ namespace OperationsResearch.Dual
             this.Close();
 
         }
+        public bool IsElementCorrectCheck()
+        {
+            try
+            {
+                // Вычисляем минимальный результат на основе входных данных
+                double calculatedMinResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElement);
+
+                // Проверяем результат: он должен быть числом и находиться в допустимом диапазоне
+                if (double.IsNaN(calculatedMinResult))
+                {
+                    return false; // Если результат не является числом, элемент некорректен
+                }
+
+                // Проверяем, что рассчитанное значение близко к поддерживающему элементу
+                return Math.Abs(calculatedMinResult - supportElement) <= 1e-9;
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (при необходимости)
+                Console.WriteLine($"Ошибка при проверке элемента: {ex.Message}");
+
+                // Возвращаем false, так как при исключении элемент считается некорректным
+                return false;
+            }
+        }
+
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
-            double calculatedMinResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElement);
-            bool isElementCorrect = !double.IsNaN(calculatedMinResult) && Math.Abs(calculatedMinResult - supportElement) <= 1e-9;
 
-            if (!isElementCorrect)
+            if (IsElementCorrectCheck())
             {
-                MessageBox.Show("Обраний опорний елемент є неправильним. Будь ласка, перевірте та виберіть правильний елемент.",
-                                "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("Обраний опорний елемент є неправильним. Будь ласка, перевірте та виберіть правильний елемент.",
+                //                "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return; // Прекращаем выполнение при ошибке
             }
+
+
+
 
             SavedElements.supportElement = supportElement;
             //SavedElements.ShowValues();
