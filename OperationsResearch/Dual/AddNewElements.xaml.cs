@@ -15,6 +15,7 @@ namespace OperationsResearch.Dual
             InitializeComponent();
 
         }
+        
 
         public SavedElements savedElements = new SavedElements();
 
