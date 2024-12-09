@@ -107,6 +107,7 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.ColumnDefinitions.Add(new ColumnDefinition());
 
+
                 Label headerLabelU = new Label
                 {
 
@@ -149,9 +150,10 @@ namespace OperationsResearch.Dual
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                Label rowLabel = new Label
+                Label rowLabel = new Label();
+
+                if (i == rows - 1)
                 {
-<<<<<<< HEAD
                     rowLabel = new Label
                     {
                         Content = "Delta",
@@ -163,10 +165,9 @@ namespace OperationsResearch.Dual
                         Background = System.Windows.Media.Brushes.SkyBlue,
                         Padding = new Thickness(5)
                     };
-                }
-                else
+                } else
                 {
-                    if (SavedElements.arrayRowSign != null && SavedElements.arrayRowSign.Length > 0)            /////   проверка массива на наличие елементов
+                    if(SavedElements.arrayRowSign != null && SavedElements.arrayRowSign.Length > 0)
                     {
                         foreach (var element in SavedElements.arrayRowSign)
                         {
@@ -184,8 +185,7 @@ namespace OperationsResearch.Dual
                             Background = System.Windows.Media.Brushes.SkyBlue,
                             Padding = new Thickness(5)
                         };
-                    }
-                    else
+                    } else
                     {
                         rowLabel = new Label
                         {
@@ -201,16 +201,16 @@ namespace OperationsResearch.Dual
                     }
                 }
 
-=======
-                    Content = $"U{i + 1}",
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    BorderThickness = new Thickness(1),
-                    BorderBrush = System.Windows.Media.Brushes.Black,
-                    Background = System.Windows.Media.Brushes.SkyBlue,
-                    Padding = new Thickness(5)
-                };
->>>>>>> c63f3d9939d7c793940465d353230dd85e038508
+                //Label rowLabel = new Label
+                //{
+                //    Content = $"U{i + 1}",
+                //    HorizontalContentAlignment = HorizontalAlignment.Center,
+                //    VerticalAlignment = VerticalAlignment.Center,
+                //    BorderThickness = new Thickness(1),
+                //    BorderBrush = System.Windows.Media.Brushes.Black,
+                //    Background = System.Windows.Media.Brushes.SkyBlue,
+                //    Padding = new Thickness(5)
+                //};
 
 
 
@@ -297,7 +297,7 @@ namespace OperationsResearch.Dual
                 textBoxContainer.Children.Add(deltaTextBox);
             }
         }
-       
+
 
         public double ValidateSup(double[,] fullArray, double[] arrayResult, double[] arrayDelta, double supportElementValue)
         {
