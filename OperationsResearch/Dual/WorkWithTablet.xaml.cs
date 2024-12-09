@@ -320,6 +320,7 @@ namespace OperationsResearch.Dual
 
                 int rowSign = i;
 
+                SavedElements.arrayRowSign[rowSign] = rowSignLabel[0];
 
                 ComboBox rowLabelResult = new ComboBox        ///////////////////////////////////////////////////////////////
                 {
