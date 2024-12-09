@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace OperationsResearch.Dual
@@ -146,13 +145,13 @@ namespace OperationsResearch.Dual
             textBoxContainer.Children.Add(valueHeader);
 
             // Добавляем строки с номерами и кнопками вместо текстовых полей
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < SavedElements.newRows; i++)
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
                 Label rowLabel = new Label();
 
-                if (i == rows - 1)
+                if (i == SavedElements.newRows-1)
                 {
                     rowLabel = new Label
                     {
@@ -165,9 +164,10 @@ namespace OperationsResearch.Dual
                         Background = System.Windows.Media.Brushes.SkyBlue,
                         Padding = new Thickness(5)
                     };
-                } else
+                }
+                else
                 {
-                    if(SavedElements.arrayRowSign != null && SavedElements.arrayRowSign.Length > 0)
+                    if (SavedElements.arrayRowSign != null && SavedElements.arrayRowSign.Length > 0)
                     {
                         foreach (var element in SavedElements.arrayRowSign)
                         {
@@ -185,7 +185,8 @@ namespace OperationsResearch.Dual
                             Background = System.Windows.Media.Brushes.SkyBlue,
                             Padding = new Thickness(5)
                         };
-                    } else
+                    }
+                    else
                     {
                         rowLabel = new Label
                         {
@@ -224,8 +225,8 @@ namespace OperationsResearch.Dual
                     TextBox textBox = new TextBox
                     {
                         IsReadOnly = true,
-                        Text = SavedElements.ToFraction(SavedElements.fullArray[i, j]),
-                        Tag = SavedElements.fullArray[i, j].ToString(),
+                        Text = SavedElements.ToFraction(SavedElements.newFullArray[i, j]),
+                        Tag = SavedElements.newFullArray[i, j].ToString(),
                         //Text = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         //Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Background = Brushes.White,
@@ -258,23 +259,23 @@ namespace OperationsResearch.Dual
                 textBoxContainer.Children.Add(valueTextBox);
             }
 
-            // Добавляем строку Delta
-            textBoxContainer.RowDefinitions.Add(new RowDefinition());
+            //// Добавляем строку Delta
+            //textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-            Label deltaLabel = new Label
-            {
-                Content = "Delta",
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                BorderThickness = new Thickness(1),
-                BorderBrush = System.Windows.Media.Brushes.Black,
-                Background = System.Windows.Media.Brushes.SkyBlue,
-                Padding = new Thickness(5)
-            };
+            //Label deltaLabel = new Label
+            //{
+            //    Content = "Delta",
+            //    HorizontalContentAlignment = HorizontalAlignment.Center,
+            //    VerticalAlignment = VerticalAlignment.Center,
+            //    BorderThickness = new Thickness(1),
+            //    BorderBrush = System.Windows.Media.Brushes.Black,
+            //    Background = System.Windows.Media.Brushes.SkyBlue,
+            //    Padding = new Thickness(5)
+            //};
 
-            Grid.SetRow(deltaLabel, rows + 1);
-            Grid.SetColumn(deltaLabel, 0);
-            textBoxContainer.Children.Add(deltaLabel);
+            //Grid.SetRow(deltaLabel, rows + 1);
+            //Grid.SetColumn(deltaLabel, 0);
+            //textBoxContainer.Children.Add(deltaLabel);
 
             for (int j = 0; j < columnsX + columnsU + 1; j++)
             {
