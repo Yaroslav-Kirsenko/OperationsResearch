@@ -22,6 +22,7 @@ namespace OperationsResearch.Dual
 
         private void InitializeArrayRowSign()
         {
+            Console.WriteLine($"{columns} Columns arrya length");
             savedElements.InitializeArrayRowSign(columns); // Указываем только количество столбцов
         }
 
@@ -334,12 +335,12 @@ namespace OperationsResearch.Dual
                     Padding = new Thickness(5)
                 };
 
+
                 rowLabelResult.SelectionChanged += (sender, e) =>
                 {
                     string selectedSign = rowLabelResult.SelectedItem.ToString();
-
-                    SavedElements.arrayRowSign[columns] = selectedSign;        ////////////////////////////////////////////
-
+                    Console.WriteLine($"{rowSign} index, {selectedSign} data");
+                    SavedElements.arrayRowSign[rowSign] = selectedSign;
                 };
 
 

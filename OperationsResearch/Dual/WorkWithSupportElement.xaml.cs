@@ -165,9 +165,24 @@ namespace OperationsResearch.Dual
                 }
                 else
                 {
-                    if (false)            /////   проверка массива на наличие елементов
+                    if (SavedElements.arrayRowSign != null && SavedElements.arrayRowSign.Length > 0)            /////   проверка массива на наличие елементов
                     {
+                        foreach (var element in SavedElements.arrayRowSign)
+                        {
+                            Console.WriteLine($"{element} arrya row sign ${i} current index");
+                        }
 
+                        rowLabel = new Label
+                        {
+                            Content = SavedElements.arrayRowSign[i]?.ToString() ?? "",
+                            Tag = i,
+                            HorizontalContentAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            BorderThickness = new Thickness(1),
+                            BorderBrush = System.Windows.Media.Brushes.Black,
+                            Background = System.Windows.Media.Brushes.SkyBlue,
+                            Padding = new Thickness(5)
+                        };
                     }
                     else
                     {
