@@ -344,10 +344,6 @@ namespace OperationsResearch.Dual
                     SavedElements.arrayRowSign[rowSign] = selectedSign;
                 };
 
-
-
-
-
                 Grid.SetRow(rowLabelResult, i + 1);
                 Grid.SetColumn(rowLabelResult, 0);
                 textBoxContainerResult.Children.Add(rowLabelResult);
@@ -365,7 +361,6 @@ namespace OperationsResearch.Dual
                         BorderBrush = System.Windows.Media.Brushes.Black,
                         Padding = new Thickness(5)
                     };
-
 
                     Grid.SetRow(textBoxResult, i + 1);
                     Grid.SetColumn(textBoxResult, j + 1);

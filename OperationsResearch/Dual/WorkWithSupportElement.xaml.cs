@@ -300,93 +300,93 @@ namespace OperationsResearch.Dual
         }
 
 
-        public double ValidateSup(double[,] fullArray, double[] arrayResult, double[] arrayDelta, double supportElementValue)
-        {
-            // Находим минимальное значение в arrayResult
-            double minValue = arrayResult.Min();
+        //public double ValidateSup(double[,] fullArray, double[] arrayResult, double[] arrayDelta, double supportElementValue)
+        //{
+        //    // Находим минимальное значение в arrayResult
+        //    double minValue = arrayResult.Min();
 
-            // Находим индекс минимального значения
-            int minIndex = Array.IndexOf(arrayResult, minValue);
+        //    // Находим индекс минимального значения
+        //    int minIndex = Array.IndexOf(arrayResult, minValue);
 
-            // Количество столбцов в fullArray
-            int columnCount = fullArray.GetLength(1);
-
-
-            // Инициализируем минимальное значение результата
-            double minResult = 0;
-
-            // Индекс выбранного элемента
-            List<double> numbers = new List<double>();
-            List<double> index = new List<double>();
-
-            double deltaValue = 0;
-            // Обрабатываем строку с индексом minIndex
-            for (int j = 0; j < columnCount; j++)
-            {
-                double element = fullArray[minIndex, j];
-                if (element < 0)
-                {
-                    deltaValue = arrayDelta[j];
-                    double dividedValue = deltaValue / element;
-                    double absValue = Math.Abs(dividedValue);
-                    numbers.Add(absValue);
-                    index.Add(deltaValue);
-                }
-            }
-
-            minResult = numbers.Min();
-
-            int temp_arr1 = numbers.IndexOf(minResult);
-            double temp_arr2 = index[temp_arr1];
+        //    // Количество столбцов в fullArray
+        //    int columnCount = fullArray.GetLength(1);
 
 
-            double temp = 0;
-            if ((temp_arr2 / minResult) > 0)
-            {
-                temp = temp_arr2 / minResult * (-1);
-            }
-            else
-            {
-                temp = temp_arr2 / minResult;
-            }
+        //    // Инициализируем минимальное значение результата
+        //    double minResult = 0;
 
-            int targetRow = -1;
+        //    // Индекс выбранного элемента
+        //    List<double> numbers = new List<double>();
+        //    List<double> index = new List<double>();
 
-            int targetCol = -1;
+        //    double deltaValue = 0;
+        //    // Обрабатываем строку с индексом minIndex
+        //    for (int j = 0; j < columnCount; j++)
+        //    {
+        //        double element = fullArray[minIndex, j];
+        //        if (element < 0)
+        //        {
+        //            deltaValue = arrayDelta[j];
+        //            double dividedValue = deltaValue / element;
+        //            double absValue = Math.Abs(dividedValue);
+        //            numbers.Add(absValue);
+        //            index.Add(deltaValue);
+        //        }
+        //    }
 
-            for (int i = 0; i < fullArray.GetLength(0); i++) // Перебор строк
-            {
-                for (int j = 0; j < fullArray.GetLength(1); j++) // Перебор столбцов
-                {
-                    if (fullArray[i, j] == temp)
-                    {
-                        targetRow = i;
-                        targetCol = j;
-                        break;
-                    }
-                }
-                if (targetRow != -1) break; // Прекращаем поиск, если нашли координаты
-            }
+        //    minResult = numbers.Min();
 
-            Console.WriteLine();
-            Console.WriteLine("TargetRow" + targetRow);
-            Console.WriteLine("TargetCol" + targetCol);
+        //    int temp_arr1 = numbers.IndexOf(minResult);
+        //    double temp_arr2 = index[temp_arr1];
 
-            if (targetRow == SavedElements.supportElementRow && targetCol == SavedElements.supportElementColumn)
-            {
-                MessageBox.Show("Вибраний елемент співпадає з мінімальним значенням!",
-                               "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
-                numbers.Clear();
 
-                return minResult;
-            }
-            else
-            {
-                MessageBox.Show("Вибраний елемент не співпадає з мінімальним значенням.",
-                                "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return supportElement;
-            }
-        }
+        //    double temp = 0;
+        //    if ((temp_arr2 / minResult) > 0)
+        //    {
+        //        temp = temp_arr2 / minResult * (-1);
+        //    }
+        //    else
+        //    {
+        //        temp = temp_arr2 / minResult;
+        //    }
+
+        //    int targetRow = -1;
+
+        //    int targetCol = -1;
+
+        //    for (int i = 0; i < fullArray.GetLength(0); i++) // Перебор строк
+        //    {
+        //        for (int j = 0; j < fullArray.GetLength(1); j++) // Перебор столбцов
+        //        {
+        //            if (fullArray[i, j] == temp)
+        //            {
+        //                targetRow = i;
+        //                targetCol = j;
+        //                break;
+        //            }
+        //        }
+        //        if (targetRow != -1) break; // Прекращаем поиск, если нашли координаты
+        //    }
+
+        //    Console.WriteLine();
+        //    Console.WriteLine("TargetRow" + targetRow);
+        //    Console.WriteLine("TargetCol" + targetCol);
+
+        //    if (targetRow == SavedElements.supportElementRow && targetCol == SavedElements.supportElementColumn)
+        //    {
+        //        MessageBox.Show("Вибраний елемент співпадає з мінімальним значенням!",
+        //                       "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        numbers.Clear();
+
+        //        return minResult;
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Вибраний елемент не співпадає з мінімальним значенням.",
+        //                        "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        return supportElement;
+        //    }
+        //}
 
         private bool ValidateTextBox(TextBox textBox)
         {
@@ -487,7 +487,7 @@ namespace OperationsResearch.Dual
             // Получаем значение опорного элемента из массива fullArray
             double supportElementValue = SavedElements.fullArray[SavedElements.supportElementRow, SavedElements.supportElementColumn];
             supportElement = supportElementValue;
-            minResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElementValue);
+            //minResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElementValue);
             //supportElementValue = minResult;
 
 
@@ -558,42 +558,42 @@ namespace OperationsResearch.Dual
             this.Close();
 
         }
-        public bool IsElementCorrectCheck()
-        {
-            try
-            {
-                // Вычисляем минимальный результат на основе входных данных
-                double calculatedMinResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElement);
+        //public bool IsElementCorrectCheck()
+        //{
+        //    try
+        //    {
+        //        // Вычисляем минимальный результат на основе входных данных
+        //        double calculatedMinResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElement);
 
-                // Проверяем результат: он должен быть числом и находиться в допустимом диапазоне
-                if (double.IsNaN(calculatedMinResult))
-                {
-                    return false; // Если результат не является числом, элемент некорректен
-                }
+        //        // Проверяем результат: он должен быть числом и находиться в допустимом диапазоне
+        //        if (double.IsNaN(calculatedMinResult))
+        //        {
+        //            return false; // Если результат не является числом, элемент некорректен
+        //        }
 
-                // Проверяем, что рассчитанное значение близко к поддерживающему элементу
-                return Math.Abs(calculatedMinResult - supportElement) <= 1e-9;
-            }
-            catch (Exception ex)
-            {
-                // Логирование исключения (при необходимости)
-                Console.WriteLine($"Ошибка при проверке элемента: {ex.Message}");
+        //        // Проверяем, что рассчитанное значение близко к поддерживающему элементу
+        //        return Math.Abs(calculatedMinResult - supportElement) <= 1e-9;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Логирование исключения (при необходимости)
+        //        Console.WriteLine($"Ошибка при проверке элемента: {ex.Message}");
 
-                // Возвращаем false, так как при исключении элемент считается некорректным
-                return false;
-            }
-        }
+        //        // Возвращаем false, так как при исключении элемент считается некорректным
+        //        return false;
+        //    }
+        //}
 
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
 
-            if (IsElementCorrectCheck())
-            {
-                //MessageBox.Show("Обраний опорний елемент є неправильним. Будь ласка, перевірте та виберіть правильний елемент.",
-                //                "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return; // Прекращаем выполнение при ошибке
-            }
+            //if (IsElementCorrectCheck())
+            //{
+            //    //MessageBox.Show("Обраний опорний елемент є неправильним. Будь ласка, перевірте та виберіть правильний елемент.",
+            //    //                "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return; // Прекращаем выполнение при ошибке
+            //}
 
 
 
