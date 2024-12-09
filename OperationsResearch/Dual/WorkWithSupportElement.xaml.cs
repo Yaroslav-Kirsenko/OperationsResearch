@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace OperationsResearch.Dual
@@ -17,9 +20,6 @@ namespace OperationsResearch.Dual
             InitializeSupportElementRow();
             InitializeSupportElementColumn();
         }
-
-        Label rowLabel;
-
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -145,12 +145,13 @@ namespace OperationsResearch.Dual
             textBoxContainer.Children.Add(valueHeader);
 
             // Добавляем строки с номерами и кнопками вместо текстовых полей
-            for (int i = 0; i < SavedElements.newRows; i++)
+            for (int i = 0; i < rows; i++)
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
 
-                if (i == SavedElements.newRows - 1)
+                Label rowLabel = new Label
                 {
+<<<<<<< HEAD
                     rowLabel = new Label
                     {
                         Content = "Delta",
@@ -200,6 +201,16 @@ namespace OperationsResearch.Dual
                     }
                 }
 
+=======
+                    Content = $"U{i + 1}",
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    BorderThickness = new Thickness(1),
+                    BorderBrush = System.Windows.Media.Brushes.Black,
+                    Background = System.Windows.Media.Brushes.SkyBlue,
+                    Padding = new Thickness(5)
+                };
+>>>>>>> c63f3d9939d7c793940465d353230dd85e038508
 
 
 
@@ -213,8 +224,8 @@ namespace OperationsResearch.Dual
                     TextBox textBox = new TextBox
                     {
                         IsReadOnly = true,
-                        Text = SavedElements.ToFraction(SavedElements.newFullArray[i, j]),
-                        Tag = SavedElements.newFullArray[i, j].ToString(),
+                        Text = SavedElements.ToFraction(SavedElements.fullArray[i, j]),
+                        Tag = SavedElements.fullArray[i, j].ToString(),
                         //Text = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         //Tag = (j < columnsX) ? SavedElements.array[i, j].ToString() : SavedElements.additionalVariables[i, j - columnsX].ToString(),
                         Background = Brushes.White,
@@ -233,7 +244,7 @@ namespace OperationsResearch.Dual
                 TextBox valueTextBox = new TextBox
                 {
                     IsReadOnly = true,
-                    Text = SavedElements.ToFraction(SavedElements.newArrayResult[i]),
+                    Text = SavedElements.ToFraction(SavedElements.arrayResult[i]),
                     Background = Brushes.White,
                     BorderThickness = new Thickness(1),
                     BorderBrush = System.Windows.Media.Brushes.Black,
@@ -246,8 +257,135 @@ namespace OperationsResearch.Dual
                 Grid.SetColumn(valueTextBox, columnsX + columnsU + 1);
                 textBoxContainer.Children.Add(valueTextBox);
             }
-        }
 
+            // Добавляем строку Delta
+            textBoxContainer.RowDefinitions.Add(new RowDefinition());
+
+            Label deltaLabel = new Label
+            {
+                Content = "Delta",
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                BorderThickness = new Thickness(1),
+                BorderBrush = System.Windows.Media.Brushes.Black,
+                Background = System.Windows.Media.Brushes.SkyBlue,
+                Padding = new Thickness(5)
+            };
+
+            Grid.SetRow(deltaLabel, rows + 1);
+            Grid.SetColumn(deltaLabel, 0);
+            textBoxContainer.Children.Add(deltaLabel);
+
+            for (int j = 0; j < columnsX + columnsU + 1; j++)
+            {
+
+                TextBox deltaTextBox = new TextBox
+                {
+                    IsReadOnly = true,
+                    Text = SavedElements.arrayDelta[j].ToString(),
+                    Tag = SavedElements.arrayDelta[j].ToString(),
+                    Background = Brushes.White,
+                    BorderThickness = new Thickness(1),
+                    BorderBrush = System.Windows.Media.Brushes.Black,
+                    Padding = new Thickness(5)
+
+                };
+
+
+                Grid.SetRow(deltaTextBox, rows + 1);
+                Grid.SetColumn(deltaTextBox, j + 1);
+                textBoxContainer.Children.Add(deltaTextBox);
+            }
+        }
+       
+
+        public double ValidateSup(double[,] fullArray, double[] arrayResult, double[] arrayDelta, double supportElementValue)
+        {
+            // Находим минимальное значение в arrayResult
+            double minValue = arrayResult.Min();
+
+            // Находим индекс минимального значения
+            int minIndex = Array.IndexOf(arrayResult, minValue);
+
+            // Количество столбцов в fullArray
+            int columnCount = fullArray.GetLength(1);
+
+
+            // Инициализируем минимальное значение результата
+            double minResult = 0;
+
+            // Индекс выбранного элемента
+            List<double> numbers = new List<double>();
+            List<double> index = new List<double>();
+
+            double deltaValue = 0;
+            // Обрабатываем строку с индексом minIndex
+            for (int j = 0; j < columnCount; j++)
+            {
+                double element = fullArray[minIndex, j];
+                if (element < 0)
+                {
+                    deltaValue = arrayDelta[j];
+                    double dividedValue = deltaValue / element;
+                    double absValue = Math.Abs(dividedValue);
+                    numbers.Add(absValue);
+                    index.Add(deltaValue);
+                }
+            }
+
+            minResult = numbers.Min();
+
+            int temp_arr1 = numbers.IndexOf(minResult);
+            double temp_arr2 = index[temp_arr1];
+
+
+            double temp = 0;
+            if ((temp_arr2 / minResult) > 0)
+            {
+                temp = temp_arr2 / minResult * (-1);
+            }
+            else
+            {
+                temp = temp_arr2 / minResult;
+            }
+
+            int targetRow = -1;
+
+            int targetCol = -1;
+
+            for (int i = 0; i < fullArray.GetLength(0); i++) // Перебор строк
+            {
+                for (int j = 0; j < fullArray.GetLength(1); j++) // Перебор столбцов
+                {
+                    if (fullArray[i, j] == temp)
+                    {
+                        targetRow = i;
+                        targetCol = j;
+                        break;
+                    }
+                }
+                if (targetRow != -1) break; // Прекращаем поиск, если нашли координаты
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("TargetRow" + targetRow);
+            Console.WriteLine("TargetCol" + targetCol);
+
+            if (targetRow == SavedElements.supportElementRow && targetCol == SavedElements.supportElementColumn)
+            {
+                MessageBox.Show("Вибраний елемент співпадає з мінімальним значенням!",
+                               "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                numbers.Clear();
+
+                return minResult;
+            }
+            else
+            {
+                MessageBox.Show("Вибраний елемент не співпадає з мінімальним значенням.",
+                                "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return supportElement;
+            }
+        }
 
         private bool ValidateTextBox(TextBox textBox)
         {
@@ -305,9 +443,13 @@ namespace OperationsResearch.Dual
             }
         }
 
+        double minResult;
         private TextBox _previousTextBox; // Поле для хранения ранее выбранного TextBox
         private void Button_Click_Search(object sender, RoutedEventArgs e)
         {
+
+
+
             // Проверяем корректность значений в текстовых полях
             if (!ValidateTextBox(textBox1) || !ValidateTextBox(textBox2))
             {
@@ -333,7 +475,7 @@ namespace OperationsResearch.Dual
             SavedElements.supportElementRow = row - 1;
             SavedElements.supportElementColumn = column - 1;
 
-            // Проверяем, находятся ли индексы в пределах допустимого диапазона
+            // Проверяем, находятся ли индексы в пределах допутимого диапазона
             if (SavedElements.supportElementRow < 0 || SavedElements.supportElementRow >= rows ||
                 SavedElements.supportElementColumn < 0 || SavedElements.supportElementColumn >= columns)
             {
@@ -344,6 +486,11 @@ namespace OperationsResearch.Dual
             // Получаем значение опорного элемента из массива fullArray
             double supportElementValue = SavedElements.fullArray[SavedElements.supportElementRow, SavedElements.supportElementColumn];
             supportElement = supportElementValue;
+            minResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElementValue);
+            //supportElementValue = minResult;
+
+
+
 
             // Поиск TextBox, соответствующего опорному элементу
             TextBox selectedTextBox = null;
@@ -410,9 +557,46 @@ namespace OperationsResearch.Dual
             this.Close();
 
         }
+        public bool IsElementCorrectCheck()
+        {
+            try
+            {
+                // Вычисляем минимальный результат на основе входных данных
+                double calculatedMinResult = ValidateSup(SavedElements.fullArray, SavedElements.arrayResult, SavedElements.arrayDelta, supportElement);
+
+                // Проверяем результат: он должен быть числом и находиться в допустимом диапазоне
+                if (double.IsNaN(calculatedMinResult))
+                {
+                    return false; // Если результат не является числом, элемент некорректен
+                }
+
+                // Проверяем, что рассчитанное значение близко к поддерживающему элементу
+                return Math.Abs(calculatedMinResult - supportElement) <= 1e-9;
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (при необходимости)
+                Console.WriteLine($"Ошибка при проверке элемента: {ex.Message}");
+
+                // Возвращаем false, так как при исключении элемент считается некорректным
+                return false;
+            }
+        }
+
 
         private void Button_Click_Next(object sender, RoutedEventArgs e)
         {
+
+            if (IsElementCorrectCheck())
+            {
+                //MessageBox.Show("Обраний опорний елемент є неправильним. Будь ласка, перевірте та виберіть правильний елемент.",
+                //                "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // Прекращаем выполнение при ошибке
+            }
+
+
+
+
             SavedElements.supportElement = supportElement;
             //SavedElements.ShowValues();
             //SavedElements.ShowValuesRezult();
