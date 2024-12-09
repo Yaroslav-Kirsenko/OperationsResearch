@@ -14,17 +14,13 @@ namespace OperationsResearch.Dual
         public WorkWithTablet()
         {
             InitializeComponent();
-            InitializeArrayRowSign();
+            
             MyButton.Content = "/ " + SavedElements.ToFraction(SavedElements.supportElement); // MyButton — имя кнопки
             MyButton2.Content = "* " + SavedElements.ToFraction(SavedElements.fullArray[indexU, SavedElements.supportElementColumn]) + " +"; // MyButton — имя кнопки
 
         }
 
-        private void InitializeArrayRowSign()
-        {
-            Console.WriteLine($"{columns} Columns arrya length");
-            savedElements.InitializeArrayRowSign(columns); // Указываем только количество столбцов
-        }
+        
 
 
         SavedElements savedElements = new SavedElements();
@@ -143,19 +139,39 @@ namespace OperationsResearch.Dual
                         Padding = new Thickness(5)
                     };
                 }
-                else
+                else // ......................................................................................................
                 {
-                    rowLabel = new Button
+                    if (SavedElements.arrayRowSign != null && SavedElements.arrayRowSign.Length > 0)
                     {
-                        Content = $"U{i + 1}",
-                        Tag = i,
-                        HorizontalContentAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        BorderThickness = new Thickness(1),
-                        BorderBrush = System.Windows.Media.Brushes.Black,
-                        Background = System.Windows.Media.Brushes.SkyBlue,
-                        Padding = new Thickness(5)
-                    };
+                        foreach (var element in SavedElements.arrayRowSign)
+                        {
+                            Console.WriteLine($"{element} arrya row sign ${i} current index");
+                        }
+                        rowLabel = new Button
+                        {
+                            Content = SavedElements.arrayRowSign[i],
+                            Tag = i,
+                            HorizontalContentAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            BorderThickness = new Thickness(1),
+                            BorderBrush = System.Windows.Media.Brushes.Black,
+                            Background = System.Windows.Media.Brushes.SkyBlue,
+                            Padding = new Thickness(5)
+                        };
+                    } else
+                    {
+                        rowLabel = new Button
+                        {
+                            Content = $"U{i + 1}",
+                            Tag = i,
+                            HorizontalContentAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            BorderThickness = new Thickness(1),
+                            BorderBrush = System.Windows.Media.Brushes.Black,
+                            Background = System.Windows.Media.Brushes.SkyBlue,
+                            Padding = new Thickness(5)
+                        };
+                    }
                 }
 
 
@@ -317,10 +333,7 @@ namespace OperationsResearch.Dual
                    
                 }
 
-
                 int rowSign = i;
-
-                SavedElements.arrayRowSign[rowSign] = rowSignLabel[0];
 
                 ComboBox rowLabelResult = new ComboBox        ///////////////////////////////////////////////////////////////
                 {

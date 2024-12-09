@@ -16,7 +16,13 @@ namespace OperationsResearch.Dual
         {
             InitializeComponent();
             InitializeArrayDelta();
+            InitializeArrayRowSign();
+        }
 
+        private void InitializeArrayRowSign()
+        {
+            Console.WriteLine($"{columns} Columns arrya length");
+            savedElements.InitializeArrayRowSign(rows); // Указываем только количество столбцов
         }
 
 
@@ -133,7 +139,7 @@ namespace OperationsResearch.Dual
             for (int i = 0; i < rows; i++)
             {
                 textBoxContainer.RowDefinitions.Add(new RowDefinition());
-
+                SavedElements.arrayRowSign[i] = $"U{i + 1}";
                 Button rowLabel = new Button
                 {
                     Content = $"U{i + 1}",
